@@ -1,0 +1,5 @@
+Today I learned:
+
+-Terminal
+-Git
+-GitHub
