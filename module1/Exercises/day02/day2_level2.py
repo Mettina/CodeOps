@@ -1,3 +1,4 @@
+#5. Grade Classifier
 score = float(input("Enter score: "))
 
 if score >= 90:
@@ -10,7 +11,7 @@ elif score >= 50:
     print("Pass")
 else:
     print("Fail")
-# Number Pattern 
+# 6.Number Pattern 
 for i in range(1, 21):
     # Print odd numbers
     if i % 2 != 0:
@@ -20,7 +21,7 @@ for i in range(1, 21):
     if i % 5 == 0:
         print(f"--> {i} is divisible by 5")
 
-#While Loop Practice 
+#7.While Loop Practice 
 total = 0
 
 # Start a loop that keeps running
@@ -35,6 +36,7 @@ while True:
 
 print(f"Total sum: {total}")
 
+#8. Function Practice 
 #Function that prints a welcome message
 def greet(name):
     print(f"Welcome, {name}!")
@@ -50,8 +52,8 @@ def is_even(number):
 greet("Ruth")#Testing the functions
 
 result_square = square(4)
-print(f"Square of 4 is: {result_square}")
+print(f"Square of 10 is: {result_square}")
 
 
-result_even = is_even(7)
-print(f"Is 7 even? {result_even}")
+result_even = is_even(4)
+print(f"Is 4 even? {result_even}")

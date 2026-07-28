@@ -1,3 +1,4 @@
+#4. List Operations
 # Create a list of numbers
 numbers = [10, 25, 40, 15, 60, 30]
 

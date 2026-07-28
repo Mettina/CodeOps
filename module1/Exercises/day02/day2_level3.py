@@ -1,5 +1,5 @@
-#Tip Calculator (Full Program) 
-def calculate_split(bill, tip_percentage, payers):
+#9.Tip Calculator (Full Program) 
+def calculate_tip(bill, tip_percentage, payers):
     #Calculates the tip, total bill, and individual share
     tip_amount = bill * (tip_percentage / 100)
     total_amount = bill + tip_amount
@@ -18,16 +18,16 @@ def main():
     payers = int(input("Enter the number of people splitting the bill: "))
     
     # Perform calculations using the function
-    tip, total, individual_share = calculate_split(bill, tip_percentage, payers)
+    tip, total, individual_share = calculate_tip(bill, tip_percentage, payers)
     
     # Display results formatted to two decimal places
     print("\n--- Bill Details ---")
-    print(f"Tip Amount: {tip:.2f}ETB")
-    print(f"Total Amount: {total:.2f}ETB")
+    print(f"Tip Amount: {tip:.2f}$")
+    print(f"Total Amount: {total:.2f}$")
     print(f"Each Person Pays: {individual_share:.2f}ETB")
 
 
-# Run the program
+# 10.Run the program
 if __name__ == "__main__":
     main()
 
@@ -111,7 +111,7 @@ def run_quiz():
 if __name__ == "__main__":
     run_quiz()
 
-    #Function with Default & Return
+#11.Function with Default & Return
 
 def calculate_final_price(price, tax_rate=0.15, discount=0):
     #Calculates the final price after applying a discount and adding tax.

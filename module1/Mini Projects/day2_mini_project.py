@@ -1,3 +1,4 @@
+#Personal Finance Tracker (Day 2 Project) 
 def add_income(balance):
     # Asks user for income amount and returns the updated balance.
     try:

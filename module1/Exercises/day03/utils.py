@@ -1,4 +1,4 @@
-# Utility functions module
+# 7.Utility functions module
 
 def add_tax(price, rate=0.15):
     """

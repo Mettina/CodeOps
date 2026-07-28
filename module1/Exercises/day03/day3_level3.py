@@ -65,7 +65,7 @@ if __name__ == "__main__":
             # Handle the exception if the input is not a number
             print("Invalid input! Please enter a numeric value.")
 
-#Error Handling 
+# 9.Error Handling 
 try:
     # Ask the user for two numbers
     num1 = float(input("Enter the first number: "))
