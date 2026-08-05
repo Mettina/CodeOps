@@ -1,0 +1,27 @@
+:root {
+  --primary-color: blue;               
+  --text-color: #f1ebeb;                  
+  --btn-padding: 12px 24px;               
+  --font-stack: "Inter", sans-serif;      
+}
+
+body {
+  font-family: var(--font-stack);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #F7FAFC;
+}
+
+.custom-button {
+  
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  padding: var(--btn-padding);
+  font-family: var(--font-stack);  
+
+}
+
+
+
