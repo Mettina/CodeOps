@@ -1,0 +1,180 @@
+/* Global Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 1. Define the four custom properties globally on :root */
+:root {
+  --primary-color: #1B4D8E;               /* Color 1 */
+  --text-color: #FFFFFF;                  /* Color 2 */
+  --btn-padding: 12px 24px;               /* Spacing value */
+  --font-stack: "Inter", sans-serif;      /* Font stack */
+}
+
+/* Base Body Styling */
+/* Find your old body selector and replace it with this one */
+body {
+  font-family: var(--font-stack);
+  display: flex;
+  flex-direction: column; /* This forces a vertical stack */
+  gap: 24px;              /* Adds clean space between exercises */
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #F7FAFC;
+  padding: 40px;
+}
+/* Element Selector Score: (0, 0, 0, 1) */
+.exercise-three p { 
+  color: black; 
+}
+
+/* Class Selector Score: (0, 0, 1, 0) */
+.exercise-three .note { 
+  color: blue; 
+}
+
+/* ID Selector Score: (0, 1, 0, 0) - WINS! */
+.exercise-three #lead { 
+  color: green; 
+}
+/* Container spacing for the table block */
+.exercise-four {
+  width: 100%;
+  max-width: 500px;
+  margin-top: 10px;
+}
+
+.exercise-four h2 {
+  margin-bottom: 12px;
+  font-size: 1.5rem;
+}
+
+/* Base table setups */
+.flight-table {
+  width: 100%;
+  border-collapse: collapse; /* Merges borders into a single clean line */
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Styled header row */
+.flight-table th {
+  background-color: #1B4D8E; /* Uses our primary brand color */
+  color: #FFFFFF;
+  text-align: left;
+  font-weight: 700;
+}
+
+/* Comfortable cell padding and borders */
+.flight-table th, 
+.flight-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+/* Zebra striping for alternate rows using nth-child */
+.flight-table tbody tr:nth-child(even) {
+  background-color: #F7FAFC; /* Light gray tint for readability */
+}
+/* Exercise 5 Styles */
+.exercise-five {
+  width: 100%;
+  max-width: 500px;
+  margin-top: 10px;
+}
+
+.exercise-five h2 {
+  margin-bottom: 12px;
+  font-size: 1.5rem;
+}
+
+.palette-container {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.color-box {
+  flex: 1;
+  padding: 16px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.color-label {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.color-values {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  font-family: monospace;
+}
+
+/* Color 1: Brand Blue - Base state (33% Lightness) */
+.color-one {
+  background-color: hsl(214, 68%, 33%);
+}
+/* Color 1: Hover state (+12% Lightness to make it 45%) */
+.color-one:hover {
+  background-color: hsl(214, 68%, 45%);
+}
+
+/* Color 2: Gold Accent - Base state (49% Lightness) */
+.color-two {
+  background-color: hsl(42, 69%, 49%);
+}
+/* Color 2: Hover state (+12% Lightness to make it 61%) */
+.color-two:hover {
+  background-color: hsl(42, 69%, 61%);
+}
+
+/* Color 3: Dark Slate - Base state (20% Lightness) */
+.color-three {
+  background-color: hsl(0, 0%, 20%);
+}
+/* Color 3: Hover state (+12% Lightness to make it 32%) */
+.color-three:hover {
+  background-color: hsl(0, 0%, 32%);
+}
+
+
+.box-model-card {
+  width: 300px;
+  padding: 24px;
+  border: 2px solid #1B4D8E;
+  background-color: #FFFFFF;
+  box-sizing: border-box; /* This locks the total width to 300px */
+}
+
+
+/* 2. Apply all four variables to the styled button via var() */
+.custom-button {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  padding: var(--btn-padding);
+  font-family: var(--font-stack);
+  
+  /* Modern button styling details */
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+/* Optional hover state to make it interactive */
+.custom-button:hover {
+  opacity: 0.9;
+}
