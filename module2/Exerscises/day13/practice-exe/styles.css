@@ -1,27 +1,272 @@
+/*  QUESTION 1 CSS Custom Properties*/
+
 :root {
-  --primary-color: blue;               
-  --text-color: #f1ebeb;                  
-  --btn-padding: 12px 24px;               
-  --font-stack: "Inter", sans-serif;      
+
+    --primary-color: #2c6e49;
+    --secondary-color: #d4a373;
+
+    --spacing: 16px;
+
+    --font-stack: Arial, sans-serif;
+
+
+    /* QUESTION 5 COLORS */
+    /* HEX */
+
+    --primary-hex: #2c6e49;
+    --secondary-hex: #d4a373;
+    --accent-hex: #4a7c59;
+    /* RGB */
+
+    --primary-rgb: 44, 110, 73;
+    --secondary-rgb: 212, 163, 115;
+    --accent-rgb: 74, 124, 89;
+
+
+    /* HSL */
+
+    --primary-hsl: 145, 43%, 30%;
+    --secondary-hsl: 36, 53%, 64%;
+    --accent-hsl: 140, 25%, 39%;
+    --primary-hover: 145, 43%, 45%;
+    --secondary-hover: 36, 53%, 79%;
+    --accent-hover: 140, 25%, 54%;
+}
+
+
+/* General */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  font-family: var(--font-stack);
+    font-family: var(--font-stack);
+    background: #f4f7fa;
+    color: #222;
+    padding: 40px;
+}
+
+h1 {
+    margin-bottom: 40px;
+    color: #0c2340;
+}
+
+.exercise {
+    background: white;
+    padding: 30px;
+    margin-bottom: 35px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.exercise h2 {
+    margin-bottom: 20px;
+    color: #0c2340;
+}
+
+.exercise h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+
+/* QUESTION 1 Styled button using all four variables*/
+
+.button-primary {
+    background: var(--primary-color);
+    color: white;
+    padding: var(--spacing);
+    font-family: var(--font-stack);
+    border: 2px solid var(--secondary-color);
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.button-primary:hover {
+    background: var(--secondary-color);
+}
+
+
+/*  QUESTION 2 Box Model */
+
+.card {
+    width: 300px;
+    padding: 24px;
+    border: 2px solid #0c2340;
+    background: #e8edf5;
+    margin-bottom: 10px;
+}
+
+
+
+
+.content-box {
+    box-sizing: content-box;
+}
+
+
+.border-box {
+    box-sizing: border-box;
+}
+
+
+/*  QUESTION 3 CSS Specificity */
+
+p {
+    color: blue;
+}
+
+
+.highlight {
+    color: green;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#special {
+    color: red;
+}
+
+
+.specificity-answer {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f5f7fa;
+}
+
+.specificity-answer p {
+    color: #222;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+
+/* QUESTION 4 Ethiopian Airlines Schedule */
+
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.schedule-table thead {
+    background: #0c2340;
+    color: white;
+}
+
+.schedule-table th {
+    padding: 16px 12px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.schedule-table td {
+    padding: 14px 12px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.schedule-table tbody tr:nth-child(even) {
+    background-color: #f5f7fa;
+}
+
+.schedule-table tbody tr:hover {
+    background-color: #e8edf5;
+}
+
+
+/*  QUESTION 5 HEX → RGB → HSL */
+
+.exercise-five {
+  width: 100%;
+  max-width: 500px;
+  margin-top: 10px;
+}
+
+.exercise-five h2 {
+  margin-bottom: 12px;
+  font-size: 1.5rem;
+}
+
+.palette-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #F7FAFC;
+  gap: 16px;
+  width: 100%;
+}
+
+.color-box {
+  flex: 1;
+  padding: 16px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.color-label {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.color-values {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  font-family: monospace;
+}
+
+
+.color-one {
+  background-color: hsl(214, 68%, 33%);
+}
+
+.color-one:hover {
+  background-color: hsl(214, 68%, 45%);
+}
+
+
+.color-two {
+  background-color: hsl(42, 69%, 49%);
+}
+
+.color-two:hover {
+  background-color: hsl(42, 69%, 61%);
+}
+
+
+.color-three {
+  background-color: hsl(0, 0%, 20%);
+}
+
+.color-three:hover {
+  background-color: hsl(0, 0%, 32%);
+}
+
+
+.box-model-card {
+  width: 300px;
+  padding: 24px;
+  border: 2px solid #1B4D8E;
+  background-color: #FFFFFF;
+  box-sizing: border-box; 
 }
 
 .custom-button {
-  
   background-color: var(--primary-color);
   color: var(--text-color);
   padding: var(--btn-padding);
-  font-family: var(--font-stack);  
-
+  font-family: var(--font-stack);
+  
+  
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
 }
-
-
-

@@ -1,14 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Exercise 1: Custom Properties</title>
-   
+
+    <title>Day 13 CSS Exercises</title>
+
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <button class="custom-button">Click Me</button>
+
+    <section class="exercise">
+
+        <h2>Question 1: CSS Custom Properties</h2>
+
+        <button class="button-primary">
+            Click Me
+        </button>
+
+    </section>
+
+
+    <section class="exercise">
+
+        <h2>Question 2: Box Model</h2>
+
+        <h3>Content-box</h3>
+
+        <div class="card content-box">
+            Content-box Card
+        </div>
+
+
+        <h3>Border-box</h3>
+
+        <div class="card border-box">
+            Border-box Card
+        </div>
+
+    </section>
+
+    <section class="exercise">
+
+        <h2>Question 3: CSS Specificity</h2>
+
+        <p class="highlight" id="special">
+            Click Me
+        </p>
+
+        <div class="specificity-answer">
+
+            <p>
+                Element selector:
+                <strong>p = 0,0,1</strong>
+            </p>
+
+            <p>
+                Class selector:
+                <strong>.highlight = 0,1,0</strong>
+            </p>
+
+            <p>
+                ID selector:
+                <strong>#special = 1,0,0</strong>
+            </p>
+
+            <p>
+                <strong>Winner: #special</strong>
+            </p>
+
+            <p>
+                The ID selector has the highest specificity,
+                so the paragraph appears red.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <section class="exercise">
+
+        <h2>Question 4: Ethiopian Airlines Schedule</h2>
+
+        <table class="schedule-table">
+
+            <thead>
+                <tr>
+                    <th>Flight</th>
+                    <th>Destination</th>
+                    <th>Departure</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>ET 302</td>
+                    <td>London</td>
+                    <td>08:30</td>
+                </tr>
+
+                <tr>
+                    <td>ET 501</td>
+                    <td>New York</td>
+                    <td>10:45</td>
+                </tr>
+
+                <tr>
+                    <td>ET 908</td>
+                    <td>Dubai</td>
+                    <td>14:20</td>
+                </tr>
+
+                <tr>
+                    <td>ET 615</td>
+                    <td>Paris</td>
+                    <td>18:00</td>
+                </tr>
+
+                <tr>
+                    <td>ET 927</td>
+                    <td>Frankfurt</td>
+                    <td>21:30</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+<div class="exercise-five">
+    <h2> QUESTION 5: Color Palette Conversion</h2>
+    <div class="palette-container">
+        
+        <div class="color-box color-one">
+            <span class="color-label">Brand Blue</span>
+            <span class="color-values">#1B4D8E<br>rgb(27, 77, 142)<br>hsl(214, 68%, 33%)</span>
+        </div>
+        
+        <div class="color-box color-two">
+            <span class="color-label">Gold Accent</span>
+            <span class="color-values">#D4A027<br>rgb(212, 160, 39)<br>hsl(42, 69%, 49%)</span>
+        </div>
+        
+        <div class="color-box color-three">
+            <span class="color-label">Dark Slate</span>
+            <span class="color-values">#333333<br>rgb(51, 51, 51)<br>hsl(0, 0%, 20%)</span>
+        </div>
+    </div>
+</div>
+
+        
+        
+    </section>
+
+
 </body>
+
 </html>
