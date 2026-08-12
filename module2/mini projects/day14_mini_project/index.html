@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethiopian Airlines - Flight Results</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <header class="header">
+
+            <nav class="navbar">
+               <a href="#" class="logo">
+                <img src="assets/logo.png" alt="Ethiopian Airlines">
+                </a>
+                <div class="nav-links">
+                    <a href="#">Book</a>
+                    <a href="#">Manage Booking</a>
+                    <a href="#">Check-in</a>
+                    <a href="#">Flight Status</a>
+                </div>
+
+                <button class="login-btn">
+                    Login
+                </button>
+
+            </nav>
+
+        </header>
+
+
+        <aside class="sidebar">
+
+            <h2>Filter Flights</h2>
+
+            <div class="filter-group">
+
+                <h3>Trip Type</h3>
+
+                <label>
+                    <input type="radio" name="trip">
+                    Round Trip
+                </label>
+
+                <label>
+                    <input type="radio" name="trip">
+                    One Way
+                </label>
+
+                <label>
+                    <input type="radio" name="trip">
+                    Multicity
+                </label>
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <h3>Cabin Class</h3>
+
+                <label>
+                    <input type="checkbox">
+                    Economy
+                </label>
+
+                <label>
+                    <input type="checkbox">
+                    Business
+                </label>
+
+                <label>
+                    <input type="checkbox">
+                    Cloud Nine
+                </label>
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <h3>Stops</h3>
+
+                <label>
+                    <input type="checkbox">
+                    Non-stop
+                </label>
+
+                <label>
+                    <input type="checkbox">
+                    1 Stop
+                </label>
+
+            </div>
+
+        </aside>
+
+
+        <main class="main-content">
+
+            <section class="search-box">
+
+                <div class="search-header">
+                    <h1>Search Flights</h1>
+                    <p>Find the best flight for your journey</p>
+                </div>
+
+                <div class="search-form">
+
+                    <div class="field">
+                        <label>From</label>
+                        <input type="text" placeholder="Addis Ababa">
+                    </div>
+
+                    <div class="field">
+                        <label>To</label>
+                        <input type="text" placeholder="Dubai">
+                    </div>
+
+                    <div class="field">
+                        <label>Departure</label>
+                        <input type="date">
+                    </div>
+
+                    <div class="field">
+                        <label>Passengers</label>
+                        <select>
+                            <option>1 Adult</option>
+                            <option>2 Adults</option>
+                            <option>3 Adults</option>
+                        </select>
+                    </div>
+
+                    <button class="search-btn">
+                        Search Flights
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <section class="results">
+
+                <div class="toolbar">
+
+                    <div>
+                        <h2>Available Flights</h2>
+                        <p>Showing available flights for your search</p>
+                    </div>
+
+                    <div class="sort">
+
+                        <label for="sort">Sort:</label>
+
+                        <select id="sort">
+                            <option>Recommended</option>
+                            <option>Lowest Price</option>
+                            <option>Shortest Flight</option>
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="flight-cards">
+
+
+                    <article class="flight-card">
+
+                        <span class="badge">
+                            BEST VALUE
+                        </span>
+
+                        <div class="flight-info">
+
+                            <div class="airline">
+                                <strong>ET</strong>
+                                <span>Ethiopian Airlines</span>
+                            </div>
+
+                            <div class="route">
+
+                                <div>
+                                    <strong>08:00</strong>
+                                    <span>ADD</span>
+                                </div>
+
+                                <div class="duration">
+                                    <span>4h 30m</span>
+                                    <hr>
+                                    <span>Direct</span>
+                                </div>
+
+                                <div>
+                                    <strong>12:30</strong>
+                                    <span>DXB</span>
+                                </div>
+
+                            </div>
+
+                            <div class="price">
+                                <strong>79,000 ETB</strong>
+                                <button>Select</button>
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="flight-card">
+
+                        <span class="badge">
+                            POPULAR
+                        </span>
+
+                        <div class="flight-info">
+
+                            <div class="airline">
+                                <strong>ET</strong>
+                                <span>Ethiopian Airlines</span>
+                            </div>
+
+                            <div class="route">
+
+                                <div>
+                                    <strong>10:15</strong>
+                                    <span>ADD</span>
+                                </div>
+
+                                <div class="duration">
+                                    <span>4h 45m</span>
+                                    <hr>
+                                    <span>Direct</span>
+                                </div>
+
+                                <div>
+                                    <strong>15:00</strong>
+                                    <span>DXB</span>
+                                </div>
+
+                            </div>
+
+                            <div class="price">
+                                <strong>84,500 ETB</strong>
+                                <button>Select</button>
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="flight-card">
+
+                        <div class="flight-info">
+
+                            <div class="airline">
+                                <strong>ET</strong>
+                                <span>Ethiopian Airlines</span>
+                            </div>
+
+                            <div class="route">
+
+                                <div>
+                                    <strong>14:30</strong>
+                                    <span>ADD</span>
+                                </div>
+
+                                <div class="duration">
+                                    <span>5h 10m</span>
+                                    <hr>
+                                    <span>Direct</span>
+                                </div>
+
+                                <div>
+                                    <strong>19:40</strong>
+                                    <span>DXB</span>
+                                </div>
+
+                            </div>
+
+                            <div class="price">
+                                <strong>72,500 ETB</strong>
+                                <button>Select</button>
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="flight-card">
+
+                        <div class="flight-info">
+
+                            <div class="airline">
+                                <strong>ET</strong>
+                                <span>Ethiopian Airlines</span>
+                            </div>
+
+                            <div class="route">
+
+                                <div>
+                                    <strong>18:00</strong>
+                                    <span>ADD</span>
+                                </div>
+
+                                <div class="duration">
+                                    <span>4h 40m</span>
+                                    <hr>
+                                    <span>Direct</span>
+                                </div>
+
+                                <div>
+                                    <strong>22:40</strong>
+                                    <span>DXB</span>
+                                </div>
+
+                            </div>
+
+                            <div class="price">
+                                <strong>76,000 ETB</strong>
+                                <button>Select</button>
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <footer class="footer">
+
+            <div>
+                <strong>Ethiopian Airlines</strong>
+                <p>Connecting Ethiopia to the world.</p>
+            </div>
+
+            <div class="footer-links">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Help</a>
+            </div>
+
+            <p>© 2026 Ethiopian Airlines</p>
+
+        </footer>
+
+    </div>
+
+</body>
+
+</html>
