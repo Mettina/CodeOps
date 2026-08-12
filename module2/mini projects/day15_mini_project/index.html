@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habesha Eatery</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <a href="#home">Habesha Eatery</a>
+
+            <div>
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#menu">Menu</a>
+                <a href="#reservation">Reservation</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <section id="home">
+            <h1>Authentic Ethiopian Flavors</h1>
+
+            <p>
+                Experience traditional Ethiopian food,
+                warm hospitality, and unforgettable flavors.
+            </p>
+
+            <a href="#reservation">Reserve a Table</a>
+        </section>
+
+        <section id="about">
+
+            <h2>Our Story</h2>
+
+            <p>
+                Habesha Eatery brings the rich flavors and traditions
+                of Ethiopian cuisine to Bole, Addis Ababa. We serve
+                traditional dishes prepared with fresh ingredients
+                and authentic Ethiopian spices.
+            </p>
+
+        </section>
+
+        <section id="menu">
+
+            <h2>Our Menu</h2>
+
+            <div class="menu-grid">
+
+                <article class="dish-card">
+                <img src="./assets/doro wot.jpg" class="img-placeholder">
+                <h3>Doro Wat</h3>
+                <p class="description">Spicy chicken stew with berbere, served with injera. A classic Ethiopian comfort dish.</p>
+                <span class="price">300 ETB</span>
+            </article>
+            <article class="dish-card">
+                <img src="./assets/kitfo.jpg" class="img-placeholder">
+                <h3>Kitfo</h3>
+                <p class="description">Minced raw beef seasoned with mitmita and clarified butter. Served with cottage cheese.</p>
+                <span class="price">350 ETB</span>
+            </article>
+
+            <article class="dish-card">
+                <img src="./assets/shiro wot.jpg" class="img-placeholder">
+                <h3>Shiro Wat</h3>
+                <p class="description">Ground chickpea stew with garlic, ginger and tomato. A hearty vegan favourite.</p>
+                <span class="price">195 ETB</span>
+            </article>
+
+            <article class="dish-card">
+                <img src="./assets/asa.jpg" class="img-placeholder">
+                <h3>Asa Tibs</h3>
+                <p class="description">Fried fish fillet with onions, peppers and a touch of turmeric. Light &amp; flaky.</p>
+                <span class="price">340 ETB</span>
+            </article>
+            <article class="dish-card">
+                <img src="./assets/beyaynet.jpg" class="img-placeholder">
+                <h3>Beyaynet</h3>
+                <p class="description">A colorful combination of flavorful Ethiopian vegetarian stews and vegetables served together on fresh injera</p>
+                <span class="price">180 ETB</span>
+            </article>
+
+            <article class="dish-card">
+                <img src="./assets/buna.jpg" class="img-placeholder">
+                <h3>Buna</h3>
+                <p class="description">Traditional Ethiopian coffee, roasted and brewed fresh. </p>
+                <span class="price">65 ETB</span>
+            </article>
+            <article class="dish-card">
+                <img src="./assets/firfir.jpg" class="img-placeholder">
+                <h3>Firfir</h3>
+                <p class="description">Shredded injera mixed with berbere, clarified butter, and spices. A flavorful and spicy Ethiopian favorite.</p>
+                <span class="price">120 ETB</span>
+            </article>
+            <article class="dish-card">
+                <img src="./assets/pasta.jpg" class="img-placeholder">
+                <h3> Pasta </h3>
+                <p class="description">Tender pasta tossed with fresh vegetables, herbs, and a flavorful tomato sauce. A light and delicious meal.</p>
+                <span class="price">185 ETB</span>
+            </article>
+            <article class="dish-card">
+                <img src="../day15_mini_project/assets/tibs.jpg" class="img-placeholder">
+                <h3>Tibs</h3>
+                <p class="description">Tender pieces of beef sautéed with onions, peppers, rosemary, and traditional Ethiopian spices.</p>
+                <span class="price">250 ETB</span>
+            </article>
+        </div>
+
+        </section>
+
+        <section id="reservation">
+
+            <h2>Reserve a Table</h2>
+
+            <form>
+
+                <label for="name">Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                >
+
+                <label for="email">Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                >
+
+                <label for="date">Date</label>
+                <input
+                    type="date"
+                    id="date"
+                    name="date"
+                    required
+                >
+
+                <label for="time">Time</label>
+                <input
+                    type="time"
+                    id="time"
+                    name="time"
+                    required
+                >
+
+                <label for="guests">Number of Guests</label>
+                <input
+                    type="number"
+                    id="guests"
+                    name="guests"
+                    min="1"
+                    required
+                >
+
+                <button type="submit">Reserve</button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <footer id="contact">
+
+        <h2>Habesha Eatery</h2>
+
+        <p>Bole, Addis Ababa</p>
+        <p>Phone: +251 987654321</p>
+        <p>Hours: Monday - Sunday, 2:00 AM - 2:00 PM</p>
+
+    </footer>
+
+</body>
+
+</html>
