@@ -4,13 +4,9 @@ const paymentMethod = "TeleBirr";
 
 let tipRate;
 
-if (bill > 300) {
-    tipRate = 0.10;
-} else {
-    tipRate = 0.05;
-}
+const tip = bill > 300 ? bill * 0.10 : bill * 0.05;
 
-const tip = bill * tipRate;
+
 const subtotal = bill + tip;
 
 let serviceFee;
