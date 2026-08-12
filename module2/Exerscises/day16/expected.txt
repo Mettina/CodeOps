@@ -1,0 +1,6 @@
+$ node tip.js
+Bill: 400 ETB
+Tip: 40 ETB
+Service fee: 5 ETB
+Total: 445 ETB
+Amount per person: 111.25 ETB
