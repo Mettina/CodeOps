@@ -1,0 +1,263 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+    background: #020617;
+    font-family: Poppins, sans-serif;
+}
+
+/* ================= BACKGROUND ================= */
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+}
+
+body::before {
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(203, 213, 225, 0.8) 1px,
+            transparent 1px
+        );
+
+    background-size: 40px 40px;
+    opacity: 0.12;
+}
+
+body::after {
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(96, 165, 250, 0.8) 1px,
+            transparent 1px
+        );
+
+    background-size: 50px 50px;
+    opacity: 0.08;
+}
+
+/* ================= LOADER ================= */
+
+.loader {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ================= LOGO ================= */
+
+.loader-logo {
+    margin-bottom: 25px;
+
+    font-size: 120px;
+    font-weight: 700;
+
+    color: #e2e8f0;
+
+    text-shadow:
+        0 0 4px #cbd5e1,
+        0 0 12px #60a5fa,
+        0 0 24px #3b82f6;
+
+    animation: glow 2s infinite alternate;
+}
+
+/* ================= NAME BOX ================= */
+
+.name-box {
+    width: 280px;
+    height: 80px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+
+    border: 2px solid #3b82f6;
+    border-radius: 25px;
+
+    background: rgba(15, 23, 42, 0.95);
+
+    box-shadow:
+        0 0 8px #3b82f6,
+        0 0 20px rgba(59, 130, 246, 0.5);
+}
+
+.drop-name {
+    display: inline-block;
+
+    color: #e2e8f0;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 2px;
+
+    animation: dropDown 2s ease-out forwards;
+}
+/* ================= PROGRESS BAR ================= */
+
+.bar {
+    width: 300px;
+    height: 8px;
+
+    margin-top: 18px;
+
+    overflow: hidden;
+    border-radius: 30px;
+
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.fill {
+    width: 0;
+    height: 100%;
+
+    border-radius: 30px;
+
+    background: linear-gradient(
+        to right,
+        #2563eb,
+        #60a5fa
+    );
+
+    box-shadow:
+        0 0 8px #60a5fa,
+        0 0 15px #3b82f6;
+
+    animation: loading 3s linear infinite;
+}
+
+/* ================= PARTICLES ================= */
+
+.particle {
+    position: absolute;
+
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #e2e8f0;
+
+    box-shadow:
+        0 0 5px #ffffff,
+        0 0 15px #60a5fa;
+
+    animation: floating 4s infinite ease-in-out;
+}
+
+.p1 {
+    top: 3%;
+    left: 1%;
+}
+
+.p2 {
+    top: 20%;
+    right: 1%;
+}
+
+.p3 {
+    bottom: 10%;
+    left: 5%;
+}
+
+.p4 {
+    bottom: 12%;
+    right: 8%;
+}
+
+.p5 {
+    bottom: 5%;
+    right: 8%;
+}
+
+.p6 {
+    bottom: 18%;
+    right: 12%;
+}
+
+/* ================= ANIMATIONS ================= */
+
+@keyframes glow {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.03);
+    }
+}
+
+@keyframes floating {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes loading {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes textGlow {
+    from {
+        text-shadow:
+            0 0 5px #ffffff,
+            0 0 10px #60a5fa;
+    }
+
+    to {
+        text-shadow:
+            0 0 10px #ffffff,
+            0 0 20px #60a5fa,
+            0 0 30px #2563eb;
+    }
+}
+
+@keyframes dropDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-500px);
+    }
+
+    80% {
+        opacity: 1;
+        transform: translateY(15px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.drop-name:hover {
+    text-shadow:
+        0 0 5px #ffffff,
+        0 0 10px #60a5fa,
+        0 0 20px #2563eb;
+}

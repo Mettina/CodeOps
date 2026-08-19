@@ -1,0 +1,90 @@
+
+header {
+    height: 70px;
+    padding: 0 6%;
+
+    background-color: #061a3a;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid #19345d;
+}
+
+
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.logo strong {
+    color: #287df5;
+}
+
+.logo-icon {
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #287df5;
+    color: white;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+}
+
+
+/* Navigation */
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+
+    font-size: 15px;
+
+    transition: 0.3s;
+}
+
+.navbar a:hover {
+    color: #287df5;
+}
+
+
+/* Add Transaction Button */
+.add-btn {
+    padding: 11px 20px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: #287df5;
+    color: white;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.add-btn:hover {
+    background-color: #1765d1;
+    transform: translateY(-2px);
+}

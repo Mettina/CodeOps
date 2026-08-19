@@ -1,0 +1,25 @@
+body {
+  font-family: Arial, sans-serif;
+
+  max-width: 600px;
+
+  margin: 40px auto;
+
+  padding: 20px;
+}
+
+input,
+select,
+button {
+  padding: 8px;
+
+  margin: 5px;
+}
+
+button {
+  cursor: pointer;
+}
+
+li {
+  margin: 10px 0;
+}

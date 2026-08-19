@@ -1,0 +1,31 @@
+p {
+color:red;
+font-size:20px;
+background-color:rgb(25, 27, 88);
+}
+img{
+width: 700px;
+height: 300px;
+}
+#abd{
+    color:wheat;
+    font-size: 40px;
+}
+.mypar{
+    background-color: green;
+    font-size: 30px;
+}
+.long{
+    border-color: black;
+    border-style: dotted;
+    background-color: yellow;
+    padding: 100px;
+    text-align: right;
+
+}
+.long:hover{
+    background-color: green;
+}
+.long::first-letter{
+    font-size: 100px;
+}

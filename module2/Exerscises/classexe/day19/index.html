@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 class="bgyellow">This is DOM  class</h1>
+    <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident necessitatibus nam labore. Blanditiis pariatur ea, temporibus cum nemo magnam accusamus facere eligendi quasi aliquam omnis mollitia, praesentium et officia consectetur.</p>
+    <script src="script.js"></script>
+</body>
+</html>
+
+const paragraph = document.createElement("p");
+
+paragraph.textContent = "Hello World";
+
+const list = document.getElementById("list");
+
+list.appendChild(paragraph);
+ <ul id="list">
+    <p>Hello World</p>
+</ul>
+
+const button = document.getElementById("myBtn");
+
+button.addEventListener("click", function () {
+    console.log("I'm clicked");
+});
