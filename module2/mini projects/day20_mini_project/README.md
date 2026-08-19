@@ -58,7 +58,7 @@ If the country cannot be found, a friendly error message is displayed instead of
 
 ## Project Structure
 
-Day20/
+day20_mini_project/
 ├── index.html
 ├── styles.css
 ├── app.js
