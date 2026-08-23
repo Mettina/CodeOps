@@ -1,39 +1,39 @@
-/* Reset and global base styles */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+   
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 body {
   background-color: #f8f9fa;
   color: #2b3e50;
-  min-height: 100vh;
-  padding: 40px 30px;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
+  min-height: 100vh;
+  padding: 40px;
 }
 
-/* Container limits width and handles basic spacing */
+
 .container {
   width: 100%;
   max-width: 700px;
 }
 
-/* Typography matching the mockup image */
+
 h1 {
   font-size: 32px;
   font-weight: 700;
-  color: #2c3e50;
+  color: #2b4560;
   margin-bottom: 24px;
 }
 
 h2 {
   font-size: 24px;
   font-weight: 700;
-  color: #2c3e50;
+  color: #2b4560;
   margin-top: 32px;
   margin-bottom: 20px;
 }
@@ -42,10 +42,9 @@ h2 {
   font-size: 14px;
   color: #6c757d;
   margin-bottom: 12px;
-  min-height: 20px;
 }
 
-/* Form structure stacking inputs vertically */
+
 #convert-form {
   display: flex;
   flex-direction: column;
@@ -53,31 +52,24 @@ h2 {
   margin-bottom: 16px;
 }
 
-/* Styled text input and dropdown select menu */
 input[type="number"], 
 select {
   width: 100%;
-  max-width: 600px;
-  padding: 12px 14px;
+  padding: 12px 16px;
   font-size: 16px;
   border: 1px solid #ced4da;
   border-radius: 4px;
   background-color: #ffffff;
   color: #212529;
   outline: none;
+  transition: border-color 0.15s ease-in-out;
 }
 
-/* Add custom drop-down styling for a clean layout */
-select {
-  appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://w3.org' viewBox='0 0 24 24' fill='none' stroke='%234a5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 14px center;
-  background-size: 14px;
-  padding-right: 40px;
+input[type="number"]:focus, 
+select:focus {
+  border-color: #3182ce;
 }
 
-/* Unified blue action buttons */
 button {
   width: fit-content;
   background-color: #3182ce;
@@ -86,24 +78,24 @@ button {
   border-radius: 4px;
   padding: 10px 20px;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  margin-top: 4px;
+  transition: background-color 0.15s ease-in-out;
 }
 
 button:hover {
   background-color: #2b6cb0;
 }
 
-/* Dynamic output text styling */
+
 #result {
   font-size: 16px;
-  color: #2d3748;
-  margin-top: 14px;
-  margin-bottom: 14px;
+  color: #333333;
+  margin-top: 8px;
+  margin-bottom: 16px;
 }
 
-/* List element structural styles */
+
 #watchlist {
   list-style-type: none;
   display: flex;
@@ -113,24 +105,19 @@ button:hover {
 
 #watchlist li {
   font-size: 16px;
-  color: #2d3748;
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-/* Minimalist remove item design */
+
+
 #watchlist button.rm {
-  background-color: transparent;
-  color: #a0aec0;
-  padding: 2px 6px;
-  font-size: 18px;
-  line-height: 1;
-  font-weight: bold;
-  margin-top: 0;
+  background-color: #e53e3e;
+  padding: 2px 8px;
+  font-size: 14px;
 }
 
 #watchlist button.rm:hover {
-  background-color: #fee2e2;
-  color: #e53e3e;
+  background-color: #c53030;
 }
