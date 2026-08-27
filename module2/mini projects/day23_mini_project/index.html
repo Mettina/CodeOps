@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 2 day 13 project</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="header-container">
+
+            <div class="logo">
+                <div class="logo-icon">B</div>
+                <h2>Budget App</h2>
+            </div>
+
+
+            <nav class="nav-link">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
+            <button class="btn-primary" id="getStartedBtn">Get Started</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Budget App</h1>
+            <p>Track your expenses and manage your budget</p>
+            <div class="hero-buttons">
+                <!--<button id="heroGetStartedBtn" class="btn-primary">Get Started</button> -->
+                <button id="heroAddBtn" class="btn-secondary">+ Add Transaction</button>
+            </div>
+        </section>
+        <section class="budget-overview">
+            <h2>Budget Overview</h2>
+            <div class="top-card-container">
+                <div class="card-left">
+                    
+                    <div class="card-left-content">
+                        <h3>Total Income</h3>
+                        <p id="incomeDisplay">$0.00</p>
+                    </div>
+                </div>
+                <div class="card-right">
+                    <div class="card-right-content">
+                        <h3>Remaining Balance</h3>
+                        <p id="balanceDisplay">$0.00</p>
+                    </div>
+                    <div class="card-right-content">
+                        <h3>Total Expenses</h3>
+                        <p id="expenseDisplay">$0.00</p>
+                    </div>
+                    <div class="card-right-content">
+                        <h3>Saving Rate</h3>
+                        <p id="savingRateDisplay">0%</p>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+
+        </section>
+        <!-- Modal Pop-up for Add Transaction -->
+        <div class="modal-backdrop" id="transactionModal" style="display: none;">
+            <div class="modal-container">
+                <div class="form-header">
+                    <h2>Add new Transaction</h2>
+                    <button type="button" class="btn-close" id="closeFormBtn" title="Close modal">&times;</button>
+                </div>
+                <div id="formNotification" class="notification-box" style="display: none;"></div>
+                <form action="" class="transaction-form" id="transactionForm">
+                    <div class="form-group">
+                        <label for="type">Type</label>
+                        <select id="type" required>
+                            <option value="">Select Type</option>
+                            <option value="income">Income</option>
+                            <option value="expense">Expense</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <input type="text" id="description" required placeholder="Enter description">
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">Amount</label>
+                        <input type="number" id="amount" step="0.01" min="0.01" required placeholder="Enter amount">
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input type="date" id="date" required placeholder="Enter date">
+                    </div>
+                    <button type="submit" class="btn-primary">Add Transaction</button>
+                </form>
+            </div>
+        </div>
+        <section class="transaction-section">
+            <h2>Recent Transactions</h2>
+            <div class="transaction-list">
+                <table class="transaction-table">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactionList">
+                        
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-col brand-col">
+                <div class="logo">
+                    <div class="logo-icon">B</div>
+                    <h2>Budget App</h2>
+                </div>
+                <p class="footer-tagline">Track expenses, manage personal income, and reach your savings goals faster with smart budget management.</p>
+            </div>
+
+            <div class="footer-col links-col">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col contact-col">
+                <h3>Contact Us</h3>
+                <div class="contact-row">
+                    <span class="contact-icon">📧</span>
+                    <a href="mailto:test@gmail.com">group4@gmail.com</a>
+                </div>
+                <div class="contact-row">
+                    <span class="contact-icon">📞</span>
+                    <a href="tel:05341234567">+251938756685</a>
+                </div>
+                <div class="contact-row">
+                    <span class="contact-icon">🌐</span>
+                    <a href="https://group4.com" target="_blank" rel="noopener">https://group4.com</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Budget App. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
