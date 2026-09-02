@@ -1,3 +1,4 @@
+/* 1. GLOBAL RESET & BASE STYLES */
 * {
     margin: 0;
     padding: 0;
@@ -11,6 +12,7 @@ body {
     line-height: 1.6;
 }
 
+/* 2. NAVIGATION HEADER & NAV BAR STYLES */
 header {
     padding: 20px;
     background-color: #0f172a;
@@ -46,6 +48,7 @@ main {
     padding: 50px;
 }
 
+/* 3. HERO BANNER PROFILE SECTION */
 .hero {
     display: flex;
     align-items: center;
@@ -105,6 +108,7 @@ footer {
     background-color: #0f172a;
 }
 
+/* 4. ABOUT BIOGRAPHY BLOCK STYLES */
 .about-page {
     background-color: #020617;
 }
@@ -209,6 +213,7 @@ footer {
         0 0 15px rgba(59, 130, 246, 0.6);
 }
 
+/* 5. EDUCATION & ACADEMIC GRID CARDS */
 .education-page {
     margin: 0;
     padding: 0;
@@ -462,6 +467,7 @@ footer {
         0 0 20px rgba(37, 99, 235, 0.4);
 }
 
+/* 6. PROJECTS SHOWCASE GRID PANEL */
 .projects-section {
     width: 90%;
     max-width: 1150px;
@@ -544,10 +550,10 @@ footer {
 }
 
 .project-number {
-    color: #64748b;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 3px;
+color: #64748b;
+font-size: 14px;
+font-weight: 600;
+letter-spacing: 3px;
 }
 
 .project-content h2 {
@@ -556,12 +562,7 @@ footer {
     margin: 10px 0 15px;
 }
 
-.project-content p {
-    color: #aeb8c5;
-    font-size: 15px;
-    line-height: 1.8;
-    margin-bottom: 20px;
-}
+.project-content p {color: #aeb8c5;font-size: 15px;line-height: 1.8;margin-bottom: 20px;}
 
 .project-content h3 {
     color: #cbd5e1;
@@ -599,9 +600,7 @@ footer {
     transform: translateX(5px);
 }
 
-
-/* CONTACT */
-
+/* 7. CONTACT MODULE COMPONENT STYLES */
 .contact-section {
     width: 90%;
     max-width: 1150px;
@@ -635,21 +634,40 @@ footer {
     line-height: 1.8;
 }
 
+/* Base layout row forces the components to lay out side-by-side on wide viewports */
 .contact-card {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
     min-height: 550px;
     background: #0f1b2d;
     border: 1px solid #334155;
     border-radius: 24px;
     overflow: hidden;
-    box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.45);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+    width: 100%;
 }
 
+/* Left panel spaces (Let's Connect card layout boundaries) */
+.contact-visual {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    text-align: center;
+    background: radial-gradient(circle at center, rgba(37, 99, 235, 0.20), transparent 55%), #0b1424;
+    border-right: 1px solid #26364d;
+    order: 1; /* Explicitly forces the profile container strictly onto the left column */
+}
+
+/* Right panel spaces (Let's Talk form elements boundary spacing) */
 .contact-form-area {
     padding: 50px;
-    order: 1;
+    flex: 1;
+    order: 2; /* Explicitly forces the input field boxes strictly onto the right column */
 }
 
 .form-label {
@@ -710,8 +728,7 @@ footer {
 .contact-form-area input:focus,
 .contact-form-area textarea:focus {
     border-color: #60a5fa;
-    box-shadow:
-        0 0 0 3px rgba(96, 165, 250, 0.12);
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.12);
 }
 
 .contact-form-area button {
@@ -731,27 +748,7 @@ footer {
 .contact-form-area button:hover {
     background: #3b82f6;
     transform: translateY(-2px);
-    box-shadow:
-        0 8px 20px rgba(37, 99, 235, 0.3);
-}
-
-.contact-visual {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 50px;
-    text-align: center;
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(37, 99, 235, 0.20),
-            transparent 55%
-        ),
-        #0b1424;
-    border-left: 1px solid #26364d;
-    order: 2;
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
 }
 
 .visual-circle {
@@ -767,9 +764,7 @@ footer {
     border: 1px solid #60a5fa;
     border-radius: 50%;
     background: rgba(37, 99, 235, 0.08);
-    box-shadow:
-        0 0 30px rgba(37, 99, 235, 0.25),
-        inset 0 0 30px rgba(37, 99, 235, 0.08);
+    box-shadow: 0 0 30px rgba(37, 99, 235, 0.25), inset 0 0 30px rgba(37, 99, 235, 0.08);
 }
 
 .contact-visual h2 {
@@ -827,107 +822,81 @@ footer {
     font-size: 13px;
 }
 
-
-/* TABLET */
-
+/* 8. MEDIA QUERIES (TABLET MODES) */
 @media (max-width: 1024px) {
-
     main {
         padding: 40px 30px;
     }
-
     .hero {
         gap: 45px;
     }
-
     .hero-image img {
         width: 280px;
     }
-
     .hero-text h2 {
         font-size: 42px;
     }
-
     .hero-text h3 {
         font-size: 27px;
     }
-
     .hero-text p {
         font-size: 18px;
     }
-
     .about-hero {
         padding: 45px;
     }
-
     .about-content {
         padding: 30px;
     }
-
     .about-content h2 {
         font-size: 42px;
     }
-
     .project-image {
         height: 350px;
     }
-
     .contact-form-area,
     .contact-visual {
         padding: 40px;
     }
 }
 
-
-/* SMALL TABLET */
-
+/* 9. MEDIA QUERIES (SMALL TABLET BREAKPOINTS) */
 @media (max-width: 800px) {
-
     .education-page .skills-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-
     .education-heading h1 {
         font-size: 38px;
     }
-
     .project-card {
         gap: 25px;
     }
 }
 
-
-/* MOBILE */
-
+/* 10. MEDIA QUERIES (MOBILE RESPONSIVE STACKING BREAKPOINTS) */
 @media (max-width: 768px) {
-
     header {
         padding: 15px 20px;
         text-align: center;
     }
-
     header h1 {
         margin-bottom: 12px;
         font-size: 24px;
     }
-
     nav {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         gap: 8px;
     }
-
     nav a {
         margin-right: 0;
         padding: 6px 8px;
         font-size: 13px;
     }
-
     main {
         padding: 35px 20px;
     }
-
     .hero {
         flex-direction: column;
         gap: 35px;
@@ -935,247 +904,197 @@ footer {
         text-align: center;
         padding: 45px 0;
     }
-
     .hero-image img {
         width: 250px;
     }
-
     .hero-text {
         max-width: 650px;
     }
-
     .hero-text h2 {
         font-size: 38px;
     }
-
     .hero-text h3 {
         font-size: 25px;
     }
-
     .hero-text p {
         font-size: 17px;
     }
-
     .about-hero {
         min-height: auto;
         padding: 60px 25px;
     }
-
     .about-image {
         width: 100%;
         height: 100%;
         opacity: 0.55;
     }
-
     .about-content {
         width: 100%;
         margin-left: 0;
         padding: 30px 10px;
     }
-
     .about-content h2 {
         font-size: 38px;
     }
-
     .about-content p {
         font-size: 16px;
     }
-
     .education-main,
     .education-container {
         width: 92%;
         padding: 55px 0;
     }
-
     .education-heading {
         margin-bottom: 45px;
     }
-
     .education-heading h1 {
         font-size: 38px;
     }
-
     .education-page .education-card {
         padding: 28px;
         gap: 22px;
     }
-
     .education-page .year {
         position: static;
         display: inline-block;
         margin-top: 15px;
     }
-
     .projects-section {
         width: 92%;
         margin: 70px auto;
     }
-
     .projects-section h1 {
         font-size: 38px;
     }
-
     .project-card {
         flex-direction: column;
         align-items: stretch;
         gap: 25px;
         padding: 20px;
     }
-
     .project-image {
         width: 100%;
         height: 330px;
     }
-
     .project-content h2 {
         font-size: 28px;
     }
-
-
-    /* CONTACT - INFORMATION FIRST ON PHONE */
-
     .contact-section {
         width: 92%;
-        margin: 50px auto;
+        margin: 45px auto;
     }
-
     .contact-heading {
-        margin-bottom: 35px;
+        margin-bottom: 30px;
     }
-
+    .contact-heading span {
+        font-size: 11px;
+        letter-spacing: 3px;
+    }
     .contact-heading h1 {
-        font-size: 38px;
+        font-size: 32px;
     }
-
+    .contact-heading p {
+        font-size: 14px;
+    }
     .contact-card {
-        display: flex;
-        flex-direction: column;
+        flex-direction: column; /* Collapses horizontal columns layout side rows back to vertical layout stack */
+        border-radius: 18px;
     }
-
     .contact-visual {
-        order: 1;
+        order: 1; /* Profile info block section stays locked on top for phone displays */
         width: 100%;
         padding: 45px 30px;
-        border-left: none;
+        border-right: none;
         border-bottom: 1px solid #26364d;
     }
-
     .contact-form-area {
-        order: 2;
+        order: 2; /* Text input form section drops beneath profile info block for phone displays */
         width: 100%;
-        padding: 35px 30px;
     }
-
     .visual-circle {
         width: 150px;
         height: 150px;
         font-size: 52px;
     }
-
     .contact-visual h2 {
         font-size: 26px;
     }
-
     .contact-details {
         max-width: 400px;
     }
 }
 
-
-/* PHONE */
-
+/* 11. MEDIA QUERIES (COMPACT PHONE SPECIFIC RULES) */
 @media (max-width: 550px) {
-
     main {
         padding: 25px 15px;
     }
-
     header {
         padding: 14px 12px;
     }
-
     header h1 {
         font-size: 21px;
     }
-
     nav {
         gap: 4px;
     }
-
     nav a {
         padding: 5px 6px;
         font-size: 12px;
     }
-
     .hero {
         padding: 35px 0;
         gap: 25px;
     }
-
     .hero-image img {
         width: 210px;
     }
-
     .hero-text h2 {
         font-size: 32px;
     }
-
     .hero-text h3 {
         font-size: 21px;
     }
-
     .hero-text p {
         font-size: 15px;
         margin-bottom: 24px;
     }
-
     .button {
-        padding: 11px 20px;
+      padding: 11px 20px;
     }
 
-    .about-hero {
-        padding: 45px 18px;
-    }
-
+.about-hero {padding: 45px 18px;}
     .about-content {
         padding: 20px 5px;
     }
-
     .about-label {
         font-size: 12px;
         letter-spacing: 3px;
     }
-
     .about-content h2 {
         font-size: 32px;
         margin: 12px 0 20px;
     }
-
     .about-content p {
         font-size: 15px;
         line-height: 1.7;
     }
-
     .education-main,
     .education-container {
         width: 92%;
         padding: 45px 0;
     }
-
     .education-heading h1 {
         font-size: 32px;
     }
-
     .education-heading p,
     .section-heading p {
         font-size: 11px;
         letter-spacing: 3px;
     }
-
     .education-heading span {
         font-size: 14px;
     }
-
     .education-page .education-card {
         flex-direction: column;
         align-items: flex-start;
@@ -1183,228 +1102,177 @@ footer {
         gap: 18px;
         margin-bottom: 50px;
     }
-
     .education-page .card-icon {
         width: 65px;
         height: 65px;
         font-size: 28px;
     }
-
     .education-page .card-content h2 {
         font-size: 23px;
     }
-
     .education-page .card-content h3 {
         font-size: 15px;
     }
-
     .education-page .year {
         position: static;
         margin-top: 12px;
     }
-
     .education-page .skills-grid {
         grid-template-columns: 1fr;
     }
-
     .education-page .soft-section,
     .education-page .skills-section {
         margin-bottom: 50px;
     }
-
     .projects-section {
         width: 92%;
         margin: 55px auto;
     }
-
     .section-label {
         font-size: 12px;
         letter-spacing: 3px;
     }
-
     .projects-section h1 {
         font-size: 32px;
     }
-
     .projects-intro {
         margin-bottom: 40px;
         font-size: 14px;
     }
-
     .project-card {
         padding: 15px;
         gap: 20px;
         border-radius: 16px;
     }
-
     .project-image {
         height: 240px;
         border-radius: 12px;
     }
-
     .project-content h2 {
         font-size: 25px;
     }
-
     .project-content p {
         font-size: 14px;
     }
-
     .technologies {
         gap: 7px;
     }
-
     .technologies span {
         padding: 6px 11px;
         font-size: 12px;
     }
-
-
-    /* CONTACT PHONE */
-
     .contact-section {
         width: 92%;
         margin: 45px auto;
     }
-
     .contact-heading {
         margin-bottom: 30px;
     }
-
     .contact-heading span {
         font-size: 11px;
         letter-spacing: 3px;
     }
-
     .contact-heading h1 {
         font-size: 32px;
     }
-
     .contact-heading p {
         font-size: 14px;
     }
-
     .contact-card {
         border-radius: 18px;
     }
-
     .contact-visual {
         order: 1;
         padding: 35px 20px;
     }
-
     .visual-circle {
         width: 135px;
         height: 135px;
         font-size: 45px;
         margin-bottom: 25px;
     }
-
     .contact-visual h2 {
         font-size: 24px;
     }
-
     .contact-visual > p {
         font-size: 14px;
     }
-
     .contact-details {
         margin-top: 25px;
     }
-
     .contact-page .detail,
     .contact-card .detail {
         gap: 10px;
         margin-bottom: 17px;
     }
-
     .contact-page .detail > span,
     .contact-card .detail > span {
         width: 40px;
         height: 40px;
     }
-
     .contact-page .detail p,
     .contact-card .detail p {
         font-size: 12px;
         overflow-wrap: anywhere;
     }
-
     .contact-form-area {
         order: 2;
         padding: 28px 20px;
     }
-
     .form-label {
         font-size: 10px;
         letter-spacing: 2px;
     }
-
     .contact-form-area h2 {
         font-size: 25px;
         margin-bottom: 25px;
     }
-
     .contact-form-area input,
     .contact-form-area textarea {
         font-size: 13px;
     }
-
     .contact-form-area button {
         width: 100%;
     }
-
     footer {
         padding: 25px 15px;
     }
 }
 
-
-/* VERY SMALL PHONE */
-
+/* 12. MEDIA QUERIES (VERY SMALL PHONES) */
 @media (max-width: 380px) {
-
     nav a {
         font-size: 11px;
         padding: 4px 5px;
     }
-
     .hero-image img {
         width: 180px;
     }
-
     .hero-text h2 {
         font-size: 28px;
     }
-
     .hero-text h3 {
         font-size: 19px;
     }
-
     .about-content h2,
     .education-heading h1,
     .projects-section h1 {
         font-size: 28px;
     }
-
     .project-image {
         height: 200px;
     }
-
     .contact-heading h1 {
         font-size: 28px;
     }
-
     .visual-circle {
         width: 120px;
         height: 120px;
         font-size: 40px;
     }
-
     .contact-form-area {
         padding: 25px 16px;
     }
-
     .contact-form-area h2 {
         font-size: 24px;
     }
