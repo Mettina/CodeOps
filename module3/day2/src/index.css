@@ -1,0 +1,125 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f3efff;
+  color: #2b174f;
+}
+
+.app {
+  min-height: 100vh;
+  padding: 45px 5%;
+  background: linear-gradient(135deg, #f7f4ff, #eee8ff);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 55px;
+}
+
+.header h1 {
+  font-size: 58px;
+  font-weight: 800;
+  color: #2b174f;
+  letter-spacing: -1px;
+  margin-bottom: 12px;
+}
+
+.header p {
+  font-size: 25px;
+  color: #716985;
+}
+
+.menu-title {
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+.menu-title h2 {
+  font-size: 38px;
+  font-weight: 800;
+  color: #2b174f;
+  margin-bottom: 18px;
+}
+
+.menu-title::after {
+  content: "";
+  display: block;
+  width: 95px;
+  height: 5px;
+  margin: auto;
+  border-radius: 10px;
+  background: #7446c7;
+}
+
+.menu {
+  width: 100%;
+  max-width: 1250px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 35px;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 35px 28px 30px;
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 8px 22px rgba(56, 31, 92, 0.13);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 15px 35px rgba(56, 31, 92, 0.18);
+}
+
+.card h3 {
+  font-size: 29px;
+  font-weight: 800;
+  color: #2b174f;
+  margin-bottom: 18px;
+}
+
+.spicy {
+  color: #e52323;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+.spicy::before {
+  content: "• ";
+}
+
+.card::after {
+  content: "";
+  width: 75%;
+  height: 2px;
+  background: #e6e6e6;
+  margin-top: 5px;
+  margin-bottom: 22px;
+}
+
+.price {
+  font-size: 27px;
+  font-weight: 800;
+  color: #7446c7;
+}
+
+.empty-state {
+  text-align: center;
+  font-size: 22px;
+  color: #716985;
+  margin-top: 40px;
+}
