@@ -53,15 +53,13 @@ and only knows about the props it's given.
 
 - **Products, images, brand names, categories** — real, fetched live from
   Open Beauty Facts across 5 categories (Cleansers, Moisturizers, Serums,
-  Sunscreen, Toners), matching your sidebar exactly.
+  Sunscreen, Toners), matching sidebar exactly.
 - **Prices (ETB)** — Open Beauty Facts doesn't include pricing data, so
   prices are generated deterministically per product (same product always
   shows the same price) so the Price filter and Sort-by-price have
   something real to work with. This is worth mentioning if asked, since
   it's not live pricing.
-- **Skin Type filter** — a simple keyword heuristic (checks the product
-  name/ingredients for words like "sensitive," "hydrating," "oil-free,"
-  etc.), not a certified dermatological classification.
+.
 - **NEW / SALE / BEST badges** — assigned deterministically per product for
   visual variety, same reasoning as the price simulation.
 
@@ -70,7 +68,7 @@ and only knows about the props it's given.
 - Live API fetch (`useEffect` + `fetch` + `Promise.allSettled` across 5 categories)
 - Card-based product display
 - Category filtering (real data)
-- Search by product name/brand
+- Search by product name
 - Price filtering
 - Sort by Featured / Price / Newest (real creation date from the API)
 - Cart: add, quantity +/- controls, remove, running total, dropdown panel
@@ -78,4 +76,4 @@ and only knows about the props it's given.
 - Checkout flow: order summary, payment method selection (Cash on Delivery,
   Telebirr, Bank Transfer, Card), order confirmation with a generated order
   number. This is a simulated checkout — no real payment is processed.
-- About and Contact pages (Contact includes a simulated form )
+
