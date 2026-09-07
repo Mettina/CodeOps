@@ -1,4 +1,4 @@
-# Addis Eats — Day 3
+# Addis Eats — Day 4
 
 The static menu becomes a working ordering screen: clickable category chips
 filter the dishes, an order total grows in ETB, and a controlled delivery

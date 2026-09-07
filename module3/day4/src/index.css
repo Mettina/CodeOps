@@ -193,3 +193,22 @@ body {
   color: #3f7d4f;
   font-weight: 600;
 }
+.search-input {
+  width: 100%;
+  padding: 10px 12px;
+  margin: 4px 0 16px;
+  border: 1px solid #d8cfbd;
+  border-radius: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.loading-state,
+.error-state {
+  padding: 24px 0;
+  color: #2b174f;
+}
+
+.error-state {
+  color: #a33d3d;
+}
