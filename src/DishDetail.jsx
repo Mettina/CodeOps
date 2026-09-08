@@ -2,12 +2,16 @@ import { useParams, Link } from "react-router-dom";
 import useFetch from "./hooks/useFetch.js";
 import { loadAllDishes } from "./api.js";
 import { useTheme } from "./theme/ThemeContext.jsx";
-import { useCart } from "./cart/CartProvider.jsx";
+import { useCartStore } from "./cart/cartStore.js";
 
 export default function DishDetail() {
   const { id } = useParams();
   const { theme } = useTheme();
-  const { dispatch } = useCart();
+  // Exercise 5: narrow selector -- DishDetail only ever calls addItem,
+  // it never reads items/total, so it only subscribes to the addItem
+  // action reference (stable across renders, so this never re-renders
+  // this component at all on cart changes).
+  const addItem = useCartStore((state) => state.addItem);
 
   const {
     data: dishes,
@@ -46,7 +50,7 @@ export default function DishDetail() {
   const { name, price, currency = "ETB", spicy, image } = dish;
 
   function addToCart() {
-    dispatch({ type: "ADD", payload: dish });
+    addItem(dish);
   }
 
   return (
