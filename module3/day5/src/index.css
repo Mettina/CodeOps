@@ -57,20 +57,45 @@ body {
 }
 
 .dish-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
 }
 
 .dish {
+  display: flex;
+  flex-direction: column;
   background: #fff;
   border: 1px solid #e3dbc9;
-  border-radius: 8px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(43, 23, 79, 0.06);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.dish:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(43, 23, 79, 0.1);
+}
+
+.dish-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+  background: #eee8ff;
+}
+
+.dish-body {
   padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
 }
 
 .dish h3 {
-  margin: 0 0 6px;
+  margin: 0;
   display: flex;
   align-items: baseline;
   gap: 8px;
@@ -80,6 +105,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: auto;
 }
 
 .dish-row p {
@@ -111,6 +137,45 @@ body {
 
 .add-btn:hover {
   background: #356a43;
+}
+
+.qty-stepper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.qty-btn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 6px;
+  background: #3f7d4f;
+  color: #fff;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.qty-btn:hover {
+  background: #356a43;
+}
+
+.qty-btn:disabled {
+  background: #b8b0a0;
+  cursor: not-allowed;
+}
+
+.qty-value {
+  min-width: 18px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.qty-max-note {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #a23b2e;
 }
 
 .empty-state {
@@ -229,6 +294,7 @@ body {
   color: #2b174f;
   font-size: 14px;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .cart-badge span {
@@ -242,6 +308,43 @@ body {
   color: #fff;
   border-radius: 50%;
   font-size: 12px;
+}
+
+.header-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.theme-toggle {
+  margin-top: 15px;
+  padding: 8px 14px;
+  background: #fff;
+  border: 1px solid #e3dbc9;
+  border-radius: 999px;
+  color: #2b174f;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.menu-stats {
+  color: #6b6153;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* Exercise 1: dark theme, read by Dish.jsx three levels deep via
+   useTheme() -- no theme prop passed through Menu or DishList. */
+.dish--dark {
+  background: #241a3a;
+  border-color: #3a2c5c;
+  color: #f3efff;
+}
+
+.dish--dark .dish-row p {
+  color: #d9a8ff;
 }
 
 
