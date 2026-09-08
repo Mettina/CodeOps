@@ -673,3 +673,23 @@ body {
     font-size: 18px;
   }
 }
+
+.nav-link.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+.main-nav {
+  display: flex;
+  gap: 1rem;
+  margin: 0.5rem 0;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav-link.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
