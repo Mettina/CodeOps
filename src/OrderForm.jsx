@@ -1,15 +1,22 @@
 import { Link } from "react-router-dom";
-import { useCart } from "./cart/CartProvider.jsx";
+import { useCartStore, selectTotal } from "./cart/cartStore.js";
 
 export default function OrderForm() {
-  const { items, dispatch, total } = useCart();
+  // Exercise 5: three narrow selectors instead of one useCart() that
+  // pulled the whole context value. OrderForm now only re-renders when
+  // items or the derived total change -- itemCount changes elsewhere
+  // don't touch this component at all (it doesn't read itemCount).
+  const items = useCartStore((state) => state.items);
+  const removeItemAction = useCartStore((state) => state.removeItem);
+  const clear = useCartStore((state) => state.clear);
+  const total = useCartStore(selectTotal);
 
   function removeItem(id) {
-    dispatch({ type: "REMOVE", payload: id });
+    removeItemAction(id);
   }
 
   function clearCart() {
-    dispatch({ type: "CLEAR" });
+    clear();
   }
 
   return (
