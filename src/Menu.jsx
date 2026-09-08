@@ -10,7 +10,7 @@ import CategoryBar from "./CategoryBar.jsx";
 import DishList from "./DishList.jsx";
 import useFetch from "./hooks/useFetch.js";
 import { loadDishes } from "./api.js";
-import { useCart } from "./cart/CartProvider.jsx";
+import { useCartStore } from "./cart/cartStore.js";
 
 const categories = [
   "All",
@@ -44,7 +44,10 @@ export default function Menu() {
     [category]
   );
 
-  const { dispatch } = useCart();
+  // Exercise 5: narrow selectors -- Menu never reads items/total, only
+  // the two actions it calls, so cart changes never re-render Menu.
+  const addItem = useCartStore((state) => state.addItem);
+  const removeItem = useCartStore((state) => state.removeItem);
 
   
   const shown = useMemo(() => {
@@ -69,18 +72,12 @@ export default function Menu() {
 
   
   const addToCart = useCallback((dish) => {
-    dispatch({
-      type: "ADD",
-      payload: dish,
-    });
-  }, [dispatch]);
+    addItem(dish);
+  }, [addItem]);
 
   const removeFromCart = useCallback((dish) => {
-    dispatch({
-      type: "REMOVE",
-      payload: dish.id,
-    });
-  }, [dispatch]);
+    removeItem(dish.id);
+  }, [removeItem]);
 
   if (loading) {
     return (
