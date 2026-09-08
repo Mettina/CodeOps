@@ -1,7 +1,24 @@
 [
-  { "id": 1, "name": "Doro Wat", "price": 240, "category": "Main", "spicy": true },
-  { "id": 2, "name": "Kitfo", "price": 260, "category": "Main", "spicy": true },
-  { "id": 3, "name": "Shiro", "price": 150, "category": "Vegan", "spicy": false },
-  { "id": 4, "name": "Gomen", "price": 140, "category": "Vegan", "spicy": false },
-  { "id": 5, "name": "Tibs", "price": 230, "category": "Grill", "spicy": true }
+  { "id": 1, "name": "Doro Wat", "price": 300, "category": "Main", "spicy": true, "image": "/images/doro wot.jpg" },
+  { "id": 2, "name": "Kitfo", "price": 260, "category": "Main", "spicy": true, "image": "/images/kitfo.jpg" },
+  { "id": 3, "name": "Shiro", "price": 150, "category": "Vegan", "spicy": false, "image": "/images/shiro wot.jpg" },
+  { "id": 4, "name": "Gomen", "price": 140, "category": "Vegan", "spicy": false, "image": "/images/gomen.jpg" },
+  { "id": 5, "name": "Tibs", "price": 230, "category": "Grill", "spicy": true, "image": "/images/tibs.jpg" },
+  { "id": 6, "name": "Asa Tibs", "price": 350, "category": "Grill", "spicy": false, "image": "/images/asa.jpg" },
+  { "id": 7, "name": "Beyayenet", "price": 250, "category": "Main", "spicy": false, "image": "/images/beyaynet.jpg" },
+  { "id": 8, "name": "Firfir", "price": 200, "category": "Main", "spicy": true, "image": "/images/firfir.jpg" },
+  { "id": 9, "name": "Miser Wat", "price": 150, "category": "Main", "spicy": true, "image": "/images/miser.jpg" },
+  { "id": 10, "name": "Salad", "price": 170, "category": "Vegan", "spicy": false, "image": "/images/salad.jpg" },
+  { "id": 11, "name": "Tere Sega", "price": 400, "category": "Main", "spicy": false, "image": "/images/tere.jpg" },
+  { "id": 12, "name": "Kikel", "price": 350, "category": "Main", "spicy": false, "image": "/images/kikel.jpg" },
+  { "id": 13, "name": "Ayib", "price": 310, "category": "Main", "spicy": false, "image": "/images/ayb.jpg" },
+  { "id": 14, "name": "Suf Fitefet ", "price": 170, "category": "Main", "spicy": false, "image": "/images/suf.jpg" },
+  { "id": 15, "name": "Goden Tibs", "price": 430, "category": "Grill", "spicy": true, "image": "/images/goden.jpg" }
+
+
+
+
+
+
+
 ]

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCart } from "./cart/CartProvider.jsx";
 
 const TELEBIRR_PATTERN =
@@ -26,6 +26,8 @@ export default function OrderForm() {
   const [submitted, setSubmitted] =
     useState(false);
 
+  const sectionRef = useRef(null);
+
   useEffect(() => {
     function handleOpenCart() {
       setCartOpen(true);
@@ -44,6 +46,15 @@ export default function OrderForm() {
       );
     };
   }, []);
+
+  useEffect(() => {
+    if (cartOpen) {
+      sectionRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, [cartOpen]);
 
   function handleChange(e) {
     const {
@@ -110,6 +121,7 @@ export default function OrderForm() {
     <section
       id="cart-section"
       className="cart-section"
+      ref={sectionRef}
     >
 
       <div className="cart-header">
@@ -265,7 +277,7 @@ export default function OrderForm() {
                 }
               >
                 {form.phone === ""
-                  ? "Enter an Ethiopian phone number."
+                  ? "."
                   : phoneIsValid
                   ? "Phone number is valid."
                   : "Use 0912345678 or +251912345678."}

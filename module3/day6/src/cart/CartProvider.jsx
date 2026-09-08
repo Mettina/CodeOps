@@ -9,6 +9,9 @@ import { cartReducer } from "./cartReducer.js";
 
 const CartContext = createContext(null);
 
+// Exercise 5: CartProvider holds the reducer (via useReducer) and
+// provides items, dispatch, and the derived total/itemCount to
+// everything below it through context.
 export function CartProvider({ children }) {
   const [items, dispatch] = useReducer(cartReducer, []);
 
@@ -28,6 +31,19 @@ export function CartProvider({ children }) {
     );
   }, [items]);
 
+  // Exercise 6: memoise the provider value with useMemo.
+  //
+  // What this prevents: every render of CartProvider (e.g. from a
+  // parent re-rendering for an unrelated reason) creates a brand-new
+  // `value` object literal by default. Context consumers re-render
+  // whenever the value they read from context changes *by reference*,
+  // even if none of the individual fields (items/dispatch/total/
+  // itemCount) actually changed. That would force Header, Menu, and
+  // OrderForm to all re-render on every CartProvider render, not just
+  // when the cart itself changes. Memoising `value` on
+  // [items, total, itemCount] means consumers only re-render when one
+  // of those actually changes (dispatch is already stable from
+  // useReducer, so it isn't a dependency).
   const value = useMemo(
     () => ({
       items,
@@ -45,6 +61,8 @@ export function CartProvider({ children }) {
   );
 }
 
+// Week 1 requirement: the hook the header cart badge and the checkout
+// panel both call to read the cart -- no prop drilling between them.
 export function useCart() {
   const context = useContext(CartContext);
 
