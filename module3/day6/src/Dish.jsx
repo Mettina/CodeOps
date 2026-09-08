@@ -1,17 +1,8 @@
 import { memo } from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useTheme } from "./theme/ThemeContext.jsx";
 
-// Exercise 7: wrapped in React.memo so a re-render of DishList (e.g.
-// because the cart changed) only re-renders the one Dish whose own
-// props (quantity/atMax) actually changed -- not all of them. This only
-// works because DishList now passes stable props (see the comment
-// there); memo alone wouldn't have helped against a fresh function prop
-// every render.
-//
-// Exercise 1: this is the "deeply nested component" (App > Menu >
-// DishList > Dish) that reads ThemeContext directly via useTheme(),
-// with no theme prop passed through Menu or DishList.
 function Dish({
   dish,
   quantity = 0,
@@ -32,16 +23,16 @@ function Dish({
   return (
     <div className={`dish dish--${theme}`}>
 
-      {image && (
-        <img
-          className="dish-image"
-          src={image}
-          alt={name}
-          loading="lazy"
-        />
-      )}
+      <Link to={`/menu/${dish.id}`} className="dish-link">
 
-      <div className="dish-body">
+        {image && (
+          <img
+            className="dish-image"
+            src={image}
+            alt={name}
+            loading="lazy"
+          />
+        )}
 
         <h3>
           {name}
@@ -52,6 +43,10 @@ function Dish({
             </span>
           )}
         </h3>
+
+      </Link>
+
+      <div className="dish-body">
 
         <div className="dish-row">
 

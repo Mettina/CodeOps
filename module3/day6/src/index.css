@@ -735,3 +735,34 @@ body {
 .cta-button:hover {
   background-color: #6d28d9;
 }
+
+.dish-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.dish-detail {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.dish-detail-image {
+  width: 100%;
+  max-width: 350px;
+  border-radius: 12px;
+  margin: 1rem auto;
+}
+
+.dish-detail-price {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0.5rem 0 1rem;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+}
