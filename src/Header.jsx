@@ -1,10 +1,14 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useCart } from "./cart/CartProvider.jsx";
+import { useCartStore, selectItemCount } from "./cart/cartStore.js";
 import { useTheme } from "./theme/ThemeContext.jsx";
 import MenuStats from "./MenuStats.jsx";
 
 export default function Header() {
-  const { itemCount } = useCart();
+  // Exercise 5: narrow selector -- Header only re-renders when the
+  // *derived* itemCount changes, not on every items-array change (e.g.
+  // it won't re-render on an ADD that's rejected for hitting MAX_QUANTITY,
+  // since selectItemCount's result is identical before/after).
+  const itemCount = useCartStore(selectItemCount);
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
