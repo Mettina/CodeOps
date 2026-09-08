@@ -40,6 +40,12 @@ export default function Header() {
         >
           Cart
         </NavLink>
+        <NavLink
+          to="/checkout"
+          className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
+        >
+          Checkout
+        </NavLink>
       </nav>
 
       <MenuStats />
