@@ -1,4 +1,4 @@
-# Addis Eats — Week 1 Routing Project
+# Addis Eats — day7
 
 A React Router application for an Ethiopian food delivery service. Built across the Day 6 exercises, this project turns the existing menu/cart app into a fully routed, multi-screen experience: a landing page, a shareable filtered menu, individual dish pages, a persistent cart, and an authenticated checkout flow.
 
