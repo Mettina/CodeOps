@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useCart } from "./cart/CartProvider.jsx";
 import { useTheme } from "./theme/ThemeContext.jsx";
 import MenuStats from "./MenuStats.jsx";
@@ -6,9 +6,10 @@ import MenuStats from "./MenuStats.jsx";
 export default function Header() {
   const { itemCount } = useCart();
   const { theme, toggleTheme } = useTheme();
+  const navigate = useNavigate();
 
   function openCart() {
-    window.dispatchEvent(new CustomEvent("open-cart"));
+    navigate("/cart");
   }
 
   return (
@@ -44,14 +45,22 @@ export default function Header() {
       <MenuStats />
 
       <div className="header-actions">
-        <button className="cart-badge" onClick={openCart}>
-          Cart
+
+        <button
+          className="cart-badge"
+          onClick={openCart}
+        >
+           Cart
           <span>{itemCount}</span>
         </button>
 
-        <button className="theme-toggle" onClick={toggleTheme}>
+        <button
+          className="theme-toggle"
+          onClick={toggleTheme}
+        >
           {theme === "light" ? "🌙 Dark" : "☀️ Light"}
         </button>
+
       </div>
     </header>
   );

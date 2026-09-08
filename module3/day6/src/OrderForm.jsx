@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useCart } from "./cart/CartProvider.jsx";
 
 const TELEBIRR_PATTERN =
@@ -11,9 +11,6 @@ export default function OrderForm() {
     total,
   } = useCart();
 
-  const [cartOpen, setCartOpen] =
-    useState(false);
-
   const [checkoutOpen, setCheckoutOpen] =
     useState(false);
 
@@ -25,36 +22,6 @@ export default function OrderForm() {
 
   const [submitted, setSubmitted] =
     useState(false);
-
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    function handleOpenCart() {
-      setCartOpen(true);
-      setCheckoutOpen(false);
-    }
-
-    window.addEventListener(
-      "open-cart",
-      handleOpenCart
-    );
-
-    return () => {
-      window.removeEventListener(
-        "open-cart",
-        handleOpenCart
-      );
-    };
-  }, []);
-
-  useEffect(() => {
-    if (cartOpen) {
-      sectionRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-  }, [cartOpen]);
 
   function handleChange(e) {
     const {
@@ -89,11 +56,6 @@ export default function OrderForm() {
     setCheckoutOpen(true);
   }
 
-  function closeCart() {
-    setCartOpen(false);
-    setCheckoutOpen(false);
-  }
-
   const phoneIsValid =
     TELEBIRR_PATTERN.test(form.phone);
 
@@ -113,27 +75,15 @@ export default function OrderForm() {
     setSubmitted(true);
   }
 
-  if (!cartOpen) {
-    return null;
-  }
-
   return (
     <section
       id="cart-section"
       className="cart-section"
-      ref={sectionRef}
     >
 
       <div className="cart-header">
 
         <h2>Your Cart</h2>
-
-        <button
-          className="clear-btn"
-          onClick={closeCart}
-        >
-          Close
-        </button>
 
       </div>
 
@@ -144,13 +94,6 @@ export default function OrderForm() {
           <p>
             Your cart is empty.
           </p>
-
-          <button
-            className="checkout-btn"
-            onClick={closeCart}
-          >
-            Back to Menu
-          </button>
 
         </div>
 

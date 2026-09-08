@@ -700,3 +700,38 @@ body {
   font-size: 0.9rem;
   color: #666;
 }
+
+.home {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.home h2 {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+  color: #2e1065; /* deep purple to match your header */
+}
+
+.home p {
+  font-size: 1.1rem;
+  color: #444;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #4c1d95;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 999px;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.cta-button:hover {
+  background-color: #6d28d9;
+}
