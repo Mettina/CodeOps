@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useCart } from "./cart/CartProvider.jsx";
+import { useCartStore, selectTotal } from "./cart/cartStore.js";
 import { useAuth } from "./auth/AuthContext.jsx";
 
 const TELEBIRR_PATTERN = /^(?:\+251|0)9\d{8}$/;
 
 export default function Checkout() {
-  const { items, dispatch, total } = useCart();
+  // Exercise 5: narrow selectors, same pattern as OrderForm.
+  const items = useCartStore((state) => state.items);
+  const clear = useCartStore((state) => state.clear);
+  const total = useCartStore(selectTotal);
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
 
@@ -31,7 +34,7 @@ export default function Checkout() {
     e.preventDefault();
     if (!canSubmit) return;
     setSubmitted(true);
-    dispatch({ type: "CLEAR" });
+    clear();
   }
 
   function handleSignOut() {
