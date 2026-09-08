@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import Header from "./Header.jsx";
+import Layout from "./Layout.jsx";
 import Menu from "./Menu.jsx";
 import OrderForm from "./OrderForm.jsx";
 import { CartProvider } from "./cart/CartProvider.jsx";
@@ -9,14 +9,13 @@ export default function App() {
   return (
     <ThemeProvider>
       <CartProvider>
-        <div className="app">
-          <Header />
-          <Routes>
-            <Route path="/" element={<Menu />} />
-            <Route path="/menu" element={<Menu />} />
-            <Route path="/cart" element={<OrderForm />} />
-          </Routes>
-        </div>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Menu />} />
+            <Route path="menu" element={<Menu />} />
+            <Route path="cart" element={<OrderForm />} />
+          </Route>
+        </Routes>
       </CartProvider>
     </ThemeProvider>
   );
