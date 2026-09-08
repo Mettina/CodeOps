@@ -7,7 +7,6 @@ import OrderForm from "./OrderForm.jsx";
 import Checkout from "./Checkout.jsx";
 import SignIn from "./SignIn.jsx";
 import NotFound from "./NotFound.jsx";
-import { CartProvider } from "./cart/CartProvider.jsx";
 import { ThemeProvider } from "./theme/ThemeContext.jsx";
 import { AuthProvider } from "./auth/AuthContext.jsx";
 import RequireAuth from "./auth/RequireAuth.jsx";
@@ -16,26 +15,24 @@ export default function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
-        <CartProvider>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<Home />} />
-              <Route path="menu" element={<Menu />} />
-              <Route path="menu/:id" element={<DishDetail />} />
-              <Route path="cart" element={<OrderForm />} />
-              <Route path="signin" element={<SignIn />} />
-              <Route
-                path="checkout"
-                element={
-                  <RequireAuth>
-                    <Checkout />
-                  </RequireAuth>
-                }
-              />
-              <Route path="*" element={<NotFound />} />
-            </Route>
-          </Routes>
-        </CartProvider>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="menu" element={<Menu />} />
+            <Route path="menu/:id" element={<DishDetail />} />
+            <Route path="cart" element={<OrderForm />} />
+            <Route path="signin" element={<SignIn />} />
+            <Route
+              path="checkout"
+              element={
+                <RequireAuth>
+                  <Checkout />
+                </RequireAuth>
+              }
+            />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
       </AuthProvider>
     </ThemeProvider>
   );

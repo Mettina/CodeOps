@@ -1,89 +1,50 @@
-# Addis Eats - day5
+# Addis Eats — Week 1 Routing Project
 
-A React-based Ethiopian food menu application built as the Week 1 Mini-Project. The application brings together data fetching, category filtering, searching, React Context, useReducer, custom hooks, and a shared shopping cart.
+A React Router application for an Ethiopian food delivery service. Built across the Day 6 exercises, this project turns the existing menu/cart app into a fully routed, multi-screen experience: a landing page, a shareable filtered menu, individual dish pages, a persistent cart, and an authenticated checkout flow.
 
-## Project Overview
+## What you can do
 
-Addis Eats is a simple Ethiopian food ordering application where users can browse dishes, filter them by category, search for dishes, add dishes to a cart, change quantities, remove items, and clear the cart.
+- Browse a landing page and jump into the menu
+- Filter dishes by category and search by name
+- Share a link to a specific filtered view (e.g. `/menu?category=Vegan`)
+- View any dish on its own page
+- Add dishes to a cart that survives navigation between screens
+- Sign in before checking out, and land back on checkout automatically after signing in
+- Get a friendly "not found" page for bad URLs, instead of a crash
 
-The project was built with React and Vite while practicing modern React concepts.
+## Routes
 
-## Features
+| Route | Component | Description |
+|---|---|---|
+| `/` | `Home` | Landing page welcoming the user, with a link into the menu. This is the **index route** — it renders when the path matches `/` exactly, nested inside `Layout`. |
+| `/menu` | `Menu` | The full dish list. Supports category filtering and text search. The selected category is stored in the URL's query string (`?category=Vegan`) via `useSearchParams`, so any filtered view can be copied, shared, or reopened directly. |
+| `/menu/:id` | `DishDetail` | A single dish's detail page. Reads the `id` URL parameter with `useParams`, looks up the matching dish, and shows its image, price, and an "Add to Cart" button. Shows a "Dish not found" message (not a crash) if the `id` doesn't match any dish. |
+| `/cart` | `OrderForm` | Shows everything currently in the cart, the running total, and a "Proceed to Checkout" link. Lets you remove individual items or clear the cart. |
+| `/signin` | `SignIn` | A simple mock sign-in form (name only — no real authentication). On submit, it signs the user in and sends them back to wherever they were trying to go before being redirected here (e.g. `/checkout`). |
+| `/checkout` | `Checkout` (guarded by `RequireAuth`) | The delivery details form (name, phone, delivery area) and order submission. **Protected** — if you're not signed in, visiting this route redirects you to `/signin` first; after signing in, you're sent straight back here. |
+| `*` (any unmatched path) | `NotFound` | Catch-all for any URL that doesn't match a defined route (e.g. a typo or a stale link). Shown inside the same `Layout`, so the header/nav/footer stay visible. |
 
-* Fetched Ethiopian food menu, re-fetched whenever the category filter changes
-* Loading state while the menu is being fetched
-* Error handling for failed requests
-* Request cleanup using AbortController
-* Search dishes by name (client-side, on top of the category-filtered fetch)
-* Add dishes to a shared cart, with a max quantity per dish (20)
-* A quantity stepper (− qty +) per dish once it's in the cart
-* Remove items from the cart
-* Clear the entire cart
-* Automatically calculate the cart total
-* Display cart item count as a badge in the header
-* Light/dark theme via ThemeContext, read from Dish.jsx three levels deep
-* Shared cart state using React Context
-* Cart transitions managed with useReducer
-* useMemo for menu filtering and provider values; useCallback for cart handlers
-* React.memo on Dish so unrelated dish cards don't re-render on cart changes
-* Automatically focus the search field
-* Responsive styling
-* TeleBirr phone number validation
-* Delivery information form
+All routes above are nested inside a shared **`Layout`** route at `/`, which renders the header, navigation, an `<Outlet />` for the active page, and a footer — so the site's frame stays consistent while only the page content changes.
 
-## Project Structure
+## Key architecture notes
 
-```text
-day5/
-│
-├── public/
-│   └── dishes.json
-│
-├── src/
-│   ├── cart/
-│   │   ├── cartReducer.js
-│   │   ├── cartReducer.checks.js   <- Exercise 3: direct plain-object calls
-│   │   └── CartProvider.jsx
-│   │
-│   ├── theme/
-│   │   └── ThemeContext.jsx        <- Exercise 1
-│   │
-│   ├── exercises/
-│   │   └── DeliveryFormComparison.jsx  <- Exercise 4 (standalone, not wired into the app)
-│   │
-│   ├── hooks/
-│   │   └── useFetch.js
-│   │
-│   ├── api.js
-│   ├── App.jsx
-│   ├── CategoryBar.jsx
-│   ├── Dish.jsx
-│   ├── DishList.jsx
-│   ├── Header.jsx
-│   ├── Menu.jsx
-│   ├── MenuStats.jsx               <- Exercise 2's second useFetch usage
-│   ├── OrderForm.jsx
-│   ├── index.css
-│   └── main.jsx
-│
-├── package.json
-└── README.md
+- **`CartProvider` is mounted above `BrowserRouter`** (in `main.jsx`), so cart state is never affected by route changes and survives navigation between every screen.
+- **`RequireAuth`** is a small wrapper component that checks auth state via `useAuth()`. If there's no signed-in user, it redirects to `/signin`, passing the attempted destination along in route state (`location`) so `SignIn` can send the user back to the right place after they sign in.
+- **`NavLink`** is used for the main navigation (Home / Menu / Cart / Checkout) so the currently active screen is visibly highlighted; plain **`Link`** is used elsewhere (e.g. the logo, "Back to Menu") where active-state styling isn't needed.
+- **Note:** both cart and sign-in state are held in memory (`useState`/`useReducer`), not persisted to `localStorage` or a backend. A full page refresh will clear the cart and sign you out — this is expected behavior for this project's scope, not a bug.
+
+## Files of note
+
+- `App.jsx` — the route table
+- `Layout.jsx` — shared header/nav/footer frame with `Outlet`
+- `DishDetail.jsx` — dynamic `/menu/:id` page
+- `auth/RequireAuth.jsx` — route guard for `/checkout`
+- `auth/AuthContext.jsx` — mock authentication state
+- `cart/CartProvider.jsx` — cart state, mounted above the router
+
+## Running locally
+
+```bash
+npm install
+npm run dev
 ```
-
-## Exercises checklist
-
-Each exercise is marked with a comment in the relevant file (search for `Exercise N`).
-
-1. ThemeContext ("light"/"dark") — `theme/ThemeContext.jsx`, read in `Dish.jsx`.
-2. `useFetch` in its own file, used in two components — `Menu.jsx` and `MenuStats.jsx`.
-3. Pure `cartReducer`, called directly with plain objects — `cart/cartReducer.js` + `cart/cartReducer.checks.js` (`node src/cart/cartReducer.checks.js`).
-4. Three `useState` calls converted to `useReducer`, both kept for comparison — `exercises/DeliveryFormComparison.jsx` (standalone practice file, not rendered by the app).
-5. `CartProvider` with `useReducer`, providing items/dispatch/total — `cart/CartProvider.jsx`.
-6. Provider value memoised with `useMemo`, commented — `cart/CartProvider.jsx`.
-7. `React.memo` + `useCallback` on the dish list, profiled — `Dish.jsx` (memo), `Menu.jsx` (useCallback for add/remove). To see the effect: open React DevTools Profiler, record, add one dish to the cart, stop recording. Before this change, every dish card would light up as re-rendered; now only the one you clicked does.
-
-
-
-
-
-

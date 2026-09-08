@@ -87,16 +87,6 @@ export default function Checkout() {
               placeholder="0912345678"
             />
 
-            <label htmlFor="area">Delivery area</label>
-            <input
-              id="area"
-              name="area"
-              type="text"
-              value={form.area}
-              onChange={handleChange}
-              placeholder="Bole, Addis Ababa"
-            />
-
             <p
               className={
                 form.phone === ""
@@ -112,6 +102,16 @@ export default function Checkout() {
                 ? "Phone number is valid."
                 : "Use 0912345678 or +251912345678."}
             </p>
+
+            <label htmlFor="area">Delivery area</label>
+            <input
+              id="area"
+              name="area"
+              type="text"
+              value={form.area}
+              onChange={handleChange}
+              placeholder="Bole, Addis Ababa"
+            />
 
             <button type="submit" disabled={!canSubmit}>
               Place Order
