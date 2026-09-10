@@ -102,11 +102,14 @@ export default function Checkout() {
               onBlur={handleBlur}
               onChange={handleChange}
               placeholder="Your name"
+              aria-invalid={touched.name && !!errors.name}
+              aria-describedby={touched.name && errors.name ? "name-error" : undefined}
             />
             {
               touched.name && errors.name &&
               (
-            <p className="hint hint-bad">{errors.name}</p>
+                 <p  id ="name-error" role ="alert" className="hint hint-bad">{errors.name}</p>
+            
              )}
 
             <label htmlFor="phone">Phone</label>
@@ -118,21 +121,25 @@ export default function Checkout() {
               onChange={handleChange}
               onBlur={handleBlur}
               placeholder="0912345678"
+              aria-invalid={touched.phone && !!errors.phone}
+              aria-describedby={touched.phone && errors.phone ? "phone-error" : undefined}
+
             />
             {touched.phone && errors.phone && (
-            <p className="hint hint-bad">{errors.phone}</p>
+            <p id="phone-error" role="alert" className="hint hint-bad">{errors.phone}</p>
             )}
-
-            
-            
-               
+             
+            <label htmlFor="area">Delivery area</label>
+           
             <select
                id="area"
                name="area"
                value={form.area}
                onChange={handleChange}
                onBlur={handleBlur}
-              
+               aria-invalid={touched.area && !!errors.area}
+               aria-describedby={touched.area && errors.area ? "area-error" : undefined}
+
             >
                <option value="">-- choose an area --</option>
                <option value="Bole">Bole</option>
@@ -142,11 +149,11 @@ export default function Checkout() {
           
             </select>
              {touched.area && errors.area && (
-             <p className="hint hint-bad">{errors.area}</p>
+             <p  id="area-error" role="alert" className="hint hint-bad">{errors.area}</p>
              )}
-            <label htmlFor="note">Notes</label>
+            <label htmlFor="notes">Notes</label>
             <input
-              id="note"
+              id="notes"
               name="notes"
               type="text"
               value={form.notes}
