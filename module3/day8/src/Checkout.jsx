@@ -41,10 +41,17 @@ export default function Checkout() {
   if (!canSubmit) return;
   setSubmitting(true);
   setSubmitError(null);
-  setTimeout(() => {
-    setSubmitting(false);
-    setSubmitError("Network error — please try again.");
-    phoneInputRef.current?.focus();
+  setTimeout(() => {                          
+    setSubmitting(false);                      
+    const didFail = Math.random() < 0.5;      
+    if (didFail) {
+      setSubmitError("Network error — please try again.");
+      phoneInputRef.current?.focus();
+    } else {
+      setSubmitError(null);
+      setSubmitted(true);
+      clear();
+    }
   }, 1000);
 }
   // exe6
