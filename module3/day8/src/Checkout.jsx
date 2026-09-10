@@ -32,14 +32,25 @@ export default function Checkout() {
   const [submitted, setSubmitted] = useState(false);
   //exe4
   const [touched, setTouched] = useState({}); 
+  const [submitting, setSubmitting] = useState(false);// exe6
 
 
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
-    setSubmitted(false);
+  function handleSubmit(e) { 
+    e.preventDefault();
+   if (!canSubmit) return;
+    setSubmitting(true);
+    setTimeout(() => {
+      setSubmitting(false);
+      setSubmitted(true);
+      clear();
+    }, 1000);
   }
-
+  // exe6
+  function handleChange(e) {
+  const { name, value } = e.target;
+  setForm({ ...form, [name]: value });
+  setSubmitted(false);
+}
   //exe4
   function handleBlur(e) { 
     const { name } = e.target;
@@ -53,12 +64,7 @@ export default function Checkout() {
     Object.keys(errors).length === 0 &&
     items.length > 0;
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    if (!canSubmit) return;
-    setSubmitted(true);
-    clear();
-  }
+  
 
   function handleSignOut() {
     signOut();
@@ -160,8 +166,8 @@ export default function Checkout() {
               onChange={handleChange}
               placeholder="want u say something!"
             />
-            <button type="submit" disabled={!canSubmit}>
-              Place Order
+            <button type="submit" disabled={!canSubmit || submitting}>
+             {submitting ? "Placing order…" : `Place Order — ${total} ETB`}
             </button>
           </form>
         </>
