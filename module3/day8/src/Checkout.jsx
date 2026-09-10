@@ -106,15 +106,18 @@ export default function Checkout() {
                 : "Use 0912345678 or +251912345678."}
             </p>
 
-            <label htmlFor="area">Delivery area</label>
-            <input
-              id="area"
-              name="area"
-              type="text"
-              value={form.area}
-              onChange={handleChange}
-              placeholder="Bole, Addis Ababa"
-            />
+            <select
+               id="area"
+               name="area"
+               value={form.area}
+               onChange={handleChange}
+            >
+               <option value="">-- choose an area --</option>
+               <option value="Bole">Bole</option>
+               <option value="Kazanchis">Kazanchis</option>
+               <option value="Megenagna">Megenagna</option>
+               <option value="Piassa">Piassa</option>
+            </select>
             <label htmlFor="note">Notes</label>
             <input
               id="note"
