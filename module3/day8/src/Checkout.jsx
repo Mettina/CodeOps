@@ -13,7 +13,7 @@ function validate(form) {
   }
 
   if (!TELEBIRR_PATTERN.test(form.phone)) {
-  errors.phone = "Use 0912345678 or +251912345678.";
+  errors.phone = "Please use 0912345678 or +251912345678 ";
   }
   if (form.area.trim() === "") {
   errors.area = "Please choose a delivery area.";
@@ -30,6 +30,9 @@ export default function Checkout() {
    // exe1 
   const [form, setForm] = useState({ name: "", phone: "", area: "" ,notes:""});
   const [submitted, setSubmitted] = useState(false);
+  //exe4
+  const [touched, setTouched] = useState({}); 
+
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -37,15 +40,17 @@ export default function Checkout() {
     setSubmitted(false);
   }
 
-  const phoneIsValid = TELEBIRR_PATTERN.test(form.phone);// old validation
-  //exe3
+  //exe4
+  function handleBlur(e) { 
+    const { name } = e.target;
+    setTouched({ ...touched, [name]: true });
+  }
+
+    //exe3
   const errors = validate(form); 
 
-
   const canSubmit =
-    form.name.trim() !== "" &&
-    form.area.trim() !== "" &&
-    phoneIsValid &&
+    Object.keys(errors).length === 0 &&
     items.length > 0;
 
   function handleSubmit(e) {
@@ -94,9 +99,15 @@ export default function Checkout() {
               name="name"
               type="text"
               value={form.name}
+              onBlur={handleBlur}
               onChange={handleChange}
               placeholder="Your name"
             />
+            {
+              touched.name && errors.name &&
+              (
+            <p className="hint hint-bad">{errors.name}</p>
+             )}
 
             <label htmlFor="phone">Phone</label>
             <input
@@ -105,37 +116,34 @@ export default function Checkout() {
               type="tel"
               value={form.phone}
               onChange={handleChange}
+              onBlur={handleBlur}
               placeholder="0912345678"
             />
+            {touched.phone && errors.phone && (
+            <p className="hint hint-bad">{errors.phone}</p>
+            )}
 
-            <p
-              className={
-                form.phone === ""
-                  ? "hint"
-                  : phoneIsValid
-                  ? "hint hint-ok"
-                  : "hint hint-bad"
-              }
-            >
-              {form.phone === ""
-                ? "."
-                : phoneIsValid
-                ? "Phone number is valid."
-                : "Use 0912345678 or +251912345678."}
-            </p>
-
+            
+            
+               
             <select
                id="area"
                name="area"
                value={form.area}
                onChange={handleChange}
+               onBlur={handleBlur}
+              
             >
                <option value="">-- choose an area --</option>
                <option value="Bole">Bole</option>
                <option value="Kazanchis">Kazanchis</option>
                <option value="Megenagna">Megenagna</option>
                <option value="Piassa">Piassa</option>
+          
             </select>
+             {touched.area && errors.area && (
+             <p className="hint hint-bad">{errors.area}</p>
+             )}
             <label htmlFor="note">Notes</label>
             <input
               id="note"
