@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCartStore, selectTotal } from "./cart/cartStore.js";
 import { useAuth } from "./auth/AuthContext.jsx";
@@ -33,18 +33,20 @@ export default function Checkout() {
   //exe4
   const [touched, setTouched] = useState({}); 
   const [submitting, setSubmitting] = useState(false);// exe6
+  const [submitError, setSubmitError] = useState(null);// exe7
+  const phoneInputRef = useRef(null);
 
-
-  function handleSubmit(e) { 
-    e.preventDefault();
-   if (!canSubmit) return;
-    setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
-      setSubmitted(true);
-      clear();
-    }, 1000);
-  }
+  function handleSubmit(e) {
+  e.preventDefault();
+  if (!canSubmit) return;
+  setSubmitting(true);
+  setSubmitError(null);
+  setTimeout(() => {
+    setSubmitting(false);
+    setSubmitError("Network error — please try again.");
+    phoneInputRef.current?.focus();
+  }, 1000);
+}
   // exe6
   function handleChange(e) {
   const { name, value } = e.target;
@@ -123,6 +125,7 @@ export default function Checkout() {
               id="phone"
               name="phone"
               type="tel"
+              ref={phoneInputRef}
               value={form.phone}
               onChange={handleChange}
               onBlur={handleBlur}
@@ -166,6 +169,11 @@ export default function Checkout() {
               onChange={handleChange}
               placeholder="want u say something!"
             />
+            {submitError && (
+             <p role="alert" className="hint hint-bad">
+              {submitError}
+             </p>
+            )}
             <button type="submit" disabled={!canSubmit || submitting}>
              {submitting ? "Placing order…" : `Place Order — ${total} ETB`}
             </button>
