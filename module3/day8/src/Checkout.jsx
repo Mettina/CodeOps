@@ -4,7 +4,22 @@ import { useCartStore, selectTotal } from "./cart/cartStore.js";
 import { useAuth } from "./auth/AuthContext.jsx";
 
 const TELEBIRR_PATTERN = /^(?:\+251|0)9\d{8}$/;
+// exe3
+function validate(form) {          
+  const errors = {};
 
+  if (form.name.trim() === "") {
+    errors.name = "Name is required.";
+  }
+
+  if (!TELEBIRR_PATTERN.test(form.phone)) {
+  errors.phone = "Use 0912345678 or +251912345678.";
+  }
+  if (form.area.trim() === "") {
+  errors.area = "Please choose a delivery area.";
+  }
+  return errors;
+}
 export default function Checkout() {
 
   const items = useCartStore((state) => state.items);
@@ -22,7 +37,10 @@ export default function Checkout() {
     setSubmitted(false);
   }
 
-  const phoneIsValid = TELEBIRR_PATTERN.test(form.phone);
+  const phoneIsValid = TELEBIRR_PATTERN.test(form.phone);// old validation
+  //exe3
+  const errors = validate(form); 
+
 
   const canSubmit =
     form.name.trim() !== "" &&
