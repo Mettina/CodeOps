@@ -19,7 +19,10 @@ function Dish({
     spicy = false,
     image,
   } = dish;
-
+  
+  if (name === "Doro") {
+    throw new Error("Deliberate test error for Exercise 2");
+  }
   return (
     <div className={`dish dish--${theme}`}>
 

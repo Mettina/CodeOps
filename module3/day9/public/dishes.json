@@ -1,5 +1,5 @@
 [
-  { "id": 1, "name": "Doro Wat", "price": 300, "category": "Main", "spicy": true, "image": "/images/doro wot.jpg" },
+  { "id": 1, "name": "Doro", "price": 300, "category": "Main", "spicy": true, "image": "/images/doro wot.jpg" },
   { "id": 2, "name": "Kitfo", "price": 260, "category": "Main", "spicy": true, "image": "/images/kitfo.jpg" },
   { "id": 3, "name": "Shiro", "price": 150, "category": "Vegan", "spicy": false, "image": "/images/shiro wot.jpg" },
   { "id": 4, "name": "Gomen", "price": 140, "category": "Vegan", "spicy": false, "image": "/images/gomen.jpg" },
