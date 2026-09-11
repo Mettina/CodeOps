@@ -4,7 +4,11 @@ import Home from "./Home.jsx";
 import Menu from "./Menu.jsx";
 import DishDetail from "./DishDetail.jsx";
 import OrderForm from "./OrderForm.jsx";
-import Checkout from "./Checkout.jsx";
+//import Checkout from "./Checkout.jsx";
+import { lazy,Suspense } from "react";
+
+const Checkout = lazy(() => import("./Checkout.jsx"));
+
 import SignIn from "./SignIn.jsx";
 import NotFound from "./NotFound.jsx";
 import { ThemeProvider } from "./theme/ThemeContext.jsx";
@@ -12,7 +16,14 @@ import { AuthProvider } from "./auth/AuthContext.jsx";
 import RequireAuth from "./auth/RequireAuth.jsx";
 import ErrorBoundary from "./ErrorBoundary.jsx";
 
+function Skeleton() {
+  return <p>Loading…</p>;
+}
+
+
+
 export default function App() {
+  
   return (
     <ThemeProvider>
       <AuthProvider>
@@ -28,7 +39,15 @@ export default function App() {
             <Route path="menu" element={<ErrorBoundary fallback={<p>Something went wrong loading the menu. Please refresh the page.
              </p>}><Menu /> </ErrorBoundary>}/>
             <Route
-              path="checkout" element={<RequireAuth><Checkout /></RequireAuth>}/>
+               path="checkout"
+               element={
+               <RequireAuth>
+               <Suspense fallback={<Skeleton />}>
+               <Checkout />
+               </Suspense>
+               </RequireAuth>
+               }
+              />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
