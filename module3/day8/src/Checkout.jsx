@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useCartStore, selectTotal } from "./cart/cartStore.js";
 import { useAuth } from "./auth/AuthContext.jsx";
 import { validate } from "./Validate.js";
-
+import Field from "./Field.jsx";
 export default function Checkout() {
 
   const items = useCartStore((state) => state.items);
@@ -93,74 +93,56 @@ export default function Checkout() {
           >
             <h2>Delivery details</h2>
 
-            <label htmlFor="name">Name</label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              value={form.name}
-              onBlur={handleBlur}
-              onChange={handleChange}
-              placeholder="Your name"
-              aria-invalid={touched.name && !!errors.name}
-              aria-describedby={touched.name && errors.name ? "name-error" : undefined}
-            />
-            {
-              touched.name && errors.name &&
-              (
-                 <p  id ="name-error" role ="alert" className="hint hint-bad">{errors.name}</p>
-            
-             )}
-
-            <label htmlFor="phone">Phone</label>
-            <input
-              id="phone"
-              name="phone"
-              type="tel"
-              ref={phoneInputRef}
-              value={form.phone}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              placeholder="0912345678"
-              aria-invalid={touched.phone && !!errors.phone}
-              aria-describedby={touched.phone && errors.phone ? "phone-error" : undefined}
-
-            />
-            {touched.phone && errors.phone && (
-            <p id="phone-error" role="alert" className="hint hint-bad">{errors.phone}</p>
-            )}
-             
-            <label htmlFor="area">Delivery area</label>
-           
-            <select
-               id="area"
-               name="area"
-               value={form.area}
+              <Field
+               label="Name"
+               name="name"
+               value={form.name}
                onChange={handleChange}
                onBlur={handleBlur}
-               aria-invalid={touched.area && !!errors.area}
-               aria-describedby={touched.area && errors.area ? "area-error" : undefined}
+               placeholder="Your name"
+               error={errors.name}
+               touched={touched.name}
+             />
 
-            >
-               <option value="">-- choose an area --</option>
-               <option value="Bole">Bole</option>
-               <option value="Kazanchis">Kazanchis</option>
-               <option value="Megenagna">Megenagna</option>
-               <option value="Piassa">Piassa</option>
-          
-            </select>
-             {touched.area && errors.area && (
-             <p  id="area-error" role="alert" className="hint hint-bad">{errors.area}</p>
-             )}
-            <label htmlFor="notes">Notes</label>
-            <input
-              id="notes"
+             <Field
+               label="Phone"
+               name="phone"
+                type="tel"
+                inputRef={phoneInputRef}
+                value={form.phone}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                placeholder="0912345678"
+                error={errors.phone}
+                touched={touched.phone}
+             />
+             
+         <Field label="Delivery area" name="area" error={errors.area} touched={touched.area}>
+           <select
+             id="area"
+             name="area"
+             value={form.area}
+             onChange={handleChange}
+             onBlur={handleBlur}
+             aria-invalid={touched.area && !!errors.area}
+             aria-describedby={touched.area && errors.area ? "area-error" : undefined}
+              >
+                <option value="">-- choose an area --</option>
+                <option value="Bole">Bole</option>
+                <option value="Kazanchis">Kazanchis</option>
+                <option value="Megenagna">Megenagna</option>
+                <option value="Piassa">Piassa</option>
+              </select>
+            </Field>
+
+            <Field
+              label="Notes"
               name="notes"
-              type="text"
               value={form.notes}
               onChange={handleChange}
               placeholder="want u say something!"
             />
+            
             {submitError && (
              <p role="alert" className="hint hint-bad">
               {submitError}
