@@ -20,9 +20,9 @@ function Dish({
     image,
   } = dish;
   
-  if (name === "Doro") {
+  {/*if (name === "Doro") {
     throw new Error("Deliberate test error for Exercise 2");
-  }
+  }*/}
   return (
     <div className={`dish dish--${theme}`}>
 

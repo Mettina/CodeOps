@@ -7,6 +7,8 @@ export default function OrderForm() {
   const removeItemAction = useCartStore((state) => state.removeItem);
   const clear = useCartStore((state) => state.clear);
   const total = useCartStore(selectTotal);
+  {/*throw new Error("Deliberate test error for Exercise 3");*/}
+
 
   function removeItem(id) {
     removeItemAction(id);

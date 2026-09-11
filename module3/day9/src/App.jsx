@@ -21,7 +21,9 @@ export default function App() {
             <Route index element={<Home />} />
             {/*<Route path="menu" element={<Menu />} />*/}
             <Route path="menu/:id" element={<DishDetail />} />
-            <Route path="cart" element={<OrderForm />} />
+            <Route path="cart" element={<ErrorBoundary fallback={<p>Something went wrong loading your cart. Please refresh the page.</p>}>
+              <OrderForm /> </ErrorBoundary>}
+            />
             <Route path="signin" element={<SignIn />} />
             <Route path="menu" element={<ErrorBoundary fallback={<p>Something went wrong loading the menu. Please refresh the page.
              </p>}><Menu /> </ErrorBoundary>}/>
