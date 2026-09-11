@@ -229,12 +229,24 @@ body {
 
 .hint-ok {
   color: #3f7d4f;
+  font-weight: 600;
 }
 
+.hint-ok::before {
+  content: "✓ ";
+}
 .hint-bad {
   color: #a23b2e;
+  font-weight: 700;
+}
+.hint-bad::before {
+  content: "⚠ ";
 }
 
+.order-form input[aria-invalid="true"],
+   .order-form select[aria-invalid="true"] {
+     border: 2px solid #a23b2e;
+   }
 .order-form button[type="submit"] {
   border: none;
   background: #3f7d4f;

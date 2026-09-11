@@ -2,24 +2,8 @@ import { useState,useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCartStore, selectTotal } from "./cart/cartStore.js";
 import { useAuth } from "./auth/AuthContext.jsx";
+import { validate } from "./Validate.js";
 
-const TELEBIRR_PATTERN = /^(?:\+251|0)9\d{8}$/;
-// exe3
-function validate(form) {          
-  const errors = {};
-
-  if (form.name.trim() === "") {
-    errors.name = "Name is required.";
-  }
-
-  if (!TELEBIRR_PATTERN.test(form.phone)) {
-  errors.phone = "Please use 0912345678 or +251912345678 ";
-  }
-  if (form.area.trim() === "") {
-  errors.area = "Please choose a delivery area.";
-  }
-  return errors;
-}
 export default function Checkout() {
 
   const items = useCartStore((state) => state.items);
@@ -37,12 +21,13 @@ export default function Checkout() {
   const phoneInputRef = useRef(null);
 
   function handleSubmit(e) {
-  e.preventDefault();
+    e.preventDefault();
+
   if (!canSubmit) return;
   setSubmitting(true);
   setSubmitError(null);
   setTimeout(() => {                          
-    setSubmitting(false);                      
+    setSubmitting(false);
     const didFail = Math.random() < 0.5;      
     if (didFail) {
       setSubmitError("Network error — please try again.");
