@@ -1,7 +1,8 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useTheme } from "./theme/ThemeContext.jsx";
+import Modal from "./UI/Modal.jsx";
 
 function Dish({
   dish,
@@ -10,8 +11,8 @@ function Dish({
   onIncrement,
   onDecrement,
 }) {
- //  console.log("Dish rendered:", dish.name);
   const { theme } = useTheme();
+  const [showModal, setShowModal] = useState(false);
 
   const {
     name,
@@ -20,15 +21,16 @@ function Dish({
     spicy = false,
     image,
   } = dish;
-  
-  {/*if (name === "Doro") {
-    throw new Error("Deliberate test error for Exercise 2");
-  }*/}
+
   return (
     <div className={`dish dish--${theme}`}>
 
-      <Link to={`/menu/${dish.id}`} className="dish-link">
-
+      <button
+        type="button"
+        className="dish-link"
+        onClick={() => setShowModal(true)}
+        style={{ all: "unset", cursor: "pointer", display: "block" }}
+      >
         {image && (
           <img
             className="dish-image"
@@ -40,65 +42,50 @@ function Dish({
 
         <h3>
           {name}
-
           {spicy === true && (
-            <span className="badge">
-              • Spicy
-            </span>
+            <span className="badge">• Spicy</span>
           )}
         </h3>
-
-      </Link>
+      </button>
 
       <div className="dish-body">
-
         <div className="dish-row">
-
-          <p>
-            {price} {currency}
-          </p>
+          <p>{price} {currency}</p>
 
           {quantity === 0 ? (
-            <button
-              className="add-btn"
-              onClick={() => onIncrement(dish)}
-            >
+            <button className="add-btn" onClick={() => onIncrement(dish)}>
               Add
             </button>
           ) : (
             <div className="qty-stepper">
-              <button
-                className="qty-btn"
-                onClick={() => onDecrement(dish)}
-                aria-label={`Remove one ${name}`}
-              >
-                −
-              </button>
-
-              <span className="qty-value">
-                {quantity}
-              </span>
-
-              <button
-                className="qty-btn"
-                onClick={() => onIncrement(dish)}
-                disabled={atMax}
-                aria-label={`Add one more ${name}`}
-              >
-                +
-              </button>
+              <button className="qty-btn" onClick={() => onDecrement(dish)} aria-label={`Remove one ${name}`}>−</button>
+              <span className="qty-value">{quantity}</span>
+              <button className="qty-btn" onClick={() => onIncrement(dish)} disabled={atMax} aria-label={`Add one more ${name}`}>+</button>
             </div>
           )}
-
         </div>
 
-        {atMax && (
-          <p className="qty-max-note">
-            Max {quantity} per order
-          </p>
-        )}
-
+        {atMax && <p className="qty-max-note">Max {quantity} per order</p>}
       </div>
+
+      <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+        <h2>
+          {name}
+          {spicy && <span className="badge">• Spicy</span>}
+        </h2>
+        {image && <img className="dish-detail-image" src={image} alt={name} />}
+        <p className="dish-detail-price">{price} {currency}</p>
+        <button
+          className="add-btn"
+          onClick={() => {
+            onIncrement(dish);
+            setShowModal(false);
+          }}
+        >
+          Add to Cart
+        </button>
+        <button onClick={() => setShowModal(false)}>Close</button>
+      </Modal>
 
     </div>
   );
@@ -106,10 +93,7 @@ function Dish({
 
 Dish.propTypes = {
   dish: PropTypes.shape({
-    id: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]).isRequired,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     currency: PropTypes.string,
