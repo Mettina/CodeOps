@@ -21,6 +21,7 @@ function Dish({
     spicy = false,
     image,
   } = dish;
+  
 
   return (
     <div className={`dish dish--${theme}`}>

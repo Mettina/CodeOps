@@ -4,8 +4,7 @@ import Home from "./Home.jsx";
 import Menu from "./Menu.jsx";
 import DishDetail from "./DishDetail.jsx";
 import OrderForm from "./OrderForm.jsx";
-//import Checkout from "./Checkout.jsx";
-import { lazy,Suspense } from "react";
+import { lazy, Suspense } from "react";
 
 const Checkout = lazy(() => import("./Checkout.jsx"));
 
@@ -20,34 +19,60 @@ function Skeleton() {
   return <p>Loading…</p>;
 }
 
-
-
 export default function App() {
-  
   return (
     <ThemeProvider>
       <AuthProvider>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            {/*<Route path="menu" element={<Menu />} />*/}
             <Route path="menu/:id" element={<DishDetail />} />
-            <Route path="cart" element={<ErrorBoundary fallback={<p>Something went wrong loading your cart. Please refresh the page.</p>}>
-              <OrderForm /> </ErrorBoundary>}
-            />
-            <Route path="signin" element={<SignIn />} />
-            <Route path="menu" element={<ErrorBoundary fallback={<p>Something went wrong loading the menu. Please refresh the page.
-             </p>}><Menu /> </ErrorBoundary>}/>
+
             <Route
-               path="checkout"
-               element={
-               <RequireAuth>
-               <Suspense fallback={<Skeleton />}>
-               <Checkout />
-               </Suspense>
-               </RequireAuth>
-               }
-              />
+              path="cart"
+              element={
+                <ErrorBoundary
+                  fallback={(reset) => (
+                    <div>
+                      <p>Something went wrong loading your cart.</p>
+                      <button onClick={reset}>Try again</button>
+                    </div>
+                  )}
+                >
+                  <OrderForm />
+                </ErrorBoundary>
+              }
+            />
+
+            <Route path="signin" element={<SignIn />} />
+
+            <Route
+              path="menu"
+              element={
+                <ErrorBoundary
+                  fallback={(reset) => (
+                    <div>
+                      <p>Something went wrong loading the menu.</p>
+                      <button onClick={reset}>Try again</button>
+                    </div>
+                  )}
+                >
+                  <Menu />
+                </ErrorBoundary>
+              }
+            />
+
+            <Route
+              path="checkout"
+              element={
+                <RequireAuth>
+                  <Suspense fallback={<Skeleton />}>
+                    <Checkout />
+                  </Suspense>
+                </RequireAuth>
+              }
+            />
+
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
