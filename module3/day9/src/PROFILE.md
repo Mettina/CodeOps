@@ -73,6 +73,45 @@ were already stable via `useCallback` in `Menu.jsx`. No change was made
 there — confirming the project's rule that no optimisation should be
 applied without a measurement proving it's needed.
 
+## Error boundary fallbacks are actionable, not just informative
+
+Fallbacks were upgraded from plain static messages to functions that
+receive a `reset` callback, added to `ErrorBoundary` itself:
+
+```jsx
+handleReset() {
+  this.setState({ hasError: false });
+}
+```
+
+Each fallback now renders a specific message ("Something went wrong
+loading the menu" / "...your cart" / "...checkout") plus a working
+**Try again** button. Verified with a deliberate throw in `Dish.jsx`:
+clicking Try again while the throw was still in place re-triggered the
+same error (proving the button genuinely re-attempts rendering, not a
+no-op); with the throw removed, clicking Try again successfully recovered
+and rendered the menu normally.
+
+## Chunk-load failure handling
+
+The checkout route's `Suspense` is wrapped in its own `ErrorBoundary`, so
+a failed dynamic import — e.g. a network drop mid-download in production —
+shows the same "Try again" fallback instead of a blank screen, rather than
+`Suspense` alone, which only handles the loading state and does not catch
+errors.
+
+This was verified structurally rather than via a live network failure:
+pointing the lazy import at a deliberately nonexistent file confirmed the
+import fails as expected, but Vite's dev server intercepts a broken import
+path at build time with its own overlay, before the app runs — so it never
+reaches the boundary as a runtime error the way a genuine mid-download
+network failure would in a production build. The boundary's catch-and-reset
+mechanism itself was already proven correct against a real thrown error
+(see above), and the nesting order (`ErrorBoundary` wrapping `Suspense`,
+not the reverse) is the standard, documented pattern for this case. A true
+production network failure was not separately reproduced in this
+environment.
+
 ## Note on the checkout/receipt routes
 
 This app has a `checkout` route but no separate `receipt` route — order
