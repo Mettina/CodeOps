@@ -27,13 +27,13 @@ export default function Menu() {
 
   const searchRef = useRef(null);
 
-  function handleCategoryChange(newCategory) {
-    if (newCategory === "All") {
-      setSearchParams({});
-    } else {
-      setSearchParams({ category: newCategory });
-    }
+  const handleCategoryChange = useCallback((newCategory) => {
+  if (newCategory === "All") {
+    setSearchParams({});
+  } else {
+    setSearchParams({ category: newCategory });
   }
+}, [setSearchParams]);
 
   const {
     data: dishes,

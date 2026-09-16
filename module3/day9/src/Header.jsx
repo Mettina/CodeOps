@@ -4,6 +4,7 @@ import { useTheme } from "./theme/ThemeContext.jsx";
 import MenuStats from "./MenuStats.jsx";
 
 export default function Header() {
+   //console.log("Header rendered"); 
   
   const itemCount = useCartStore(selectItemCount);
   const { theme, toggleTheme } = useTheme();

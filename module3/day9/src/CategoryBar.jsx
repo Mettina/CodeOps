@@ -1,6 +1,8 @@
+import { memo } from "react";
 import PropTypes from "prop-types";
 
-export default function CategoryBar({ categories, selected, onSelect }) {
+function CategoryBar({ categories, selected, onSelect }) {
+  //console.log("CategoryBar rendered");
   return (
     <div className="category-bar">
       {categories.map((cat) => (
@@ -11,9 +13,7 @@ export default function CategoryBar({ categories, selected, onSelect }) {
         >
           {cat}
         </button>
-        
       ))}
-      
     </div>
   );
 }
@@ -23,3 +23,5 @@ CategoryBar.propTypes = {
   selected: PropTypes.string.isRequired,
   onSelect: PropTypes.func.isRequired,
 };
+
+export default memo(CategoryBar);

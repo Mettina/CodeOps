@@ -10,6 +10,7 @@ function Dish({
   onIncrement,
   onDecrement,
 }) {
+ //  console.log("Dish rendered:", dish.name);
   const { theme } = useTheme();
 
   const {
