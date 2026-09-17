@@ -1,76 +1,63 @@
-# The Addis Eats Checkout
+# Addis Eats
 
-A checkout form split across three files — `Checkout.jsx`, `Validate.js`,
-and `Field.jsx` — that validates itself, never nags before it should, stays
-usable with a keyboard or a screen reader, and survives a failed submit
-without losing anything the customer typed.
+An Ethiopian food ordering app built with React, React Router, and Vite.
+Browse a menu, add dishes to a cart, and check out — with client-side
+validation, error boundaries, lazy-loaded routes, and a keyboard- and
+screen-reader-accessible checkout form.
 
-## Files
+## Running it locally
 
-- **`Checkout.jsx`** — the form itself: holds state, wires up handlers,
-  lays out the four fields and the submit button.
-- **`Validate.js`** — a single pure function, `validate(form)`, with no
-  dependency on React or the component. Given a form object, it returns an
-  errors object. Nothing else.
-- **`Field.jsx`** — one reusable field: a label, an input (or any custom
-  control passed as `children`, like the area `<select>`), and its error
-  message, all wired together with the right `id`/`aria-*` attributes.
+```bash
+git clone <this-repo-url>
+cd <repo-folder>
+npm install
+npm run dev
+```
 
-## Every rule, and why it exists
+Then open the URL shown in your terminal (typically `http://localhost:5173`).
 
-**All four fields live in one state object, updated by a single change handler.**
-If each field had its own `useState`, every new field would mean writing a
-new setter and a new handler. One object + one `handleChange` keyed off each
-input's `name` attribute scales to any number of fields for free, and it's
-also the shape `validate()` expects — one object in, one object of errors
-out.
+No environment variables or external services are required — the menu
+data is served from a static `dishes.json` file in `public/`.
 
-**`validate(form)` is a pure function, in its own file, called fresh on every render.**
-Pure means: given the same form, it always returns the same errors, and it
-never reaches outside itself to do it — no state, no DOM, no side effects.
-That's what makes it trustworthy to call on *every* render without worrying
-about stale results, and what makes it testable on its own, completely
-separate from any component.
+## Routes
 
-**Errors only appear after a field has been touched, then update live.**
-Showing "Name is required" the instant the page loads, before the user has
-typed anything, is punishing someone for a mistake they haven't made yet.
-`touched` (set `onBlur`) plus the always-fresh `errors` from `validate()`
-means: quiet until you leave a field, then honest and immediate the moment
-you fix it — no lag, no waiting for a second blur.
+| Path          | Renders                          | Notes                          |
+|---------------|-----------------------------------|---------------------------------|
+| `/`           | Home                              |                                  |
+| `/menu`       | Menu (dish grid, search, filters) | Wrapped in an error boundary    |
+| `/menu/:id`   | Dish detail                       | Dynamic route                   |
+| `/cart`       | Cart                              | Wrapped in a separate error boundary |
+| `/checkout`   | Checkout form                     | Requires sign-in; lazy-loaded behind Suspense |
+| `/signin`     | Sign in                           |                                  |
+| `*`           | Not found                         | Catch-all                       |
 
-**Every field has a real `<label>`, and invalid fields carry `aria-invalid`, `aria-describedby`, and `role="alert"`.**
-A red message under a box tells a sighted user everything; it tells a
-screen reader user nothing. `aria-invalid` announces that a field is
-currently wrong. `aria-describedby` points at the exact error text so it's
-read out when the field is focused. `role="alert"` means a screen reader
-announces the message the moment it appears, not only if the user happens
-to be on that field already.
+## What's implemented
 
-**Errors don't rely on color alone.**
-Red-vs-green text is invisible to anyone with red-green colorblindness, and
-disappears completely in greyscale. Every error also gets a `⚠` symbol, a
-heavier font weight, and a thicker input border — three signals that survive
-losing color entirely, confirmed with Chrome's Achromatopsia emulation.
+- Menu fetched from a static JSON file, with visible loading, error, and
+  empty states.
+- Category filter reflected in the URL's query string; a dynamic
+  `/menu/:id` route reads its own dish by id.
+- Cart state (Zustand) readable from the header badge and the cart page
+  independently.
+- A checkout form with field-level validation, touched-based error
+  display, full ARIA wiring, and a simulated submit that can succeed or
+  fail.
+- A dish quick-view modal built with `createPortal`, closing on Escape,
+  trapping focus while open, and returning focus to the trigger on close.
+- Independent error boundaries around the menu and cart regions, so a
+  failure in one doesn't take down the other; a third around the
+  lazy-loaded checkout route catches chunk-load failures the same way.
+- One measured, fixed unnecessary re-render (`CategoryBar`), documented
+  with before/after evidence in `PROFILE.md`.
 
-**A `submitting` flag disables the button and the button shows the ETB total.**
-Two different problems, one flag. Disabling on `submitting` stops a fast
-double-click from firing two orders (verified: only one `handleSubmit` call
-ever fires, even on a rapid double-click). Putting the total directly in the
-button's own label — `Place Order — 1500 ETB` — means the price is the very
-last thing seen before committing, not something read separately above the
-form and then forgotten.
+See `README.md` inside the checkout-related files for the field-by-field
+validation rules and why each one exists, and `PROFILE.md` for the
+profiling investigation.
 
-**A failed submit keeps every value and moves focus to the field that needs attention.**
-Losing a fully-typed form because a request failed is one of the more
-needlessly punishing things a form can do. On failure, `clear()` and
-`setSubmitted(true)` simply never run — only a genuine success reaches them.
-Focus is then moved with a `ref`, so the next keypress lands exactly where
-it's needed instead of leaving the user to go hunting for it.
+## Testing notes
 
-**The form works with only a keyboard.**
-Every control here is a native `<label>`, `<input>`, `<select>`, or
-`<button>` — nothing custom that Tab, arrow keys, Enter, or Space don't
-already know how to operate. Enter submits from any text field. Tabbing
-in order reaches every field and the button, with no dead ends.
-
+Every route was verified with a cold load (typed directly into the
+address bar, then hard-refreshed) rather than only navigated to from
+within the app. The checkout form was verified for full keyboard-only
+operation and for error visibility under a greyscale/colorblindness
+emulation, not color alone.
