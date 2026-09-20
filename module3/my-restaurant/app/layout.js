@@ -1,5 +1,4 @@
-
-import './globals.css';
+import Link from 'next/link';
 
 export const metadata = {
   title: 'My Restaurant App',
@@ -9,7 +8,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <nav>
+          <Link href="/">Home</Link> |{' '}
+          <Link href="/menu">Menu</Link> |{' '}
+          <Link href="/cart">Cart</Link> |{' '}
+          <Link href="/checkout">Checkout</Link>
+        </nav>
+        <hr />
+        {children}
+      </body>
     </html>
   );
 }
