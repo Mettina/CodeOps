@@ -1,5 +1,11 @@
+import { notFound } from 'next/navigation';
+
 export default async function DishPage({ params }) {
   const { id } = await params;
+
+  if (id === '999') {
+    notFound();
+  }
 
   return (
     <div>
