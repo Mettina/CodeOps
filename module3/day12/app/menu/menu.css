@@ -1,0 +1,36 @@
+.menu-shell {
+  display: flex;
+  gap: 2rem;
+}
+
+.menu-sidebar {
+  min-width: 200px;
+  border-right: 1px solid #ddd;
+  padding-right: 1rem;
+}
+
+.menu-sidebar h3 {
+  margin-bottom: 0.75rem;
+}
+
+.menu-sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.menu-sidebar li {
+  margin: 0.5rem 0;
+}
+
+.menu-content {
+  flex: 1;
+}
+
+.menu-list {
+  list-style: none;
+  padding: 0;
+}
+
+.menu-list li {
+  margin: 0.5rem 0;
+}
