@@ -1,4 +1,4 @@
-# Addi Eats — Layouts & Rendering Strategies
+# Addis Eats — Layouts & Rendering Strategies
 
 A Next.js 16 App Router demo showing per-route rendering strategies:
 static generation, incremental regeneration, dynamic rendering, and streaming.
