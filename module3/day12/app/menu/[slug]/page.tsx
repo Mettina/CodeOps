@@ -4,6 +4,10 @@ const dishes = [
   { slug: 'caesar', name: 'Caesar Salad' },
 ];
 
+export function generateStaticParams() {
+  return dishes.map((d) => ({ slug: d.slug }));
+}
+
 export default async function DishPage({
   params,
 }: {
