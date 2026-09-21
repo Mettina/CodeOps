@@ -59,3 +59,8 @@
 .menu-counter button:hover {
   background: #5f5a3f;
 }
+.menu-loading {
+  color: #888;
+  font-style: italic;
+  padding: 0.5rem 0;
+}
