@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Addi Eats — Layouts & Rendering Strategies
 
-## Getting Started
+A Next.js 16 App Router demo showing per-route rendering strategies:
+static generation, incremental regeneration, dynamic rendering, and streaming.
 
-First, run the development server:
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Build
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+npm run start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Build output
 
-## Learn More
+```
+Route (app)             Revalidate  Expire
+┌ ○ /                           1m      1y
+├ ○ /_not-found
+├ ƒ /checkout
+├ ○ /menu
+└   /menu/[slug]
+  ├ ● /menu/margherita
+  ├ ● /menu/carbonara
+  └ ● /menu/caesar
 
-To learn more about Next.js, take a look at the following resources:
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Rendering strategy
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+See [STRATEGY.md](./STRATEGY.md) for the per-route rationale.
 
-## Deploy on Vercel
+## Project structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+app/
+├── globals.css              # Global styles (header, footer, body)
+├── layout.tsx               # Root layout — owns <html> and <body>
+├── page.tsx                 # Home (/)
+├── checkout/
+│   └── page.tsx             # /checkout — dynamic (cookies)
+└── menu/
+    ├── menu.css             # Menu-scoped styles
+    ├── layout.tsx           # Nested layout — sidebar + counter
+    ├── page.tsx             # /menu — static + revalidate + Suspense
+    └── [slug]/
+        └── page.tsx         # /menu/[slug] — SSG via generateStaticParams
+```
