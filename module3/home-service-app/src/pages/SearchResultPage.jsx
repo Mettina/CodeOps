@@ -1,5 +1,5 @@
 import { useSearchParams, Link } from "react-router-dom";
-import categories from "../data/servicesData";
+import categories from "../data/ServicesData";
 
 function SearchResultsPage() {
   const [searchParams] = useSearchParams();

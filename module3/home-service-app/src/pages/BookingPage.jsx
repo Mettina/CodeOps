@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link, useLocation, useNavigate } from "react-router-dom";
-import categories from "../data/servicesData";
+import categories from "../data/ServicesData";
 import { phonePattern, emailPattern } from "../utils/validate";
 
 function BookingPage() {

@@ -1,5 +1,5 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
-import categories from "../data/servicesData";
+import categories from "../data/ServicesData";
 
 function ServiceDetail() {
   const { slug, serviceSlug } = useParams();
