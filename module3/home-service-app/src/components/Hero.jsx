@@ -1,6 +1,16 @@
-import heroImage from "../assets/hero.jpg";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
+import heroImage from "../assets/hero.jpg";
 function Hero() {
+  const navigate = useNavigate();
+  const [query, setQuery] = useState("");
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    navigate(`/search?q=${encodeURIComponent(query)}`);
+  };
+
   return (
     <section
       className="hero"
@@ -22,24 +32,16 @@ function Hero() {
           and more comfortable home.
         </p>
 
-        <div className="search-box">
-          <select>
-            <option>Select a service</option>
-            <option>Cleaning</option>
-            <option>Painting</option>
-            <option>Cooking</option>
-            <option>Plumbing</option>
-            <option>Electrical</option>
-            <option>Maintenance</option>
-          </select>
-
+        <form className="search-box" onSubmit={handleSearch}>
           <input
             type="text"
-            placeholder="Enter your location"
+            placeholder="What service are you looking for?"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
           />
 
-          <button>Search</button>
-        </div>
+          <button type="submit">Search</button>
+        </form>
       </div>
     </section>
   );
