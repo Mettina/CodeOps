@@ -7,7 +7,6 @@ const dishData = [
 ];
 
 async function getDishes() {
-	await new Promise((resolve) => setTimeout(resolve, 1200));
 	return dishData;
 }
 
