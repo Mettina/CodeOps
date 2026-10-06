@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Addis Eats: Sorting the Boundary
 
-## Getting Started
+Next.js (app router) menu app. Data is fetched in async server components, `"use client"` sits only on
+interactive leaves, the cart provider is isolated in `app/providers.jsx`, and a client `FilterShell`
+wraps the server `DishList` through `children`. See [BOUNDARY.md](./BOUNDARY.md) for every component.
 
-First, run the development server:
+## Run
 
 ```bash
+npm install
+npm run build  
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Bundle measurement: First Load JS for `/menu`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Run `npm run build` and read the `/menu` row of the route table. If your Next version does not print sizes, add up the JS transferred for `/menu` in the browser Network tab (disable cache, hard reload), and use the same method for both numbers.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| | First Load JS for `/menu` |
+|---|---|
+| Before (client page with `useFetch`, `"use client"` high in the tree) | ___ kB |
+| After (this sorted version) | ___ kB |
 
-## Learn More
+**Explanation (write in your own words after measuring):** The drop comes from the fetching hook and
+its state logic no longer shipping, components that were client only because of a high-level directive
+now staying on the server, and the dish cards arriving as HTML instead of JavaScript.
 
-To learn more about Next.js, take a look at the following resources:
+## Exercise log
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Menu page converted to an async server component.
+2. `useFetch` and its loading/error state deleted from the route.
+3. `grep -rl "use client" app components context` listed every directive.
+4. Directives moved down to the smallest components that need them.
+5. Cart provider extracted into `app/providers.jsx`.
+6. `DishList` wrapped in `FilterShell` through `children`.
+7. Before/after First Load JS recorded above.
