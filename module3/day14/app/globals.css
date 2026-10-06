@@ -1,0 +1,15 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, sans-serif; color: #222; background: #fffaf3; }
+main { max-width: 760px; margin: 0 auto; padding: 1.5rem 1rem; }
+a { color: #8a3b12; }
+.site-header { display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: #8a3b12; }
+.site-header a, .site-header .cart-badge { color: #fff; text-decoration: none; margin-left: 1rem; }
+.site-header .brand { margin-left: 0; font-weight: 700; font-size: 1.2rem; }
+.button, .chip { border: 0; border-radius: 6px; padding: 0.5rem 0.9rem; background: #8a3b12; color: #fff; cursor: pointer; text-decoration: none; display: inline-block; font: inherit; }
+.chip { background: #eadbc8; color: #222; margin: 0 0.4rem 0.4rem 0; }
+.chip.active { background: #8a3b12; color: #fff; }
+.dish-list { list-style: none; padding: 0; margin: 1rem 0; }
+.dish-card { display: flex; justify-content: space-between; align-items: center; padding: 0.7rem 0; border-bottom: 1px solid #e6d8c5; }
+.meta, .status { color: #666; }
+.price { font-weight: 700; }
+.reviews { padding-left: 1.2rem; }
