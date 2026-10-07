@@ -2,6 +2,7 @@ import { revalidatePath } from "next/cache";
 import { errorResponse } from "@/lib/errors";
 import { createOrder } from "@/lib/orders";
 import { saveOrder } from "@/lib/orderStore";
+import { getSession } from "@/lib/session";
 
 export async function POST(request) {
   let body;
@@ -23,7 +24,9 @@ export async function POST(request) {
     return errorResponse(422, result.error.code, result.error.message, result.error.fieldErrors);
   }
 
-  const order = saveOrder(result.order);
+  const session = await getSession();
+  const order = saveOrder({ ...result.order, owner: session?.user ?? null });
   revalidatePath("/orders");
+  revalidatePath("/my-orders");
   return Response.json({ order }, { status: result.status });
 }

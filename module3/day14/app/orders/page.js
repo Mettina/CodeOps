@@ -15,8 +15,8 @@ export default function OrdersPage() {
           {orders.map((order) => (
             <li key={order.id} className="dish-card">
               <div>
-                #{order.id} · {order.name} · {order.area}
-                <span className="meta"> {order.total} ETB</span>
+                {order.id} · {order.name} · {order.area}
+                <span className="meta"> {order.total} ETB · {order.status}</span>
               </div>
             </li>
           ))}

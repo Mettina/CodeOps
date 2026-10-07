@@ -1,7 +1,7 @@
 # BOUNDARY.md: Addis Eats server/client sort
 
 A component is **Server** unless it needs state, handlers, effects, context or a browser API.
-"use client" appears in **5 files**. Every other component is a server component or
+"use client" appears in **7 files**. Every other component is a server component or
 is client only because a client file imports it.
 
 | Component / file | Runs on | Justification |
@@ -21,6 +21,7 @@ is client only because a client file imports it.
 | `components/DishList.jsx` | Server | Pure markup from data; ships no JavaScript. |
 | `components/DishCard.jsx` | Server | Markup from data; its button is a separate client leaf. |
 | `components/AddToCartButton.jsx` | **Client** (`"use client"`) | `onClick` writing to the cart; receives only `id`, `name`, `price`. |
+| `components/CancelButton.jsx` | **Client** (`"use client"`) | Uses `useActionState` to submit a cancellation server action and show pending/error feedback. |
 | `app/dish/[id]/page.js` | Server | `async`, `Promise.all` for dish and reviews; `notFound()` for the empty case. |
 | `app/dish/[id]/loading.js` | Server | Static fallback for the dish route. |
 | `app/dish/[id]/not-found.js` | Server | Static message for a missing dish. |
@@ -28,7 +29,7 @@ is client only because a client file imports it.
 
 ## Check yourself
 
-- **How many files contain "use client"?** Six: `providers.jsx`, `CartBadge.jsx`, `AddToCartButton.jsx`, `FilterShell.jsx`, `error.js`, and `cart/page.js`.
+- **How many files contain "use client"?** Seven: `providers.jsx`, `CartBadge.jsx`, `AddToCartButton.jsx`, `FilterShell.jsx`, `error.js`, `cart/page.js`, and `CancelButton.jsx`.
 - **Does the menu page work with every fetching hook deleted?** Yes. There are no fetching hooks; the page awaits its data.
 - **Is DishList shipped to the browser?** No. `FilterShell` never imports it; it arrives as `children`, already rendered. Proof: after `npm run build`, search `.next/static/chunks` for a string only DishList contains (e.g. `dish-list`); it will not be found there but will be in `.next/server`.
 - **Does layout.js import anything that carries the directive?** Only `Providers`, the one intended boundary. `Header` is a server component.

@@ -9,6 +9,8 @@ export default function Header() {
         <Link href="/menu">Menu</Link>
         <CartBadge />
         <Link href="/checkout">Checkout</Link>
+        <Link href="/my-orders">My Orders</Link>
+        <Link href="/signin">Sign in</Link>
       </nav>
     </header>
   );

@@ -3,8 +3,19 @@
 import { revalidatePath } from "next/cache";
 import { createOrder } from "@/lib/orders";
 import { saveOrder } from "@/lib/orderStore";
+import { getSession } from "@/lib/session";
 
 export async function placeOrder(_previousState, input) {
+  const session = await getSession();
+  if (!session) {
+    return {
+      ok: false,
+      fieldErrors: {},
+      message: "Please sign in before placing an order.",
+      order: null,
+    };
+  }
+
   const result = await createOrder(input);
 
   if (result.status !== 201) {
@@ -16,7 +27,8 @@ export async function placeOrder(_previousState, input) {
     };
   }
 
-  const order = saveOrder(result.order);
+  const order = saveOrder({ ...result.order, owner: session.user });
   revalidatePath("/orders");
+  revalidatePath("/my-orders");
   return { ok: true, fieldErrors: {}, message: "", order };
 }
