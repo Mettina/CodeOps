@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import CheckoutForm from "@/components/CheckoutForm";
 import { useCart } from "@/context/CartContext";
 
 export default function CartPage() {
@@ -28,9 +27,10 @@ export default function CartPage() {
           </ul>
           <p className="price">Total: {total} ETB</p>
           <Link className="button" href="/menu">Continue shopping</Link>
+          {" "}
+          <Link className="button" href="/checkout">Proceed to checkout</Link>
         </>
       )}
-      <CheckoutForm />
     </section>
   );
 }

@@ -1,7 +1,7 @@
 // No directive here: this file is only ever imported by client components
 // (Providers, AddToCartButton, CartBadge), so it joins the client bundle
 // through them. Never import it from a server component.
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useCallback, useContext, useReducer } from "react";
 
 const CartContext = createContext(null);
 
@@ -25,7 +25,7 @@ export function CartProvider({ children }) {
   const [items, dispatch] = useReducer(reducer, []);
   const count = items.reduce((sum, i) => sum + i.qty, 0);
   const addDish = (dish) => dispatch({ type: "add", dish });
-  const clearCart = () => dispatch({ type: "clear" });
+  const clearCart = useCallback(() => dispatch({ type: "clear" }), []);
   return (
     <CartContext.Provider value={{ items, count, addDish, clearCart }}>
       {children}
