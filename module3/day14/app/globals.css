@@ -13,3 +13,9 @@ a { color: #8a3b12; }
 .meta, .status { color: #666; }
 .price { font-weight: 700; }
 .reviews { padding-left: 1.2rem; }
+.order-form { display: grid; gap: 0.5rem; max-width: 28rem; margin-top: 1rem; }
+.order-form input { padding: 0.6rem; border: 1px solid #bca98f; border-radius: 6px; font: inherit; }
+.order-form input[aria-invalid="true"] { border-color: #b42318; }
+.order-form button { justify-self: start; margin-top: 0.5rem; }
+.order-form button:disabled { cursor: wait; opacity: 0.7; }
+.field-error { margin: 0; color: #b42318; }
