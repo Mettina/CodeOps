@@ -1,5 +1,7 @@
+import { revalidatePath } from "next/cache";
 import { errorResponse } from "@/lib/errors";
 import { createOrder } from "@/lib/orders";
+import { saveOrder } from "@/lib/orderStore";
 
 export async function POST(request) {
   let body;
@@ -21,5 +23,7 @@ export async function POST(request) {
     return errorResponse(422, result.error.code, result.error.message, result.error.fieldErrors);
   }
 
-  return Response.json({ order: result.order }, { status: result.status });
+  const order = saveOrder(result.order);
+  revalidatePath("/orders");
+  return Response.json({ order }, { status: result.status });
 }

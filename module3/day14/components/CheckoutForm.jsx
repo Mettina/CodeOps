@@ -1,28 +1,38 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState, useEffect, useState } from "react";
-import { submitOrder } from "@/app/actions/orders";
+import { startTransition, useActionState, useEffect, useState } from "react";
+import { placeOrder } from "@/app/actions/placeOrder";
 import { useCart } from "@/context/CartContext";
 
-const initialState = { status: 0, fieldErrors: {}, message: "", order: null };
+const initialState = { ok: false, fieldErrors: {}, message: "", order: null };
 
 export default function CheckoutForm() {
   const { items, clearCart } = useCart();
   const [form, setForm] = useState({ name: "", phone: "", area: "" });
-  const [state, formAction, isPending] = useActionState(submitOrder, initialState);
+  const [state, formAction, isPending] = useActionState(placeOrder, initialState);
 
   useEffect(() => {
-    if (state.status === 201) {
+    if (state.ok && items.length > 0) {
       clearCart();
     }
-  }, [state.status, clearCart]);
+  }, [state, items.length, clearCart]);
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
-  if (state.status === 201) {
+  function handleSubmit(event) {
+    event.preventDefault();
+    startTransition(() =>
+      formAction({
+        ...form,
+        items: items.map((item) => ({ dishId: item.id, quantity: item.qty })),
+      })
+    );
+  }
+
+  if (state.ok) {
     return (
       <p className="status" role="status">
         Order submitted successfully. Total: {state.order.total} ETB. Your cart is now empty.
@@ -41,12 +51,7 @@ export default function CheckoutForm() {
   return (
     <>
       <h2>Delivery details</h2>
-      <form className="order-form" action={formAction}>
-        <input
-          type="hidden"
-          name="items"
-          value={JSON.stringify(items.map((item) => ({ dishId: item.id, quantity: item.qty })))}
-        />
+      <form className="order-form" onSubmit={handleSubmit}>
         {["name", "phone", "area"].map((field) => (
           <div className="order-field" key={field}>
             <label htmlFor={`order-${field}`}>
