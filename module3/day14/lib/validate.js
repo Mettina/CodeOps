@@ -18,5 +18,19 @@ export function validate(form) {
     errors.area = "Please choose a delivery area.";
   }
 
+  if (!Array.isArray(form?.items) || form.items.length === 0) {
+    errors.items = "Add at least one dish to your order.";
+  } else if (
+    form.items.some(
+      (item) =>
+        !Number.isInteger(item?.dishId) ||
+        item.dishId < 1 ||
+        !Number.isInteger(item?.quantity) ||
+        item.quantity < 1
+    )
+  ) {
+    errors.items = "Each item must have a valid dish ID and quantity.";
+  }
+
   return errors;
 }
