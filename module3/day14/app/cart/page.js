@@ -28,7 +28,7 @@ export default function CartPage() {
           <p className="price">Total: {total} ETB</p>
           <Link className="button" href="/menu">Continue shopping</Link>
           {" "}
-          <Link className="button" href="/checkout">Proceed to checkout</Link>
+          <Link className="button" href="/signin?next=%2Fcheckout">Proceed to checkout</Link>
         </>
       )}
     </section>

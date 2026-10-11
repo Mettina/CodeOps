@@ -9,7 +9,7 @@ export default async function CheckoutPage() {
   }
 
   return (
-    <section>
+    <section className="checkout-page">
       <h1>Checkout</h1>
       <CheckoutForm />
     </section>

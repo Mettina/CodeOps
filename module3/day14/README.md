@@ -8,9 +8,19 @@ wraps the server `DishList` through `children`. See [BOUNDARY.md](./BOUNDARY.md)
 
 ```bash
 npm install
-npm run build  
+npm run build
 npm run dev
 ```
+
+## Checkout flow
+
+Before a user can place an order, they must sign in first.
+
+- Add dishes to the cart from the menu.
+- Open the cart and choose "Proceed to checkout".
+- If the user is not signed in, they are redirected to `/signin?next=%2Fcheckout`.
+- After signing in, they are sent back to the checkout page and can complete the order.
+- The server also guards `/checkout` directly, so a signed-out user cannot bypass the flow by typing the URL manually.
 
 ## Bundle measurement: First Load JS for `/menu`
 

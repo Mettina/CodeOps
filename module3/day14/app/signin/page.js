@@ -10,7 +10,7 @@ export default async function SignInPage({ searchParams }) {
       <form className="order-form" action={signIn}>
         <input type="hidden" name="next" value={returnTo} />
         <label htmlFor="name">Name</label>
-        <input id="name" name="name" required />
+        <input id="name" name="name" placeholder="Enter your name" required />
         <button type="submit" className="button">Sign in</button>
       </form>
     </section>

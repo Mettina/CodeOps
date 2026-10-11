@@ -34,14 +34,14 @@ export default function CheckoutForm() {
 
   if (state.ok) {
     return (
-      <p className="status" role="status">
+      <p className="status checkout-status" role="status">
         Order submitted successfully. Total: {state.order.total} ETB. Your cart is now empty.
       </p>
     );
   }
   if (items.length === 0) {
     return (
-      <div>
+      <div className="checkout-empty">
         <p className="status">Your cart is empty. Add dishes from the menu before checking out.</p>
         <Link className="button" href="/menu">Browse the menu</Link>
       </div>
@@ -51,7 +51,7 @@ export default function CheckoutForm() {
   return (
     <>
       <h2>Delivery details</h2>
-      <form className="order-form" onSubmit={handleSubmit}>
+      <form className="order-form checkout-form" onSubmit={handleSubmit}>
         {["name", "phone", "area"].map((field) => (
           <div className="order-field" key={field}>
             <label htmlFor={`order-${field}`}>
@@ -63,6 +63,13 @@ export default function CheckoutForm() {
               type={field === "phone" ? "tel" : "text"}
               value={form[field]}
               onChange={handleChange}
+              placeholder={
+                field === "name"
+                  ? "Enter your full name"
+                  : field === "phone"
+                    ? "e.g. +251 912 345 678"
+                    : "e.g. Bole, Piazza, or Arat Kilo"
+              }
               aria-invalid={Boolean(state.fieldErrors[field])}
               aria-describedby={state.fieldErrors[field] ? `order-${field}-error` : undefined}
               required
