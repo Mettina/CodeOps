@@ -90,7 +90,7 @@ The dish lookup returns `404`; the invalid phone number returns `422` with
 - `/menu/[id]` uses `generateStaticParams()` and `notFound()` for invalid IDs.
 - The menu's category selector wraps server-rendered dish cards through `children`.
 - Menu search filters the server-rendered dish cards by name, category, and description without moving the dish list into the client bundle.
-- To show a dish photo, place it under `public/dishes/` and add its path to that dish's `image` property in `lib/data.js` (for example, `image: "/dishes/doro-wot.jpg"`). Cards use Next.js Image and hide the image area until a path is provided.
+- To show a dish photo, place it under `public/img/` and add its path to that dish's `image` property in `lib/data.js` (for example, `image: "/img/doro wot.jpg"`). Cards use Next.js Image and hide the image area until a path is provided.
 - Client directives are kept on interactive leaves and stateful pages; the root layout
   remains a Server Component.
 - Checkout and cancellation actions enforce authentication/ownership on the server.
