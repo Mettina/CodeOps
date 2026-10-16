@@ -6,6 +6,7 @@ export default function DishCard({ dish }) {
   return (
     <li
       className="dish-card menu-dish-card"
+      data-id={dish.id}
       data-category={dish.category}
       data-search={`${dish.name} ${dish.category} ${dish.description}`}
     >

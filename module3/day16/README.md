@@ -22,7 +22,7 @@ Use `npm run dev` for development. The checkout page requires `SESSION_SECRET` i
 | Route | Behavior |
 |---|---|
 | `/` | Static landing page. |
-| `/menu` | Server-fetched menu, revalidated every hour, with category filters and live search by dish, category, or description. |
+| `/menu` | Server-fetched menu, revalidated every hour, with category filters and debounced server search by dish, category, or description. |
 | `/menu/[id]` | Dish detail pages generated from known dish IDs; unknown dishes render not-found UI. |
 | `/cart` | Client cart and running total. |
 | `/checkout` | Session-guarded checkout using a validated server action. |
@@ -89,7 +89,7 @@ The dish lookup returns `404`; the invalid phone number returns `422` with
 - `/menu` uses hourly ISR; its page and dish markup stay on the server.
 - `/menu/[id]` uses `generateStaticParams()` and `notFound()` for invalid IDs.
 - The menu's category selector wraps server-rendered dish cards through `children`.
-- Menu search filters the server-rendered dish cards by name, category, and description without moving the dish list into the client bundle.
+- Menu search debounces requests to `/api/dishes?search=...` and filters the server-rendered dish cards by name, category, and description without moving the dish list into the client bundle. An empty search uses a null SWR key and sends no request.
 - To show a dish photo, place it under `public/img/` and add its path to that dish's `image` property in `lib/data.js` (for example, `image: "/img/doro wot.jpg"`). Cards use Next.js Image and hide the image area until a path is provided.
 - Client directives are kept on interactive leaves and stateful pages; the root layout
   remains a Server Component.
