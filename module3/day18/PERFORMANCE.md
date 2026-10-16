@@ -1,49 +1,12 @@
-# Day 18 Lighthouse baseline
 
-Lighthouse was run against an isolated Day 18 production build served locally
-at `http://127.0.0.1:3018`. The existing app on port 3000 was left running.
-Each URL was audited three times; the table records the median result. An
-earlier attempt against port 3000 was discarded after verifying that server
-was `next dev`, not a production build.
+## Third-party scripts
 
-## Test setup
+Audited `app/`, `components/`, `context/` and `lib/` for `<script>` tags,
+analytics or tag-manager snippets, and external script URLs. None are present,
+so there was nothing to migrate to `next/script`. Inter is loaded through
+`next/font`, which self-hosts it at build time, so it adds no third-party
+request.
 
-- Lighthouse 13.5.0; Chrome 154.0.0.0 (headless)
-- Mobile emulation: Moto G Power (2022)
-- Simulated throttling: 150 ms RTT, 1,638.4 Kbps throughput, 4x CPU slowdown
-- Production server: `npm run start` after `npm run build`
-
-## Results
-
-| Page | LCP | CLS | INP | TBT (lab diagnostic) | Performance score |
-|---|---:|---:|---|---:|---:|
-| `/` | 2.76 s | 0.000 | Not available | 252 ms | 97 |
-| `/menu` | 3.36 s | 0.719 | Not available | 401 ms | 61 |
-
-Lighthouse's navigation-mode lab audit did not produce an INP value, and
-`localhost` has no Chrome UX Report (CrUX) field data. TBT is reported as a lab
-responsiveness diagnostic; it is **not** an INP measurement or substitute.
-Collect INP from real user interactions using field data (CrUX/PageSpeed Insights
-after deployment) or real-user monitoring. See
-[web.dev's INP measurement guide](https://web.dev/articles/inp#how_to_measure_inp).
-
-The original `/menu` CLS baseline was high: Lighthouse attributed one large
-shift to the menu layout container. These measurements are a throttled local
-baseline, not field performance data.
-
-## Font loading check
-
-Day 18 did not have an external font link; it used the system Arial font. Inter
-is now loaded through `next/font` and applied to the document body. Three
-throttled production Lighthouse runs on `/menu` reported CLS `0.719` each
-(median `0.719`), unchanged from the recorded baseline. Lighthouse still
-attributes the shift to `.menu-layout`, so this font change did not improve
-the measured CLS. The subsequent menu loading-placeholder change and result
-are recorded below.
-
-## Menu CLS improvement
-
-The menu loading fallback was updated to reserve space for the hero, filters,
-and dish cards instead of showing a short loading message that was replaced by
-the full menu. Three throttled production Lighthouse runs then measured `/menu`
-CLS at `0.000` each (median `0.000`), down from the `0.719` baseline.
+If a third-party script is added later (analytics, chat widget), it should use
+`next/script` with `strategy="lazyOnload"` so it loads after the page is idle
+and stays out of the LCP/TBT path.
