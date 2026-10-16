@@ -15,7 +15,8 @@ export default function FilterShell({ categories, children }) {
     debouncedSearch
       ? `/api/dishes?search=${encodeURIComponent(debouncedSearch)}`
       : null,
-    fetcher
+    fetcher,
+    { keepPreviousData: true }
   );
 
   useEffect(() => {
