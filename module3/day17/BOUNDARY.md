@@ -33,6 +33,7 @@ client components. There are **8 files with `"use client"`**.
 | `app/signin/page.js` | Server | Renders a form that invokes a server action. |
 | `app/my-orders/page.js` | Server | Reads the session and queries only that user's server-side orders. |
 | `app/orders/page.js` | Server | Reads the session and queries only that user's server-side orders. |
+| `app/kitchen/page.js` | Server | Checks the session's staff role before reading all server-side orders. |
 | `middleware.js` | Middleware | Verifies the signed session cookie only for `/checkout` and `/orders` routes and redirects unauthenticated requests to sign-in. |
 | `lib/data.js` | Server only | Provides menu and review data; it is not imported by a client component. |
 | `app/actions/*` | Server only | Validates and performs authenticated mutations on the server. |

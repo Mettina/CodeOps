@@ -15,7 +15,9 @@ npm run start
 ```
 
 Use `npm run dev` for development. The checkout page requires `SESSION_SECRET` in
-`.env.local`; the provided local configuration includes a development value.
+`.env.local`; the provided local configuration includes a development value. Set
+`STAFF_USERS` there to a comma-separated list of staff sign-in names, for example
+`STAFF_USERS=chef,manager`.
 
 ## Routes
 
@@ -29,10 +31,14 @@ Use `npm run dev` for development. The checkout page requires `SESSION_SECRET` i
 | `/signin` | Creates a signed session and returns the user to checkout or My Orders. |
 | `/my-orders` | Shows only the signed-in user's orders; cancellation checks ownership in the server action. |
 | `/orders` | Lists only the signed-in user's orders; detail pages and the order API also enforce ownership. |
+| `/kitchen` | Checks the signed-in user's staff role on the server before showing all orders. |
 
 Requests to `/checkout` and `/orders` (including their nested routes) require a
 valid signed session cookie. Unauthenticated requests are sent to `/signin` and
 returned to their original path after sign-in.
+The `/kitchen` page independently checks the session role on the server; non-staff
+users receive the not-found page. Since this exercise's sign-in identifies users by
+name only, the staff allowlist is for learning and is not production-grade authentication.
 
 ### Build output
 

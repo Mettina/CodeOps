@@ -2,6 +2,12 @@ import { createHmac, timingSafeEqual } from "node:crypto";
 import { cookies } from "next/headers";
 
 const COOKIE = "session";
+const STAFF_USERS = new Set(
+  (process.env.STAFF_USERS ?? "")
+    .split(",")
+    .map((user) => user.trim())
+    .filter(Boolean)
+);
 
 function sign(value) {
   const secret = process.env.SESSION_SECRET;
@@ -49,7 +55,10 @@ export async function getSession() {
     return null;
   }
 
-  return { user };
+  return {
+    user,
+    role: STAFF_USERS.has(user) ? "staff" : "customer",
+  };
 }
 
 export async function destroySession() {

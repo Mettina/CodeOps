@@ -15,6 +15,10 @@ export function listOrders(owner) {
   return store.orders.filter((order) => order.owner === owner);
 }
 
+export function listAllOrders() {
+  return store.orders;
+}
+
 export function getOrder(id, owner) {
   return (
     store.orders.find(
