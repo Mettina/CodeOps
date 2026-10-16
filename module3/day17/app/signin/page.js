@@ -1,11 +1,9 @@
 import { signIn } from "@/app/actions/auth";
+import { getSafeNextPath } from "@/lib/redirects";
 
 export default async function SignInPage({ searchParams }) {
   const { next } = await searchParams;
-  const returnTo =
-    next === "/checkout" || (typeof next === "string" && /^\/orders(?:\/|$)/.test(next))
-      ? next
-      : "/my-orders";
+  const returnTo = getSafeNextPath(next);
 
   return (
     <section>
