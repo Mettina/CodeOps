@@ -15,8 +15,9 @@ export default function DishCard({ dish }) {
               className="dish-card-image"
               src={dish.image}
               alt={dish.name}
-              fill
-              sizes="(max-width: 480px) 100vw, (max-width: 800px) 50vw, 25vw"
+              width={dish.imageWidth}
+              height={dish.imageHeight}
+              sizes="(max-width: 480px) calc(100vw - 8px), (max-width: 850px) calc(50vw - 24px), (max-width: 1200px) calc(33.333vw - 29.333px), (max-width: 1499px) calc(25vw - 27px), 348px"
             />
 
             <span className="dish-category-badge">

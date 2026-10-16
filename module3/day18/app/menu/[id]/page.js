@@ -28,9 +28,10 @@ export default async function DishPage({ params }) {
               className="dish-detail-image"
               src={dish.image}
               alt={dish.name}
-              width={640}
-              height={480}
+              width={dish.imageWidth}
+              height={dish.imageHeight}
               priority
+              sizes="(max-width: 480px) calc(100vw - 24px), (max-width: 700px) calc(100vw - 32px), 560px"
             />
           </div>
         )}
