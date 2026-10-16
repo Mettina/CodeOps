@@ -1,11 +1,10 @@
-import { getDishes, categories } from "@/lib/data";
+import { categories, getDishPage } from "@/lib/data";
 import FilterShell from "@/components/FilterShell";
-import DishList from "@/components/DishList";
 
-export const revalidate = 3600;
-
-export default async function MenuPage() {
-  const dishes = await getDishes();
+export default async function MenuPage({ searchParams }) {
+  const { page = "1", category = "", search = "" } = await searchParams;
+  const initialSearch = typeof search === "string" ? search.trim() : "";
+  const initialData = await getDishPage(page, initialSearch, category);
 
   return (
     <main className="menu-page">
@@ -27,9 +26,7 @@ export default async function MenuPage() {
 
       {/* Menu and Filters */}
       <section className="menu-content">
-        <FilterShell categories={categories}>
-          <DishList dishes={dishes} />
-        </FilterShell>
+        <FilterShell categories={categories} initialData={initialData} initialSearch={initialSearch} />
       </section>
     </main>
   );

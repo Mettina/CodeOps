@@ -1,4 +1,3 @@
-// Data layer. Server only: never import this file from a client component.
 const dishes = [
   { id: 1, name: "Doro Wot", price: 240, category: "Main", description: "Slow-cooked chicken stew in spiced berbere sauce with a boiled egg, served with injera.", image: "/img/doro wot.jpg" },
   { id: 2, name: "Kitfo", price: 260, category: "Main", description: "Minced beef seasoned with mitmita and spiced butter.", image: "/img/kitfo.jpg" },
@@ -31,12 +30,39 @@ const reviews = [
 ];
 
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const DISH_PAGE_SIZE = 6;
 
 export const categories = ["Main", "Breakfast", "Lunch", "Dinner", "Drinks", "Pizza", "Burger"];
 
 export async function getDishes() {
   await wait(300);
   return dishes;
+}
+
+export async function getDishPage(page = 1, search = "", category = "") {
+  const allDishes = await getDishes();
+  const query = search.trim().toLocaleLowerCase();
+  const selectedCategory = categories.includes(category) ? category : "";
+  const matches = allDishes.filter((dish) => {
+    const matchesSearch = !query ||
+      `${dish.name} ${dish.category} ${dish.description}`.toLocaleLowerCase().includes(query);
+    const matchesCategory = !selectedCategory || dish.category === selectedCategory;
+    return matchesSearch && matchesCategory;
+  });
+  const totalPages = Math.ceil(matches.length / DISH_PAGE_SIZE);
+  const requestedPage = Number(page);
+  const validPage = Number.isInteger(requestedPage) && requestedPage > 0 ? requestedPage : 1;
+  const currentPage = Math.min(validPage, Math.max(totalPages, 1));
+  const start = (currentPage - 1) * DISH_PAGE_SIZE;
+
+  return {
+    dishes: matches.slice(start, start + DISH_PAGE_SIZE),
+    total: matches.length,
+    page: currentPage,
+    pageSize: DISH_PAGE_SIZE,
+    totalPages,
+    category: selectedCategory,
+  };
 }
 
 export async function getDish(id) {

@@ -6,7 +6,7 @@ The markers below are from the production build route table. `○` means static,
 | Route | Strategy | Build marker | Reason |
 |---|---|---|---|
 | `/` | Static | `○` | The landing page contains no request-specific data. |
-| `/menu` | ISR, 3600 seconds | `○` (1h revalidation) | The menu changes infrequently and can be refreshed hourly. |
+| `/menu` | Dynamic server rendering | `ƒ` | The selected page and category come from request query parameters; initial dish data is rendered on the server. |
 | `/menu/[id]` | Static via `generateStaticParams` | `●` for each generated dish path | The dish IDs are known at build time; ungenerated IDs return 404 and missing data uses `notFound()`. |
 | `/cart` | Client | `○` | Cart contents belong to this browser tab and come from client context. |
 | `/checkout` | Dynamic | `ƒ` | The page reads the signed-in session cookie before rendering. |
@@ -18,6 +18,6 @@ The markers below are from the production build route table. `○` means static,
 
 | Endpoint | Strategy | Reason |
 |---|---|---|
-| `/api/dishes` | Request-time handler | Returns the current menu data. |
+| `/api/dishes` | Request-time handler | Returns the requested page of menu data, optionally filtered by search term and category. |
 | `/api/dishes/[id]` | Request-time handler | Looks up an individual dish and returns a 404 for an unknown ID. |
 | `/api/orders` | Request-time handler | Validates each submitted order and writes valid orders. |

@@ -22,7 +22,7 @@ Use `npm run dev` for development. The checkout page requires `SESSION_SECRET` i
 | Route | Behavior |
 |---|---|
 | `/` | Static landing page. |
-| `/menu` | Server-fetched menu, revalidated every hour, with category filters and debounced server search by dish, category, or description. |
+| `/menu` | Server-rendered menu pages (`?page=N`) with category filters and debounced SWR search by dish, category, or description. |
 | `/menu/[id]` | Dish detail pages generated from known dish IDs; unknown dishes render not-found UI. |
 | `/cart` | Client cart and running total. |
 | `/checkout` | Session-guarded checkout using a validated server action. |
@@ -32,10 +32,10 @@ Use `npm run dev` for development. The checkout page requires `SESSION_SECRET` i
 
 ### Build output
 
-Verified with `npm run build` on Next.js 16.3.8:
+Verified with `npm run build` on Next.js 16.3.8 after adding query-string menu paging:
 
 ```text
-Route (app)             Revalidate  Expire
+Route (app)
 ┌ ○ /
 ├ ○ /_not-found
 ├ ƒ /api/dishes
@@ -43,7 +43,7 @@ Route (app)             Revalidate  Expire
 ├ ƒ /api/orders
 ├ ○ /cart
 ├ ƒ /checkout
-├ ○ /menu                       1h      1y
+├ ƒ /menu
 ├   /menu/[id]
 │ ├ ● /menu/1
 │ ├ ● /menu/2
@@ -51,6 +51,7 @@ Route (app)             Revalidate  Expire
 │ └ ● [+18 more paths]
 ├ ƒ /my-orders
 ├ ƒ /orders
+├ ƒ /orders/[id]
 └ ƒ /signin
 
 ○  Static
@@ -89,7 +90,7 @@ The dish lookup returns `404`; the invalid phone number returns `422` with
 - `/menu` uses hourly ISR; its page and dish markup stay on the server.
 - `/menu/[id]` uses `generateStaticParams()` and `notFound()` for invalid IDs.
 - The menu's category selector wraps server-rendered dish cards through `children`.
-- Menu search debounces requests to `/api/dishes?search=...` and filters the server-rendered dish cards by name, category, and description without moving the dish list into the client bundle. An empty search uses a null SWR key and sends no request.
+- Menu paging uses `/menu?page=N`; category and search terms are preserved in the URL, and the initial results are rendered on the server. Search debounces requests to `/api/dishes?search=...&page=N` through SWR. An empty search uses a null SWR key and sends no search request. See [DATA.md](./DATA.md) for the data and API response shape.
 - To show a dish photo, place it under `public/img/` and add its path to that dish's `image` property in `lib/data.js` (for example, `image: "/img/doro wot.jpg"`). Cards use Next.js Image and hide the image area until a path is provided.
 - Client directives are kept on interactive leaves and stateful pages; the root layout
   remains a Server Component.

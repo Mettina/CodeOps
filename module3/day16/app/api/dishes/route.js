@@ -1,17 +1,12 @@
-import { getDishes } from "@/lib/data";
+import { getDishPage } from "@/lib/data";
 
 export async function GET(request) {
-  const dishes = await getDishes();
-  const search = new URL(request.url).searchParams.get("search")?.trim();
-
-  if (!search) {
-    return Response.json(dishes);
-  }
-
-  const query = search.toLocaleLowerCase();
-  const matches = dishes.filter((dish) =>
-    `${dish.name} ${dish.category} ${dish.description}`.toLocaleLowerCase().includes(query)
+  const params = new URL(request.url).searchParams;
+  const data = await getDishPage(
+    params.get("page") ?? 1,
+    params.get("search") ?? "",
+    params.get("category") ?? ""
   );
 
-  return Response.json(matches);
+  return Response.json(data);
 }

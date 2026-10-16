@@ -1,50 +1,64 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import useSWR from "swr";
 import fetcher from "@/lib/fetcher";
 import CategoryBar from "./CategoryBar";
+import DishList from "./DishList";
 
-export default function FilterShell({ categories, children }) {
-  const [selected, setSelected] = useState("All");
-  const [search, setSearch] = useState("");
-  const [debouncedSearch, setDebouncedSearch] = useState("");
-  const [visibleCount, setVisibleCount] = useState(null);
-  const listRef = useRef(null);
-  const { data: searchResults, error, isLoading } = useSWR(
+function menuHref(page, category, search) {
+  const params = new URLSearchParams({ page: String(page) });
+  if (category) params.set("category", category);
+  if (search) params.set("search", search);
+  return `/menu?${params.toString()}`;
+}
+
+export default function FilterShell({ categories, initialData, initialSearch }) {
+  const router = useRouter();
+  const selected = initialData.category || "All";
+  const [search, setSearch] = useState(initialSearch);
+  const [debouncedSearch, setDebouncedSearch] = useState(initialSearch);
+  const { data, error, isLoading } = useSWR(
     debouncedSearch
-      ? `/api/dishes?search=${encodeURIComponent(debouncedSearch)}`
+      ? `/api/dishes?search=${encodeURIComponent(debouncedSearch)}&page=${initialData.page}&category=${encodeURIComponent(initialData.category)}`
       : null,
     fetcher,
-    { keepPreviousData: true }
+    {
+      fallbackData: debouncedSearch === initialSearch ? initialData : undefined,
+      keepPreviousData: true,
+    }
   );
 
   useEffect(() => {
+    setSearch(initialSearch);
+    setDebouncedSearch(initialSearch);
+  }, [initialSearch]);
+
+  useEffect(() => {
+    const nextSearch = search.trim();
+    if (nextSearch === debouncedSearch) return;
+
     const timeoutId = setTimeout(() => {
-      setDebouncedSearch(search.trim());
+      setDebouncedSearch(nextSearch);
+      router.replace(
+        menuHref(1, selected === "All" ? "" : selected, nextSearch),
+        { scroll: false }
+      );
     }, 300);
 
     return () => clearTimeout(timeoutId);
-  }, [search]);
+  }, [debouncedSearch, router, search, selected]);
 
-  useEffect(() => {
-    const cards = listRef.current?.querySelectorAll(".dish-card[data-category]");
-    if (!cards) return;
-
-    const matchingIds = searchResults
-      ? new Set(searchResults.map((dish) => String(dish.id)))
-      : null;
-    let count = 0;
-
-    cards.forEach((card) => {
-      const matchesCategory = selected === "All" || card.dataset.category === selected;
-      const matchesSearch = !debouncedSearch || matchingIds?.has(card.dataset.id);
-      card.hidden = !matchesCategory || !matchesSearch;
-      if (!card.hidden) count += 1;
-    });
-
-    setVisibleCount(isLoading || error ? null : count);
-  }, [debouncedSearch, error, isLoading, searchResults, selected]);
+  const pageData = debouncedSearch ? data : initialData;
+  const pageInfo = pageData ?? initialData;
+  const chooseCategory = (category) => {
+    router.push(
+      menuHref(1, category === "All" ? "" : category, debouncedSearch),
+      { scroll: false }
+    );
+  };
 
   return (
     <div>
@@ -57,13 +71,48 @@ export default function FilterShell({ categories, children }) {
           placeholder="Search by dish, category, or description"
         />
       </label>
-      <CategoryBar categories={categories} selected={selected} onSelect={setSelected} />
-      <div ref={listRef}>
-        {children}
-        {isLoading && <p className="status" role="status">Searching dishes...</p>}
-        {error && <p className="status" role="alert">{error.message}</p>}
-        {visibleCount === 0 && <p className="status">No dishes match your search.</p>}
-      </div>
+      <CategoryBar categories={categories} selected={selected} onSelect={chooseCategory} />
+      {error && <p className="status" role="alert">{error.message}</p>}
+      {debouncedSearch && isLoading && !data ? (
+        <p className="status" role="status">Searching dishes...</p>
+      ) : pageData?.dishes.length > 0 ? (
+        <DishList dishes={pageData.dishes} />
+      ) : !pageData && error ? null : (
+        <p className="status">No dishes match your search.</p>
+      )}
+      {pageInfo.totalPages > 1 && (
+        <nav className="category-bar" aria-label="Menu pages">
+          {pageInfo.page > 1 && (
+            <Link
+              className="chip"
+              href={menuHref(pageInfo.page - 1, initialData.category, debouncedSearch)}
+            >
+              Previous
+            </Link>
+          )}
+          {Array.from({ length: pageInfo.totalPages }, (_, index) => index + 1).map((page) => (
+            <Link
+              key={page}
+              className={page === pageInfo.page ? "chip active" : "chip"}
+              href={menuHref(page, initialData.category, debouncedSearch)}
+              aria-current={page === pageInfo.page ? "page" : undefined}
+            >
+              {page}
+            </Link>
+          ))}
+          {pageInfo.page < pageInfo.totalPages && (
+            <Link
+              className="chip"
+              href={menuHref(pageInfo.page + 1, initialData.category, debouncedSearch)}
+            >
+              Next
+            </Link>
+          )}
+        </nav>
+      )}
+      <p className="status" aria-live="polite">
+        Page {pageInfo.page} of {pageInfo.totalPages || 1}
+      </p>
     </div>
   );
 }
