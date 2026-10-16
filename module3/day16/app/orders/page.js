@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { listOrders } from "@/lib/orderStore";
 
 export const dynamic = "force-dynamic";
@@ -15,7 +16,8 @@ export default function OrdersPage() {
           {orders.map((order) => (
             <li key={order.id} className="dish-card">
               <div>
-                {order.id} · {order.name} · {order.area}
+                <Link href={`/orders/${order.id}`}>Order {order.id}</Link>
+                {" · "}{order.name} · {order.area}
                 <span className="meta"> {order.total} ETB · {order.status}</span>
               </div>
             </li>

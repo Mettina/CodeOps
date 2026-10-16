@@ -28,7 +28,8 @@ export default async function MyOrdersPage() {
         {mine.map((order) => (
           <li key={order.id} className="dish-card">
             <div>
-              {order.id} · {order.total} ETB · {order.status}
+              <Link href={`/orders/${order.id}`}>Order {order.id}</Link>
+              {" · "}{order.total} ETB · {order.status}
             </div>
             <CancelButton id={order.id} status={order.status} />
           </li>
