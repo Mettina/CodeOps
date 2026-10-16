@@ -20,9 +20,10 @@ export default function FilterShell({ categories, initialData, initialSearch }) 
   const selected = initialData.category || "All";
   const [search, setSearch] = useState(initialSearch);
   const [debouncedSearch, setDebouncedSearch] = useState(initialSearch);
+  const searchPage = debouncedSearch === initialSearch ? initialData.page : 1;
   const { data, error, isLoading } = useSWR(
     debouncedSearch
-      ? `/api/dishes?search=${encodeURIComponent(debouncedSearch)}&page=${initialData.page}&category=${encodeURIComponent(initialData.category)}`
+      ? `/api/dishes?search=${encodeURIComponent(debouncedSearch)}&page=${searchPage}&category=${encodeURIComponent(initialData.category)}`
       : null,
     fetcher,
     {

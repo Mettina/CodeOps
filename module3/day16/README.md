@@ -41,6 +41,7 @@ Route (app)
 ├ ƒ /api/dishes
 ├ ƒ /api/dishes/[id]
 ├ ƒ /api/orders
+├ ƒ /api/orders/[id]
 ├ ○ /cart
 ├ ƒ /checkout
 ├ ƒ /menu
@@ -87,10 +88,10 @@ The dish lookup returns `404`; the invalid phone number returns `422` with
 
 ## Rendering and boundary notes
 
-- `/menu` uses hourly ISR; its page and dish markup stay on the server.
+- `/menu` reads the page, category, and search query parameters and renders the selected dish page on the server.
 - `/menu/[id]` uses `generateStaticParams()` and `notFound()` for invalid IDs.
 - The menu's category selector wraps server-rendered dish cards through `children`.
-- Menu paging uses `/menu?page=N`; category and search terms are preserved in the URL, and the initial results are rendered on the server. Search debounces requests to `/api/dishes?search=...&page=N` through SWR. An empty search uses a null SWR key and sends no search request. See [DATA.md](./DATA.md) for the data and API response shape.
+- Menu paging uses `/menu?page=N`; category and search terms are preserved in the URL, and the initial results are rendered on the server. Search debounces requests to `/api/dishes?search=...&page=N` through SWR. An empty search uses a null SWR key and sends no search request. While typing, the Network tab shows one `/api/dishes` fetch after the 300 ms pause rather than a request for every keystroke; previous results stay visible while the response loads. See [DATA.md](./DATA.md) for every SWR query key and refresh policy.
 - To show a dish photo, place it under `public/img/` and add its path to that dish's `image` property in `lib/data.js` (for example, `image: "/img/doro wot.jpg"`). Cards use Next.js Image and hide the image area until a path is provided.
 - Client directives are kept on interactive leaves and stateful pages; the root layout
   remains a Server Component.
