@@ -34,7 +34,7 @@ client components. There are **8 files with `"use client"`**.
 | `app/my-orders/page.js` | Server | Reads the session and queries only that user's server-side orders. |
 | `app/orders/page.js` | Server | Reads the session and queries only that user's server-side orders. |
 | `app/kitchen/page.js` | Server | Checks the session's staff role before reading all server-side orders. |
-| `middleware.js` | Middleware | Verifies the signed session cookie only for `/checkout` and `/orders` routes and redirects unauthenticated requests to sign-in. |
+| `middleware.js` | Middleware | Verifies the signed session cookie only for `/checkout`, `/kitchen`, `/my-orders`, and `/orders` routes and redirects unauthenticated requests to sign-in. |
 | `lib/data.js` | Server only | Provides menu and review data; it is not imported by a client component. |
 | `app/actions/*` | Server only | Validates and performs authenticated mutations on the server. |
 | `app/api/*/route.js` | Server only | Handles API requests and returns server-side responses. |
@@ -46,3 +46,4 @@ client components. There are **8 files with `"use client"`**.
 - **How does menu paging work?** The server reads `/menu?page=N` and renders that page; category, search, and pagination update the query string. The API applies search and category filters before slicing results into pages of six.
 - **Can checkout submit with JavaScript disabled?** Yes. The no-script form submits dish IDs, quantities, and delivery details to `placeOrder`; the server validates the same schema and redirects after success.
 - **Where is ownership enforced for cancellation?** Inside `cancelOrder`, which reads the session and compares the order owner before changing its status.
+- **Where are authentication and authorization documented?** See [AUTH.md](./AUTH.md) for route layers and the three attack exercises.

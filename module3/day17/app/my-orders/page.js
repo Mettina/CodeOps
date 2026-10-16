@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import CancelButton from "@/components/CancelButton";
 import { signOut } from "@/app/actions/auth";
 import { listOrders } from "@/lib/orderStore";
@@ -7,12 +8,7 @@ import { getSession } from "@/lib/session";
 export default async function MyOrdersPage() {
   const session = await getSession();
   if (!session) {
-    return (
-      <section>
-        <h1>My orders</h1>
-        <p><Link href="/signin">Sign in</Link> to see your orders.</p>
-      </section>
-    );
+    redirect("/signin?next=%2Fmy-orders");
   }
 
   const mine = listOrders(session.user);

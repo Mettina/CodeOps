@@ -16,6 +16,7 @@ export function getSafeNextPath(value) {
   const isAllowedPath =
     pathname === "/checkout" ||
     pathname === "/kitchen" ||
+    pathname === "/my-orders" ||
     pathname === "/orders" ||
     pathname.startsWith("/orders/");
 

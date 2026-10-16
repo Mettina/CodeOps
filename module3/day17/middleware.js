@@ -50,6 +50,10 @@ async function hasValidSession(raw, secret) {
 }
 
 export async function middleware(request) {
+  if (request.method === "POST" && request.headers.has("next-action")) {
+    return NextResponse.next();
+  }
+
   const rawSession = request.cookies.get("session")?.value;
   const validSession = await hasValidSession(rawSession, process.env.SESSION_SECRET);
 
@@ -66,5 +70,10 @@ export async function middleware(request) {
 }
 
 export const config = {
-  matcher: ["/checkout/:path*", "/orders/:path*"],
+  matcher: [
+    "/checkout/:path*",
+    "/kitchen/:path*",
+    "/my-orders/:path*",
+    "/orders/:path*",
+  ],
 };

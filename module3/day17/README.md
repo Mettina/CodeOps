@@ -33,16 +33,23 @@ Use `npm run dev` for development. The checkout page requires `SESSION_SECRET` i
 | `/orders` | Lists only the signed-in user's orders; detail pages and the order API also enforce ownership. |
 | `/kitchen` | Checks the signed-in user's staff role on the server before showing all orders. |
 
-Requests to `/checkout` and `/orders` (including their nested routes) require a
-valid signed session cookie. Unauthenticated requests are sent to `/signin` and
-returned to their original path after sign-in.
+Requests to `/checkout`, `/kitchen`, `/my-orders`, and `/orders` (including nested
+routes) require a valid signed session cookie. Unauthenticated requests are sent
+to `/signin` and returned to their original path after sign-in.
 The `/kitchen` page independently checks the session role on the server; non-staff
 users receive the not-found page. Since this exercise's sign-in identifies users by
 name only, the staff allowlist is for learning and is not production-grade authentication.
+See [AUTH.md](./AUTH.md) for the route-by-route security layers and the three attack exercises.
+
+### Day 42 security exercise
+
+Sign-in and sign-out, protected-route redirects, session-scoped order access,
+ownership-checked order actions, and server-enforced staff access are implemented.
+The three attack tests and their results are recorded in [AUTH.md](./AUTH.md).
 
 ### Build output
 
-Verified with `npm run build` on Next.js 16.3.8 after adding query-string menu paging:
+Verified with `npm run build` on Next.js 16.3.8:
 
 ```text
 Route (app)
@@ -54,6 +61,7 @@ Route (app)
 ├ ƒ /api/orders/[id]
 ├ ○ /cart
 ├ ƒ /checkout
+├ ƒ /kitchen
 ├ ƒ /menu
 ├   /menu/[id]
 │ ├ ● /menu/1
@@ -64,6 +72,8 @@ Route (app)
 ├ ƒ /orders
 ├ ƒ /orders/[id]
 └ ƒ /signin
+
+ƒ  Proxy (Middleware)
 
 ○  Static
 ●  Static HTML generated from generateStaticParams
