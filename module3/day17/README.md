@@ -28,7 +28,7 @@ Use `npm run dev` for development. The checkout page requires `SESSION_SECRET` i
 | `/checkout` | Session-guarded checkout using a validated server action. |
 | `/signin` | Creates a signed session and returns the user to checkout or My Orders. |
 | `/my-orders` | Shows only the signed-in user's orders; cancellation checks ownership in the server action. |
-| `/orders` | Server-rendered order list. |
+| `/orders` | Lists only the signed-in user's orders; detail pages and the order API also enforce ownership. |
 
 Requests to `/checkout` and `/orders` (including their nested routes) require a
 valid signed session cookie. Unauthenticated requests are sent to `/signin` and
@@ -76,19 +76,21 @@ and `placeOrder` independently checks it again. With JavaScript enabled, the car
 its item IDs and quantities through the action state form. With JavaScript disabled, a
 server-rendered fallback lets the user select dishes and submit the same server action.
 Both paths and `POST /api/orders` use `lib/validate.js` via `lib/orders.js`; prices are
-looked up on the server rather than trusted from the browser.
+looked up on the server rather than trusted from the browser. The API requires a valid
+session, and order lists and detail lookups are scoped to that session's user.
 
 Try the endpoint contracts against `npm run start`:
 
 ```bash
 curl.exe -i http://localhost:3000/api/dishes/not-a-dish
 curl.exe -i -X POST http://localhost:3000/api/orders `
+  -b "session=<your-session-cookie>" `
   -H "Content-Type: application/json" `
   --data-raw '{"name":"Almaz","phone":"0912","area":"Bole","items":[{"dishId":1,"quantity":1}]}'
 ```
 
-The dish lookup returns `404`; the invalid phone number returns `422` with
-`fieldErrors.phone`.
+The dish lookup returns `404`; an authenticated request with the invalid phone number
+returns `422` with `fieldErrors.phone`.
 
 ## Rendering and boundary notes
 

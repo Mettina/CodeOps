@@ -15,7 +15,7 @@ export default async function MyOrdersPage() {
     );
   }
 
-  const mine = listOrders().filter((order) => order.owner === session.user);
+  const mine = listOrders(session.user);
   return (
     <section>
       <h1>My orders</h1>

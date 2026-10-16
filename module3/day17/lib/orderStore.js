@@ -11,16 +11,20 @@ export function saveOrder(order) {
   return saved;
 }
 
-export function listOrders() {
-  return store.orders;
+export function listOrders(owner) {
+  return store.orders.filter((order) => order.owner === owner);
 }
 
-export function getOrder(id) {
-  return store.orders.find((order) => order.id === Number(id)) ?? null;
+export function getOrder(id, owner) {
+  return (
+    store.orders.find(
+      (order) => order.id === Number(id) && order.owner === owner
+    ) ?? null
+  );
 }
 
-export function markCancelled(id) {
-  const order = getOrder(id);
+export function markCancelled(id, owner) {
+  const order = getOrder(id, owner);
   if (order) {
     order.status = "cancelled";
   }

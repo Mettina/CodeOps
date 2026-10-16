@@ -5,6 +5,11 @@ import { saveOrder } from "@/lib/orderStore";
 import { getSession } from "@/lib/session";
 
 export async function POST(request) {
+  const session = await getSession();
+  if (!session) {
+    return errorResponse(401, "UNAUTHORIZED", "Please sign in before placing an order.");
+  }
+
   let body;
 
   try {
@@ -24,8 +29,7 @@ export async function POST(request) {
     return errorResponse(422, result.error.code, result.error.message, result.error.fieldErrors);
   }
 
-  const session = await getSession();
-  const order = saveOrder({ ...result.order, owner: session?.user ?? null });
+  const order = saveOrder({ ...result.order, owner: session.user });
   revalidatePath("/orders");
   revalidatePath("/my-orders");
   return Response.json({ order }, { status: result.status });

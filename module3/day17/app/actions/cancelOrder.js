@@ -11,19 +11,16 @@ export async function cancelOrder(_previousState, formData) {
   }
 
   const id = Number(formData.get("id"));
-  const order = Number.isInteger(id) ? getOrder(id) : null;
+  const order = Number.isInteger(id) ? getOrder(id, session.user) : null;
   if (!order) {
     return { ok: false, message: "Order not found." };
   }
 
-  if (order.owner !== session.user) {
-    return { ok: false, message: "You can only cancel your own orders." };
-  }
   if (order.status === "cancelled") {
     return { ok: false, message: "This order is already cancelled." };
   }
 
-  markCancelled(id);
+  markCancelled(id, session.user);
   revalidatePath("/orders");
   revalidatePath("/my-orders");
   return { ok: true, message: "Order cancelled." };

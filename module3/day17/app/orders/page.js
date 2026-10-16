@@ -1,10 +1,17 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { listOrders } from "@/lib/orderStore";
+import { getSession } from "@/lib/session";
 
 export const dynamic = "force-dynamic";
 
-export default function OrdersPage() {
-  const orders = listOrders();
+export default async function OrdersPage() {
+  const session = await getSession();
+  if (!session) {
+    redirect("/signin?next=%2Forders");
+  }
+
+  const orders = listOrders(session.user);
 
   return (
     <section>
