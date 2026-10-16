@@ -4,8 +4,9 @@ import Link from "next/link";
 import useSWR from "swr";
 import fetcher from "@/lib/fetcher";
 
-export default function OrderStatus({ id }) {
+export default function OrderStatus({ id, fallbackData }) {
   const { data: order, error, isLoading } = useSWR(`/api/orders/${id}`, fetcher, {
+    fallbackData,
     refreshInterval: 2000,
   });
 
