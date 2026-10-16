@@ -1,0 +1,29 @@
+import Link from "next/link";
+import { listOrders } from "@/lib/orderStore";
+
+export const dynamic = "force-dynamic";
+
+export default function OrdersPage() {
+  const orders = listOrders();
+
+  return (
+    <section>
+      <h1>Orders</h1>
+      {orders.length === 0 ? (
+        <p className="status">No orders yet.</p>
+      ) : (
+        <ul className="dish-list">
+          {orders.map((order) => (
+            <li key={order.id} className="dish-card">
+              <div>
+                <Link href={`/orders/${order.id}`}>Order {order.id}</Link>
+                {" · "}{order.name} · {order.area}
+                <span className="meta"> {order.total} ETB · {order.status}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  );
+}
