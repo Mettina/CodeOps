@@ -27,7 +27,23 @@ Collect INP from real user interactions using field data (CrUX/PageSpeed Insight
 after deployment) or real-user monitoring. See
 [web.dev's INP measurement guide](https://web.dev/articles/inp#how_to_measure_inp).
 
-The `/menu` CLS result is high: Lighthouse attributed one large shift to the
-menu layout container. This should be investigated as a follow-up performance
-exercise. These measurements are a throttled local baseline, not field
-performance data.
+The original `/menu` CLS baseline was high: Lighthouse attributed one large
+shift to the menu layout container. These measurements are a throttled local
+baseline, not field performance data.
+
+## Font loading check
+
+Day 18 did not have an external font link; it used the system Arial font. Inter
+is now loaded through `next/font` and applied to the document body. Three
+throttled production Lighthouse runs on `/menu` reported CLS `0.719` each
+(median `0.719`), unchanged from the recorded baseline. Lighthouse still
+attributes the shift to `.menu-layout`, so this font change did not improve
+the measured CLS. The subsequent menu loading-placeholder change and result
+are recorded below.
+
+## Menu CLS improvement
+
+The menu loading fallback was updated to reserve space for the hero, filters,
+and dish cards instead of showing a short loading message that was replaced by
+the full menu. Three throttled production Lighthouse runs then measured `/menu`
+CLS at `0.000` each (median `0.000`), down from the `0.719` baseline.
