@@ -1,5 +1,6 @@
 import { categories, getDishPage } from "@/lib/data";
 import FilterShell from "@/components/FilterShell";
+import HeroImage from "@/components/HeroImage";
 
 export default async function MenuPage({ searchParams }) {
   const { page = "1", category = "", search = "" } = await searchParams;
@@ -10,6 +11,9 @@ export default async function MenuPage({ searchParams }) {
     <main className="menu-page">
       {/* Hero Banner */}
       <section className="menu-hero">
+        <HeroImage
+          sizes="(max-width: 480px) calc(100vw - 32px), (max-width: 850px) calc(100vw - 64px), (max-width: 1500px) calc(100vw - 96px), 1404px"
+        />
         <div className="hero-content">
           <p className="hero-eyebrow">
             AUTHENTIC ETHIOPIAN FLAVORS

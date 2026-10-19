@@ -4,8 +4,8 @@ import DishCard from "./DishCard";
 export default function DishList({ dishes }) {
   return (
     <ul className="dish-list menu-dish-list">
-      {dishes.map((dish, index) => (
-        <DishCard key={dish.id} dish={dish} priority={index === 0} />
+      {dishes.map((dish) => (
+        <DishCard key={dish.id} dish={dish} />
       ))}
     </ul>
   );

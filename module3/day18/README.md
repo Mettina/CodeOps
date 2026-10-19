@@ -9,15 +9,30 @@ server/client component map.
 Run commands from this directory:
 
 ```bash
-npm install
+npm ci
+```
+
+Create `.env.local` from the committed template and replace the placeholder
+session secret with a random value. In PowerShell:
+
+```powershell
+Copy-Item .env.example .env.local
+node -e "console.log(require('node:crypto').randomBytes(32).toString('hex'))"
+```
+
+Put the generated value in `SESSION_SECRET`. `STAFF_USERS` is an optional
+comma-separated list of staff sign-in names. Keep these values in `.env.local`;
+do not prefix server secrets with `NEXT_PUBLIC_`.
+
+Build and run the production app:
+
+```bash
 npm run build
 npm run start
 ```
 
-Use `npm run dev` for development. The checkout page requires `SESSION_SECRET` in
-`.env.local`; the provided local configuration includes a development value. Set
-`STAFF_USERS` there to a comma-separated list of staff sign-in names, for example
-`STAFF_USERS=chef,manager`.
+Use `npm run dev` for development only. Lighthouse measurements should use
+`npm run build` followed by `npm run start`.
 
 ## Routes
 
@@ -41,12 +56,14 @@ users receive the not-found page. Since this exercise's sign-in identifies users
 name only, the staff allowlist is for learning and is not production-grade authentication.
 See [AUTH.md](./AUTH.md) for the route-by-route security layers and the three attack exercises.
 
-### Day 18 Lighthouse baseline
+### Performance mini-project (Day 18)
 
-See [PERFORMANCE.md](./PERFORMANCE.md) for the throttled production Lighthouse
-results for `/` and `/menu`, including the INP field-data limitation.
+See [PERF.md](./PERF.md) for the throttled production Lighthouse measurements
+and the cause of each before/after change. Images are local; no remote image
+hosts or third-party scripts are configured. Inter is self-hosted at build time
+with `next/font`.
 
-### Day 42 security exercise
+### Day 17 security exercise
 
 Sign-in and sign-out, protected-route redirects, session-scoped order access,
 ownership-checked order actions, and server-enforced staff access are implemented.
