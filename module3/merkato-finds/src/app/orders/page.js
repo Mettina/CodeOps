@@ -17,7 +17,7 @@ export default async function OrdersPage() {
   if (!session) redirect("/login?next=%2Forders");
 
   // The query is scoped to the session's owner, never to an id sent by the browser.
-  const orders = listOrders(session.user);
+  const orders = await listOrders(session.user);
 
   return (
     <section className="page-shell orders-page">

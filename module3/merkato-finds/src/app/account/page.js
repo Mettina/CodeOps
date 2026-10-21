@@ -14,7 +14,7 @@ export const metadata = {
 export default async function AccountPage() {
   const session = await getSession();
   if (!session) redirect("/login?next=%2Faccount");
-  const count = listOrders(session.user).length;
+  const count = (await listOrders(session.user)).length;
   const staff = isStaff(session);
 
   return (

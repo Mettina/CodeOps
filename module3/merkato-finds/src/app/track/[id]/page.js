@@ -20,7 +20,7 @@ export default async function TrackPage({ params }) {
   if (!session) redirect(`/login?next=${encodeURIComponent(`/track/${id}`)}`);
 
   const staff = isStaff(session);
-  const order = staff ? getOrderForStaff(id) : getOrder(id, session.user);
+  const order = staff ? await getOrderForStaff(id) : await getOrder(id, session.user);
   if (!order) notFound();
 
   const tracking = trackingFor(order);

@@ -43,7 +43,7 @@ export default async function DashboardPage({ searchParams }) {
   if (!session) redirect("/login?next=%2Fdashboard");
   if (!isStaff(session)) notFound();
 
-  const orders = listAllOrders();
+  const orders = await listAllOrders();
   const now = Date.now();
   const data = getDashboardData(orders, new Date(now));
   const maxCityRevenue = Math.max(1, ...data.cityRevenue.map((row) => row.revenue));

@@ -12,7 +12,7 @@ export async function cancelOrder(_previousState, formData) {
 
   // Check 2: the order must belong to THIS session. A foreign id behaves as not found.
   const id = Number(formData.get("id"));
-  const order = Number.isInteger(id) ? getOrder(id, session.user) : null;
+  const order = Number.isInteger(id) ? await getOrder(id, session.user) : null;
   if (!order) return { ok: false, message: "Order not found." };
   const status = trackingFor(order).status;
   if (status === "cancelled") return { ok: false, message: "This order is already cancelled." };
@@ -20,7 +20,7 @@ export async function cancelOrder(_previousState, formData) {
     return { ok: false, message: "This demo order can only be cancelled before it is on the way." };
   }
 
-  markCancelled(id, session.user);
+  await markCancelled(id, session.user);
   revalidatePath("/orders");
   revalidatePath("/dashboard");
   revalidatePath(`/track/${id}`);

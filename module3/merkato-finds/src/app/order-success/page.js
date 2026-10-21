@@ -17,7 +17,7 @@ export default async function OrderSuccessPage({ searchParams }) {
   if (!session) redirect("/login?next=%2Forders");
 
   // Owner-scoped lookup: another account's id is simply "not found".
-  const order = getOrder(sp?.id, session.user);
+  const order = await getOrder(sp?.id, session.user);
   if (!order) notFound();
 
   return (

@@ -4,6 +4,10 @@ import { isStaff } from "@/lib/staff";
 import { trackingFor } from "@/lib/tracking";
 
 export const dynamic = "force-dynamic";
+// Serverless functions have a time limit. The stream ends itself just before it, and the
+// browser's EventSource reconnects on its own, so tracking keeps updating.
+export const maxDuration = 60;
+const STREAM_SECONDS = 50;
 
 export async function GET(request, { params }) {
   const session = await getSession();
@@ -11,11 +15,13 @@ export async function GET(request, { params }) {
 
   const { id } = await params;
   const staff = isStaff(session);
-  const order = staff ? getOrderForStaff(id) : getOrder(id, session.user);
+  const load = () => (staff ? getOrderForStaff(id) : getOrder(id, session.user));
+  const order = await load();
   if (!order) return Response.json({ error: "Order not found." }, { status: 404 });
 
   const encoder = new TextEncoder();
   let timer;
+  let stopTimer;
   let closed = false;
 
   const stream = new ReadableStream({
@@ -24,23 +30,28 @@ export async function GET(request, { params }) {
         if (closed) return;
         closed = true;
         clearInterval(timer);
-        controller.close();
+        clearTimeout(stopTimer);
+        try { controller.close(); } catch {}
       };
-      const send = () => {
+      const send = async () => {
         if (closed) return;
-        const fresh = staff ? getOrderForStaff(id) : getOrder(id, session.user);
-        const snapshot = { id: order.id, ...trackingFor(fresh ?? order), at: new Date().toISOString() };
+        let fresh = order;
+        try { fresh = (await load()) ?? order; } catch {}
+        if (closed) return;
+        const snapshot = { id: order.id, ...trackingFor(fresh), at: new Date().toISOString() };
         controller.enqueue(encoder.encode(`data: ${JSON.stringify(snapshot)}\n\n`));
         if (snapshot.status === "delivered" || snapshot.status === "cancelled") close();
       };
 
       timer = setInterval(send, 2000);
+      stopTimer = setTimeout(close, STREAM_SECONDS * 1000);
       send();
       request.signal.addEventListener("abort", close, { once: true });
     },
     cancel() {
       closed = true;
       clearInterval(timer);
+      clearTimeout(stopTimer);
     },
   });
 
