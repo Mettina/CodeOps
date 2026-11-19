@@ -1,5 +1,7 @@
 
 using System;
+using AddisEats.Exercises;
+
 Console.WriteLine("I AM RUNNING ADDISEATS.EXERCISES");
 
 // EXERCISE 2
@@ -96,3 +98,5 @@ else
 {
     Console.WriteLine("Please enter a positive number.");
 }
+
+TopUpCalculator.Run();
