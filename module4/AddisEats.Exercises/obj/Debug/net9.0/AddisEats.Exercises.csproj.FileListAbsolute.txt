@@ -1,0 +1,15 @@
+C:\Users\metin\Desktop\IBT\module4\AddisEats.Exercises\bin\Debug\net9.0\AddisEats.Exercises.exe
+C:\Users\metin\Desktop\IBT\module4\AddisEats.Exercises\bin\Debug\net9.0\AddisEats.Exercises.deps.json
+C:\Users\metin\Desktop\IBT\module4\AddisEats.Exercises\bin\Debug\net9.0\AddisEats.Exercises.runtimeconfig.json
+C:\Users\metin\Desktop\IBT\module4\AddisEats.Exercises\bin\Debug\net9.0\AddisEats.Exercises.dll
+C:\Users\metin\Desktop\IBT\module4\AddisEats.Exercises\bin\Debug\net9.0\AddisEats.Exercises.pdb
+C:\Users\metin\Desktop\IBT\module4\AddisEats.Exercises\obj\Debug\net9.0\AddisEats.Exercises.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\metin\Desktop\IBT\module4\AddisEats.Exercises\obj\Debug\net9.0\AddisEats.Exercises.AssemblyInfoInputs.cache
+C:\Users\metin\Desktop\IBT\module4\AddisEats.Exercises\obj\Debug\net9.0\AddisEats.Exercises.AssemblyInfo.cs
+C:\Users\metin\Desktop\IBT\module4\AddisEats.Exercises\obj\Debug\net9.0\AddisEats.Exercises.csproj.CoreCompileInputs.cache
+C:\Users\metin\Desktop\IBT\module4\AddisEats.Exercises\obj\Debug\net9.0\AddisEats.Exercises.sourcelink.json
+C:\Users\metin\Desktop\IBT\module4\AddisEats.Exercises\obj\Debug\net9.0\AddisEats.Exercises.dll
+C:\Users\metin\Desktop\IBT\module4\AddisEats.Exercises\obj\Debug\net9.0\refint\AddisEats.Exercises.dll
+C:\Users\metin\Desktop\IBT\module4\AddisEats.Exercises\obj\Debug\net9.0\AddisEats.Exercises.pdb
+C:\Users\metin\Desktop\IBT\module4\AddisEats.Exercises\obj\Debug\net9.0\AddisEats.Exercises.genruntimeconfig.cache
+C:\Users\metin\Desktop\IBT\module4\AddisEats.Exercises\obj\Debug\net9.0\ref\AddisEats.Exercises.dll
