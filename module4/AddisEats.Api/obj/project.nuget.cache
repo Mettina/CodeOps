@@ -1,11 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "dZvRY4VhmF4=",
+  "dgSpecHash": "QhUWvklBB+g=",
   "success": true,
   "projectFilePath": "C:\\Users\\metin\\Desktop\\IBT\\module4\\AddisEats.Api\\AddisEats.Api.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\metin\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.23\\microsoft.aspnetcore.openapi.9.0.23.nupkg.sha512",
-    "C:\\Users\\metin\\.nuget\\packages\\microsoft.openapi\\1.6.31\\microsoft.openapi.1.6.31.nupkg.sha512"
+    "C:\\Users\\metin\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\metin\\.nuget\\packages\\microsoft.openapi\\1.6.14\\microsoft.openapi.1.6.14.nupkg.sha512",
+    "C:\\Users\\metin\\.nuget\\packages\\swashbuckle.aspnetcore\\6.9.0\\swashbuckle.aspnetcore.6.9.0.nupkg.sha512",
+    "C:\\Users\\metin\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.9.0\\swashbuckle.aspnetcore.swagger.6.9.0.nupkg.sha512",
+    "C:\\Users\\metin\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.9.0\\swashbuckle.aspnetcore.swaggergen.6.9.0.nupkg.sha512",
+    "C:\\Users\\metin\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.9.0\\swashbuckle.aspnetcore.swaggerui.6.9.0.nupkg.sha512"
   ],
   "logs": []
 }

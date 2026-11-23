@@ -6,7 +6,6 @@ C:\Users\metin\Desktop\IBT\module4\AddisEats.Api\bin\Debug\net9.0\AddisEats.Api.
 C:\Users\metin\Desktop\IBT\module4\AddisEats.Api\bin\Debug\net9.0\AddisEats.Api.runtimeconfig.json
 C:\Users\metin\Desktop\IBT\module4\AddisEats.Api\bin\Debug\net9.0\AddisEats.Api.dll
 C:\Users\metin\Desktop\IBT\module4\AddisEats.Api\bin\Debug\net9.0\AddisEats.Api.pdb
-C:\Users\metin\Desktop\IBT\module4\AddisEats.Api\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
 C:\Users\metin\Desktop\IBT\module4\AddisEats.Api\bin\Debug\net9.0\Microsoft.OpenApi.dll
 C:\Users\metin\Desktop\IBT\module4\AddisEats.Api\obj\Debug\net9.0\AddisEats.Api.csproj.AssemblyReference.cache
 C:\Users\metin\Desktop\IBT\module4\AddisEats.Api\obj\Debug\net9.0\rpswa.dswa.cache.json
@@ -31,3 +30,6 @@ C:\Users\metin\Desktop\IBT\module4\AddisEats.Api\obj\Debug\net9.0\refint\AddisEa
 C:\Users\metin\Desktop\IBT\module4\AddisEats.Api\obj\Debug\net9.0\AddisEats.Api.pdb
 C:\Users\metin\Desktop\IBT\module4\AddisEats.Api\obj\Debug\net9.0\AddisEats.Api.genruntimeconfig.cache
 C:\Users\metin\Desktop\IBT\module4\AddisEats.Api\obj\Debug\net9.0\ref\AddisEats.Api.dll
+C:\Users\metin\Desktop\IBT\module4\AddisEats.Api\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\metin\Desktop\IBT\module4\AddisEats.Api\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\metin\Desktop\IBT\module4\AddisEats.Api\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
