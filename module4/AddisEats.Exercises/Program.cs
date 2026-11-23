@@ -1,5 +1,6 @@
 
 using System;
+using AddisEats.Catalog;
 using AddisEats.Exercises;
 
 Console.WriteLine("I AM RUNNING ADDISEATS.EXERCISES");
@@ -100,3 +101,4 @@ else
 }
 
 TopUpCalculator.Run();
+Day53Runner.Run();

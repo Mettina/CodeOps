@@ -27,12 +27,7 @@ public static class TopUpCalculator
                 customerName = $"Customer {i}";
             }
 
-            Console.Write("Network: ");
-            string network = Console.ReadLine()?.Trim() ?? string.Empty;
-            if (string.IsNullOrWhiteSpace(network))
-            {
-                network = "Other";
-            }
+            string network = ReadNetwork();
 
             decimal? amount = ReadValidAmount();
             if (amount is null)
@@ -65,6 +60,27 @@ public static class TopUpCalculator
             }
 
             Console.WriteLine("Invalid amount. Enter a number greater than 0 and no more than ETB 5,000.00.");
+        }
+    }
+
+    private static string ReadNetwork()
+    {
+        while (true)
+        {
+            Console.WriteLine("Network:");
+            Console.WriteLine("1. Ethio Telecom");
+            Console.WriteLine("2. Safaricom");
+            Console.WriteLine("3. Other");
+            Console.Write("Choose a network (1-3): ");
+
+            switch (Console.ReadLine())
+            {
+                case "1": return "Ethio Telecom";
+                case "2": return "Safaricom";
+                case "3": return "Other";
+                case null: return "Other";
+                default: Console.WriteLine("Invalid choice. Please select 1, 2, or 3."); break;
+            }
         }
     }
 
