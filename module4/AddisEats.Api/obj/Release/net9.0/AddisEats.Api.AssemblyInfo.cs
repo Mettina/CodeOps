@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AddisEats.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fc97819b2271cf2fac068f78d58f3dc5a3101618")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+332c600628acd4a5005b12a58e2f7a0fb69152ab")]
 [assembly: System.Reflection.AssemblyProductAttribute("AddisEats.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AddisEats.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
