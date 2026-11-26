@@ -1,4 +1,5 @@
 using AddisEats.Api.Models;
+using AddisEats.Api.Models.Dtos;
 using AddisEats.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,26 +18,26 @@ public class RestaurantsController : ControllerBase
         _menu = menu;
     }
 
-    // GET /api/v1/restaurants?area=Bole&page=1&limit=5
+    // GET /api/v1/restaurants?area=Bole&areas=Piassa&maxFeeEtb=80&page=1&limit=5
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public IActionResult GetAll([FromQuery] string? area, [FromQuery] int page = 1, [FromQuery] int limit = 20)
+    public IActionResult GetAll([FromQuery] RestaurantQuery q)
     {
-        if (page < 1 || limit < 1)
+        if (q.Page < 1 || q.Limit < 1)
         {
             return BadRequest(new { error = "page and limit must be at least 1." });
         }
 
-        var results = _restaurants.Search(area, page, limit).Select(r => r.ToDto()).ToList();
-        return Ok(new { data = results, page, pageSize = limit, total = _restaurants.CountAll(area) });
+        var results = _restaurants.Search(q).Select(r => r.ToDto()).ToList();
+        return Ok(new { data = results, page = q.Page, pageSize = q.Limit, total = _restaurants.CountAll(q) });
     }
 
     // GET /api/v1/restaurants/3
     [HttpGet("{id:int}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public IActionResult GetOne(int id)
+    public ActionResult<RestaurantDto> GetOne(int id)
     {
         var found = _restaurants.GetById(id);
         if (found is null)
@@ -44,7 +45,7 @@ public class RestaurantsController : ControllerBase
             return NotFound(new { error = $"Restaurant {id} was not found." });
         }
 
-        return Ok(found.ToDto());
+        return found.ToDto();   // implicit 200
     }
 
     // GET /api/v1/restaurants/3/menu?category=Main
@@ -55,10 +56,10 @@ public class RestaurantsController : ControllerBase
     {
         if (_restaurants.GetById(id) is null)
         {
-            return NotFound(new { error = $"Restaurant {id} was not found." });   // no restaurant
+            return NotFound(new { error = $"Restaurant {id} was not found." });
         }
 
         var items = _menu.ForRestaurant(id, category).Select(m => m.ToDto()).ToList();
-        return Ok(items);   // 200, even if the list is empty
+        return Ok(items);  
     }
 }

@@ -3,6 +3,8 @@ using AddisEats.Api.Options;
 using AddisEats.Api.Services;
 using AddisEats.Api.Data;
 using Microsoft.AspNetCore.Authentication;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +13,13 @@ builder.Services.Configure<MenuOptions>(builder.Configuration.GetSection(MenuOpt
 builder.Services.AddSingleton<MenuStore>();
 builder.Services.AddScoped<IMenuService, MenuService>();
 // EXERCISE 1
-builder.Services.AddControllers();
+
+builder.Services.AddControllers().AddJsonOptions(o =>
+{
+    o.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+    o.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+    o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -48,6 +56,8 @@ builder.Services.AddCors(options => options.AddPolicy("frontend", policy =>
     policy.WithOrigins("http://localhost:3000", "http://localhost:5173")
           .AllowAnyHeader()
           .AllowAnyMethod()));
+builder.Services.AddSingleton<OrderStore>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 var app = builder.Build();
 
 
